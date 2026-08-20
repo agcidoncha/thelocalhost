@@ -24,24 +24,8 @@ import LanguageMenu from "../shared/LanguageMenu.astro";
   </button>
 </header>
 
-<script>
-  const originalBrand = document.querySelector<HTMLElement>(".mobile-brand");
-
-  const syncCompactHeader = (visible: boolean) => {
-    document.body.classList.toggle("compact-header-visible", visible);
-  };
-
-  if ("IntersectionObserver" in window && originalBrand) {
-    const brandObserver = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        syncCompactHeader(!entry.isIntersecting);
-      },
-      { root: null, threshold: 0 }
-    );
-    brandObserver.observe(originalBrand);
-  }
-</script>
+{/* La visibilidad (body.compact-header-visible) la controla HeroMobile,
+   que es quien conoce si la intro ya ha terminado. */}
 
 <style>
   .mobile-compact-header {

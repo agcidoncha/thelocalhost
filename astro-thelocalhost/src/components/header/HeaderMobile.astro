@@ -4,38 +4,29 @@ import LanguageMenu from "../shared/LanguageMenu.astro";
 import AboutModal from "../shared/AboutModal.astro";
 ---
 
-<div class="mobile-header-anchor">
-  <LanguageMenu classPrefix="language" wrapId="languageWrap" triggerId="languageTrigger" menuId="languageMenu" />
+<LanguageMenu classPrefix="language" wrapId="languageWrap" triggerId="languageTrigger" menuId="languageMenu" />
 
-  <button class="about-trigger" type="button" aria-label="Quién está detrás de The Localhost" data-about-trigger="aboutModal">
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <circle cx="12" cy="8" r="3.2"></circle>
-      <path d="M5.8 19c.7-3.4 3-5.1 6.2-5.1s5.5 1.7 6.2 5.1"></path>
-    </svg>
-  </button>
+<button class="about-trigger" type="button" aria-label="Quién está detrás de The Localhost" data-about-trigger="aboutModal">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <circle cx="12" cy="8" r="3.2"></circle>
+    <path d="M5.8 19c.7-3.4 3-5.1 6.2-5.1s5.5 1.7 6.2 5.1"></path>
+  </svg>
+</button>
 
-  <div class="mobile-brand" aria-label="The Localhost — Automatización de procesos">
-    <BrandLogo gradientId="mobileBrandGradient" class="mobile-brand-mark" />
-    <div class="mobile-brand-copy">
-      <span class="mobile-brand-name">The Localhost</span>
-      <span class="mobile-brand-tagline">Automatización de procesos</span>
-    </div>
+<div class="mobile-brand" aria-label="The Localhost — Automatización de procesos">
+  <BrandLogo gradientId="mobileBrandGradient" class="mobile-brand-mark" />
+  <div class="mobile-brand-copy">
+    <span class="mobile-brand-name">The Localhost</span>
+    <span class="mobile-brand-tagline">Automatización de procesos</span>
   </div>
 </div>
 
 <AboutModal classPrefix="about" modalId="aboutModal" closeId="aboutClose" titleId="aboutTitle" />
 
 <style>
-  .mobile-header-anchor {
-    position: relative;
-    min-height: calc(6.6rem + env(safe-area-inset-top));
-  }
-
-  @media (min-width: 1100px) {
-    .mobile-header-anchor {
-      display: none;
-    }
-  }
+  /* Este componente asume que su contenedor (HeroMobile) ya establece
+     position:relative — igual que el original, donde estos elementos
+     viven dentro de .mobile-intro. */
 
   .language-wrap {
     position: absolute;

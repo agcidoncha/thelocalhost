@@ -1,25 +1,25 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HeaderDesktop from "../components/header/HeaderDesktop.astro";
-import HeaderMobile from "../components/header/HeaderMobile.astro";
 import HeaderCompactMobile from "../components/header/HeaderCompactMobile.astro";
 import HeroDesktop from "../components/hero/HeroDesktop.astro";
+import HeroMobile from "../components/hero/HeroMobile.astro";
 ---
 
 <BaseLayout>
   <HeaderDesktop />
-  <HeaderMobile />
   <HeaderCompactMobile />
 
   <main id="top">
     <HeroDesktop />
+    <HeroMobile />
 
     <p
       class="container"
       style="color: var(--ink-muted); padding: 2rem 0 8rem; font-size: 0.85rem; display: block;"
     >
-      Fase 4 en curso: hero desktop migrado. Objetivos, método y diagnóstico
-      se migran a continuación siguiendo <code>migracion-astro.md</code>.
+      Fase 4 en curso: hero desktop y mobile migrados. Objetivos, método y
+      diagnóstico se migran a continuación siguiendo <code>migracion-astro.md</code>.
     </p>
   </main>
 </BaseLayout>

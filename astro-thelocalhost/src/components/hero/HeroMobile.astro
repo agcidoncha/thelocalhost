@@ -1,0 +1,385 @@
+---
+import HeaderMobile from "../header/HeaderMobile.astro";
+---
+
+<section class="mobile-intro hero-mobile" id="inicio">
+  <HeaderMobile />
+
+  <div class="intro-inner">
+    <div>
+      <div class="intro-line" aria-hidden="true"></div>
+
+      <h1 class="intro-copy" aria-live="polite">
+        <span class="intro-title is-active" data-intro-step="0">
+          <span class="intro-brand-highlight">Automatizamos el trabajo</span> que no te gusta.
+        </span>
+
+        <span class="intro-title" data-intro-step="1" aria-hidden="true">
+          <span class="intro-brand-highlight">Recupera tiempo</span> para lo que sí importa.
+        </span>
+
+        <span class="intro-title" data-intro-step="2" aria-hidden="true">
+          Déjame mostrarte si podemos hacer <em>algo mejor.</em>
+        </span>
+      </h1>
+    </div>
+  </div>
+
+  <button class="intro-next" id="introNext" type="button" aria-label="Descubrirlo en 4 preguntas">
+    <span>Descúbrelo en 4 preguntas</span>
+    <span aria-hidden="true">↓</span>
+  </button>
+</section>
+
+<footer class="loading-footer" id="loadingFooter" aria-label="Preparando diagnóstico">
+  <div class="loading-footer-inner">
+    <div class="loading-track" aria-hidden="true">
+      <span class="loading-fill" id="loadingFill"></span>
+    </div>
+    <span class="loading-percent" id="loadingPercent">0%</span>
+  </div>
+</footer>
+
+<script>
+  const introTitles = Array.from(document.querySelectorAll<HTMLElement>("[data-intro-step]"));
+  const introNext = document.getElementById("introNext");
+  const loadingFill = document.getElementById("loadingFill");
+  const loadingPercent = document.getElementById("loadingPercent");
+  const diagnosisSection = document.getElementById("diagnostico");
+  const originalBrand = document.querySelector<HTMLElement>(".mobile-brand");
+
+  const totalDuration = 8000;
+  const phaseOneEnd = 2600;
+  const phaseTwoEnd = 5200;
+  let startedAt: number | null = null;
+  let introFinished = false;
+
+  function activateIntroStep(stepIndex: number) {
+    introTitles.forEach((title, index) => {
+      const active = index === stepIndex;
+      title.classList.toggle("is-active", active);
+      title.setAttribute("aria-hidden", active ? "false" : "true");
+    });
+  }
+
+  const syncCompactHeader = () => {
+    if (!introFinished || !originalBrand) {
+      document.body.classList.remove("compact-header-visible");
+      return;
+    }
+
+    const rect = originalBrand.getBoundingClientRect();
+    const originalHeaderVisible = rect.bottom > 0 && rect.top < window.innerHeight;
+
+    document.body.classList.toggle("compact-header-visible", !originalHeaderVisible);
+  };
+
+  function finishIntro() {
+    if (introFinished) return;
+    introFinished = true;
+
+    activateIntroStep(2);
+    if (loadingFill) loadingFill.style.width = "100%";
+    if (loadingPercent) loadingPercent.textContent = "100%";
+
+    document.body.classList.remove("mobile-locked");
+    document.body.classList.add("intro-ready");
+    introNext?.classList.add("is-ready");
+
+    requestAnimationFrame(syncCompactHeader);
+  }
+
+  function animateIntro(timestamp: number) {
+    if (startedAt === null) startedAt = timestamp;
+
+    const elapsed = timestamp - startedAt;
+    const progress = Math.min(1, elapsed / totalDuration);
+    const percent = Math.round(progress * 100);
+
+    if (loadingFill) loadingFill.style.width = `${percent}%`;
+    if (loadingPercent) loadingPercent.textContent = `${percent}%`;
+
+    if (elapsed < phaseOneEnd) {
+      activateIntroStep(0);
+    } else if (elapsed < phaseTwoEnd) {
+      activateIntroStep(1);
+    } else {
+      activateIntroStep(2);
+    }
+
+    if (progress < 1) {
+      requestAnimationFrame(animateIntro);
+    } else {
+      finishIntro();
+    }
+  }
+
+  introNext?.addEventListener("click", () => {
+    if (!introFinished || !diagnosisSection) return;
+
+    document.body.classList.add("quiz-unlocked");
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        diagnosisSection.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+  });
+
+  let scrollUnlockMarked = false;
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (!introFinished || scrollUnlockMarked) return;
+
+      if (window.scrollY > 12) {
+        scrollUnlockMarked = true;
+        document.body.classList.add("quiz-unlocked");
+      }
+    },
+    { passive: true }
+  );
+
+  if ("IntersectionObserver" in window && originalBrand) {
+    const brandObserver = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (!introFinished) {
+          document.body.classList.remove("compact-header-visible");
+          return;
+        }
+
+        document.body.classList.toggle("compact-header-visible", !entry.isIntersecting);
+      },
+      { root: null, threshold: 0 }
+    );
+
+    brandObserver.observe(originalBrand);
+  } else {
+    window.addEventListener("scroll", syncCompactHeader, { passive: true });
+    window.addEventListener("resize", syncCompactHeader);
+  }
+
+  window.addEventListener("pageshow", syncCompactHeader);
+  window.addEventListener("resize", syncCompactHeader);
+
+  requestAnimationFrame(animateIntro);
+</script>
+
+<style>
+  .hero-mobile {
+    display: none;
+  }
+
+  @media (max-width: 1099px) {
+    .hero-mobile {
+      display: flex;
+    }
+  }
+
+  :global(body.mobile-locked) {
+    height: 100svh;
+    overflow: hidden;
+  }
+
+  @media (min-width: 1100px) {
+    :global(body.mobile-locked) {
+      height: auto;
+      overflow: visible;
+    }
+  }
+
+  .mobile-intro {
+    min-height: 100svh;
+    align-items: center;
+    justify-content: center;
+    padding: calc(3rem + env(safe-area-inset-top)) 1.25rem 7.6rem;
+    position: relative;
+    overflow: hidden;
+    transition: opacity 0.38s ease, transform 0.38s var(--ease);
+  }
+
+  .intro-inner {
+    width: 100%;
+    min-height: 15rem;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    transform: translateY(-3vh);
+  }
+
+  .intro-line {
+    width: 46px;
+    height: 4px;
+    margin: 0 auto 1.4rem;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #f45a60 0%, #ff447c 52%, #ff3292 100%);
+    box-shadow: 0 0 22px rgba(255, 68, 124, 0.34);
+  }
+
+  .intro-copy {
+    width: 100%;
+    display: grid;
+    place-items: center;
+    min-height: 11rem;
+    margin: 0;
+    font-weight: inherit;
+  }
+
+  .intro-title {
+    grid-area: 1/1;
+    max-width: 470px;
+    margin: 0 auto;
+    font-size: clamp(3.35rem, 15vw, 5.7rem);
+    line-height: 0.87;
+    text-wrap: balance;
+    opacity: 0;
+    transform: translateY(18px);
+    pointer-events: none;
+    transition: opacity 0.52s ease, transform 0.52s var(--ease);
+  }
+
+  .intro-title.is-active {
+    opacity: 1;
+    transform: none;
+  }
+
+  .intro-title :global(em) {
+    font-style: normal;
+    color: #ff3d85;
+    -webkit-text-fill-color: #ff3d85;
+  }
+
+  .intro-title :global(.intro-brand-highlight) {
+    display: inline;
+    color: #ff3d85;
+    -webkit-text-fill-color: #ff3d85;
+  }
+
+  .intro-next {
+    position: absolute;
+    left: 50%;
+    bottom: calc(3.1rem + env(safe-area-inset-bottom));
+    transform: translate(-50%, 10px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.36rem;
+    color: #fff;
+    background: transparent;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    font-size: 0.78rem;
+    font-weight: 850;
+    letter-spacing: 0.075em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: opacity 0.35s ease, transform 0.35s var(--ease), visibility 0.35s ease;
+    z-index: 4;
+  }
+
+  .intro-next.is-ready {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate(-50%, 0);
+  }
+
+  .intro-next span:last-child {
+    color: #ff447c;
+    font-size: 1.22rem;
+    animation: down 1.5s ease-in-out infinite;
+  }
+
+  @keyframes down {
+    0%,
+    100% {
+      transform: translateY(0);
+      opacity: 0.55;
+    }
+    50% {
+      transform: translateY(5px);
+      opacity: 1;
+    }
+  }
+
+  .loading-footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 40;
+    height: calc(3.05rem + env(safe-area-inset-bottom));
+    padding: 0 1rem env(safe-area-inset-bottom);
+    display: flex;
+    align-items: center;
+    background: rgba(5, 8, 17, 0.96);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(14px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+  }
+
+  @media (min-width: 1100px) {
+    .loading-footer {
+      display: none;
+    }
+  }
+
+  .loading-footer-inner {
+    width: min(100%, 540px);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.8rem;
+    align-items: center;
+  }
+
+  .loading-track {
+    position: relative;
+    height: 3px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .loading-fill {
+    display: block;
+    width: 0%;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #f45a60 0%, #ff447c 52%, #ff3292 100%);
+    box-shadow: 0 0 18px rgba(255, 68, 124, 0.42);
+    transition: width 0.08s linear;
+  }
+
+  .loading-percent {
+    min-width: 3.2rem;
+    color: #fff;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 1.4rem;
+    line-height: 1;
+    text-align: right;
+    letter-spacing: 0.03em;
+  }
+
+  :global(body.intro-ready) .loading-footer {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(100%);
+    pointer-events: none;
+  }
+
+  @media (min-width: 700px) and (max-width: 1099px) {
+    .mobile-intro {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    .intro-title {
+      max-width: 680px;
+      font-size: clamp(4.6rem, 9vw, 6.4rem);
+    }
+  }
+</style>
