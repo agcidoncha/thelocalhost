@@ -1,0 +1,1328 @@
+---
+---
+
+<section class="hero hero-desktop">
+  <div class="hero-yeah" aria-hidden="true"><span>EMPEZAMOS</span></div>
+  <div class="container hero-grid">
+    <div class="hero-copy reveal">
+      <p class="hero-label">Automatización · web · SEO · IA</p>
+      <h1 class="hero-title" aria-live="polite">
+        <span class="hero-title-text is-active"
+          ><span class="hero-highlight">Automatizamos el trabajo</span> que no te gusta.</span
+        >
+        <span class="hero-title-text"><span class="hero-highlight">Recupera tiempo</span> para lo que sí importa.</span>
+        <span class="hero-title-text">Déjame mostrarte si podemos hacer <span class="hero-highlight">algo mejor.</span></span>
+      </h1>
+    </div>
+
+    <div class="hero-visual reveal" aria-hidden="true">
+      <div class="visual-topbar"><span></span><span></span><span></span></div>
+      <div class="visual-workspace">
+        <div class="hero-visual-mode workflow-mode is-active">
+          <div class="hero-scene scene-leads is-active">
+            <div class="hero-n8n" aria-hidden="true">
+              <svg viewBox="0 0 620 225" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="heroWireGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#FF3D85"></stop>
+                    <stop offset="52%" stop-color="#7a5cff"></stop>
+                    <stop offset="100%" stop-color="#21d4fd"></stop>
+                  </linearGradient>
+                </defs>
+
+                <path class="wire" d="M163 53 C176 53 166 139 180 139"></path>
+                <path class="wire-run run-1" d="M163 53 C176 53 166 139 180 139"></path>
+
+                <path class="wire" d="M319 139 C356 139 289 47 323 47"></path>
+                <path class="wire-run run-2" d="M319 139 C356 139 289 47 323 47"></path>
+
+                <path class="wire" d="M441 47 C491 47 430 161 466 161"></path>
+                <path class="wire-run run-3" d="M441 47 C491 47 430 161 466 161"></path>
+              </svg>
+
+              <div class="n8n-node webhook">
+                <span class="node-icon">↳</span>
+                <span><strong>Formulario</strong><small>Nuevo lead</small></span>
+              </div>
+
+              <div class="n8n-node router">
+                <span class="node-icon">IF</span>
+                <span><strong>Validar datos</strong><small>Regla automática</small></span>
+              </div>
+
+              <span class="n8n-branch-label yes">válido</span>
+
+              <div class="n8n-node crm">
+                <span class="node-icon">◎</span>
+                <span><strong>CRM</strong><small>Crear / actualizar</small></span>
+              </div>
+
+              <div class="n8n-node whatsapp">
+                <span class="node-icon">◉</span>
+                <span><strong>WhatsApp</strong><small>Confirmación</small></span>
+              </div>
+            </div>
+
+            <div class="terminal">
+              <div class="terminal-title">$ thelocalhost run automations</div>
+              <div class="terminal-line"><span class="prompt">&gt;</span> Conectando herramientas...</div>
+              <div class="terminal-line"><span class="prompt">&gt;</span> Sincronizando datos...</div>
+              <div class="terminal-line"><span class="prompt">&gt;</span> Enviando recordatorios...</div>
+              <div class="terminal-line"><span class="prompt">&gt;</span> Proceso completado <span class="ok">✓</span></div>
+            </div>
+          </div>
+
+          <div class="hero-scene scene-citas">
+            <div class="hero-n8n" aria-hidden="true">
+              <svg viewBox="0 0 620 225" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="heroWireGradientCitas" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#FF3D85"></stop>
+                    <stop offset="52%" stop-color="#7a5cff"></stop>
+                    <stop offset="100%" stop-color="#21d4fd"></stop>
+                  </linearGradient>
+                </defs>
+
+                <path class="wire" d="M163 53 C176 53 166 139 180 139"></path>
+                <path class="wire-run run-1" style="stroke:url(#heroWireGradientCitas)" d="M163 53 C176 53 166 139 180 139"
+                ></path>
+
+                <path class="wire" d="M319 139 C356 139 289 47 323 47"></path>
+                <path class="wire-run run-2" style="stroke:url(#heroWireGradientCitas)" d="M319 139 C356 139 289 47 323 47"
+                ></path>
+
+                <path class="wire" d="M441 47 C491 47 430 161 466 161"></path>
+                <path class="wire-run run-3" style="stroke:url(#heroWireGradientCitas)" d="M441 47 C491 47 430 161 466 161"
+                ></path>
+              </svg>
+
+              <div class="n8n-node webhook">
+                <span class="node-icon">＋</span>
+                <span><strong>Nueva cita</strong><small>Reserva recibida</small></span>
+              </div>
+
+              <div class="n8n-node router">
+                <span class="node-icon">IF</span>
+                <span><strong>Agenda</strong><small>Comprobar hueco</small></span>
+              </div>
+
+              <span class="n8n-branch-label yes">disponible</span>
+
+              <div class="n8n-node crm">
+                <span class="node-icon">▣</span>
+                <span><strong>Calendario</strong><small>Bloquear horario</small></span>
+              </div>
+
+              <div class="n8n-node whatsapp">
+                <span class="node-icon">⏱</span>
+                <span><strong>Recordatorio</strong><small>Programado</small></span>
+              </div>
+            </div>
+
+            <div class="terminal">
+              <div class="terminal-title">$ thelocalhost run appointments</div>
+              <div class="terminal-line"><span class="prompt">&gt;</span> Nueva reserva recibida...</div>
+              <div class="terminal-line"><span class="prompt">&gt;</span> Comprobando disponibilidad...</div>
+              <div class="terminal-line"><span class="prompt">&gt;</span> Calendario actualizado...</div>
+              <div class="terminal-line"><span class="prompt">&gt;</span> Recordatorio programado <span class="ok">✓</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual-mode life-mode">
+          <div class="hero-life">
+            <div class="life-center">
+              <div>
+                <span class="life-time" id="lifeTime">+2h 17m</span>
+                <span class="life-label">tiempo recuperado</span>
+              </div>
+            </div>
+
+            <div class="life-choice cinema">
+              <strong>Voy al cine</strong>
+              <span>pantalla grande</span>
+            </div>
+
+            <div class="life-choice dinner">
+              <strong>Voy a cenar</strong>
+              <span>sin mirar el reloj</span>
+            </div>
+
+            <div class="life-choice sport">
+              <strong>Entreno</strong>
+              <span>tiempo para mí</span>
+            </div>
+
+            <div class="life-choice friends">
+              <strong>Quedo con amigos</strong>
+              <span>vida fuera del trabajo</span>
+            </div>
+
+            <div class="life-choice rest">
+              <strong>Descanso</strong>
+              <span>también cuenta</span>
+            </div>
+
+            <div class="life-choice nothing">
+              <strong>No hago nada</strong>
+              <span>porque puedo</span>
+            </div>
+
+            <div class="life-foot">Tú decides dónde gastarlo.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="hero-ctas" aria-label="Progreso de introducción">
+  <a href="#necesitas" class="btn btn-primary" data-progress="0%">
+    <span class="hero-cta-label">¿Qué necesitas lograr en tu negocio?</span>
+  </a>
+</div>
+
+<script>
+  const heroTitle = document.querySelector<HTMLElement>(".hero-desktop .hero-title");
+  const heroTitleTexts = Array.from(document.querySelectorAll<HTMLElement>(".hero-desktop .hero-title-text"));
+  const heroProgressButton = document.querySelector<HTMLElement>(".hero-ctas .btn-primary");
+
+  const runHeroFirstCycleProgress = () => {
+    if (!heroProgressButton) return;
+
+    const duration = 8000;
+    const startedAt = performance.now();
+
+    const tick = (now: number) => {
+      const progress = Math.min((now - startedAt) / duration, 1);
+      const percent = Math.round(progress * 100);
+
+      heroProgressButton.style.setProperty("--hero-progress", `${percent}%`);
+      heroProgressButton.dataset.progress = `${percent}%`;
+
+      if (progress < 1) {
+        requestAnimationFrame(tick);
+      }
+    };
+
+    requestAnimationFrame(tick);
+  };
+
+  const workflowMode = document.querySelector<HTMLElement>(".hero-desktop .hero-visual-mode.workflow-mode");
+  const lifeMode = document.querySelector<HTMLElement>(".hero-desktop .hero-visual-mode.life-mode");
+  const lifeTime = document.getElementById("lifeTime");
+  const workflowScenes = Array.from(document.querySelectorAll<HTMLElement>(".hero-desktop .workflow-mode .hero-scene"));
+
+  let lastRecoveredMinutes: number | null = null;
+
+  const randomizeRecoveredTime = () => {
+    if (!lifeTime) return;
+
+    const minMinutes = 65;
+    const maxMinutes = 270;
+
+    let totalMinutes: number;
+
+    do {
+      totalMinutes = Math.floor(Math.random() * (maxMinutes - minMinutes + 1)) + minMinutes;
+    } while (totalMinutes === lastRecoveredMinutes);
+
+    lastRecoveredMinutes = totalMinutes;
+
+    const hours = Math.floor(totalMinutes / 60);
+    const minutes = totalMinutes % 60;
+
+    lifeTime.textContent = `+${hours}h ${minutes}m`;
+  };
+
+  let heroTitleIndex = 0;
+  let heroHeadlineLocked = false;
+
+  const fitHeroTitle = (index: number) => {
+    if (!heroTitle || !heroTitleTexts[index]) return;
+    heroTitle.style.height = `${heroTitleTexts[index].scrollHeight}px`;
+  };
+
+  const setHeroTitle = (index: number) => {
+    if (!heroTitleTexts.length) return;
+    heroTitleTexts.forEach((el, i) => el.classList.toggle("is-active", i === index));
+    heroTitleIndex = index;
+    fitHeroTitle(index);
+  };
+
+  const activateWorkflowScene = (index: number) => {
+    workflowScenes.forEach((scene) => scene.classList.remove("is-active"));
+    const scene = workflowScenes[index];
+    if (!scene) return;
+    void scene.offsetWidth;
+    scene.classList.add("is-active");
+  };
+
+  const showWorkflowMode = () => {
+    if (lifeMode) lifeMode.classList.remove("is-active");
+    if (workflowMode) workflowMode.classList.add("is-active");
+
+    if (!heroHeadlineLocked) {
+      setHeroTitle(0);
+    }
+    activateWorkflowScene(0);
+
+    window.setTimeout(() => {
+      if (workflowMode) workflowMode.classList.remove("is-active");
+      if (workflowScenes[0]) workflowScenes[0].classList.remove("is-active");
+
+      if (!heroHeadlineLocked) {
+        setHeroTitle(1);
+      }
+
+      window.setTimeout(() => {
+        if (lifeMode) {
+          randomizeRecoveredTime();
+          lifeMode.classList.remove("is-active");
+          void lifeMode.offsetWidth;
+          lifeMode.classList.add("is-active");
+        }
+      }, 180);
+
+      window.setTimeout(() => {
+        const heroRoot = document.querySelector(".hero-desktop");
+
+        if (heroRoot && !heroRoot.classList.contains("hero-cycle-complete")) {
+          heroRoot.classList.add("hero-cycle-complete");
+          heroHeadlineLocked = true;
+          setHeroTitle(2);
+        }
+
+        if (lifeMode) lifeMode.classList.remove("is-active");
+
+        window.setTimeout(() => {
+          showWorkflowMode();
+        }, 180);
+      }, 4000);
+    }, 4000);
+  };
+
+  if (heroTitle && heroTitleTexts.length > 1 && workflowMode && lifeMode && workflowScenes.length > 1) {
+    requestAnimationFrame(() => {
+      fitHeroTitle(0);
+      runHeroFirstCycleProgress();
+      showWorkflowMode();
+    });
+
+    window.addEventListener("resize", () => fitHeroTitle(heroTitleIndex));
+  }
+
+  const heroUnlockButton = document.querySelector<HTMLAnchorElement>('.hero-ctas a[href="#necesitas"]');
+  const heroProgressBar = document.querySelector<HTMLElement>(".hero-ctas");
+  const needsSection = document.getElementById("necesitas");
+  const heroSection = document.querySelector<HTMLElement>(".hero-desktop");
+  let heroUnlocking = false;
+
+  if (heroUnlockButton && needsSection && heroSection) {
+    heroUnlockButton.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      if (heroUnlocking) return;
+
+      if (document.body.classList.contains("hero-first-unlocked")) {
+        needsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
+
+      heroUnlocking = true;
+
+      if (heroProgressBar) {
+        heroProgressBar.classList.add("is-dismissing");
+      }
+
+      heroSection.classList.remove("is-celebrating");
+      void heroSection.offsetWidth;
+      heroSection.classList.add("is-celebrating");
+
+      window.setTimeout(() => {
+        heroSection.classList.add("hero-compact");
+        document.body.classList.add("hero-scroll-enabled");
+        needsSection.classList.add("progressive-open");
+
+        void document.body.offsetHeight;
+
+        const startY = window.scrollY;
+        const needsTitle = needsSection.querySelector(".needs-title");
+        const needsHint = needsSection.querySelector(".needs-hint");
+        const sectionRect = needsSection.getBoundingClientRect();
+        const titleRect = needsTitle ? needsTitle.getBoundingClientRect() : sectionRect;
+        const hintRect = needsHint ? needsHint.getBoundingClientRect() : sectionRect;
+
+        const navHeight = 76;
+        const visibleCenterY = navHeight + (window.innerHeight - navHeight) / 2;
+
+        const contentTop = titleRect.top;
+        const contentBottom = hintRect.bottom;
+        const contentCenterY = contentTop + (contentBottom - contentTop) / 2;
+
+        const targetY = Math.max(0, startY + contentCenterY - visibleCenterY);
+        const distance = targetY - startY;
+        const duration = 1050;
+        const startTime = performance.now();
+
+        const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+
+        const animateScroll = (now: number) => {
+          const progress = Math.min((now - startTime) / duration, 1);
+          window.scrollTo(0, startY + distance * easeInOutCubic(progress));
+
+          if (progress < 1) {
+            requestAnimationFrame(animateScroll);
+            return;
+          }
+
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              needsSection.classList.add("progressive-visible");
+            });
+          });
+
+          window.setTimeout(() => {
+            document.body.classList.add("hero-first-unlocked");
+            heroSection.classList.remove("is-celebrating");
+            heroUnlocking = false;
+          }, 900);
+        };
+
+        requestAnimationFrame(animateScroll);
+      }, 1050);
+    });
+  }
+</script>
+
+<style>
+  .hero-desktop {
+    display: none;
+  }
+
+  @media (min-width: 1100px) {
+    .hero-desktop {
+      display: block;
+      position: relative;
+      overflow: hidden;
+      padding: 5.2rem 0 2rem;
+    }
+  }
+
+  .hero-desktop::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 42px 42px;
+    mask-image: linear-gradient(to bottom, black, transparent 88%);
+    pointer-events: none;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 3rem;
+    align-items: center;
+    transition: opacity 0.24s ease, transform 0.32s var(--ease);
+  }
+
+  .hero-desktop.is-celebrating .hero-grid {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+
+  .hero-yeah {
+    position: absolute;
+    inset: 0;
+    z-index: 30;
+    display: grid;
+    place-items: center;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .hero-yeah::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(255, 61, 133, 0.08), transparent 36%), rgba(6, 9, 19, 0.96);
+  }
+
+  .hero-yeah span {
+    position: relative;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: clamp(5.5rem, 14vw, 12rem);
+    line-height: 0.8;
+    letter-spacing: 0.03em;
+    color: #fff;
+    text-shadow: 0 0 18px rgba(255, 255, 255, 0.14), 0 0 44px rgba(255, 61, 133, 0.34);
+    transform: scale(0.82);
+    opacity: 0;
+  }
+
+  .hero-desktop.is-celebrating .hero-yeah {
+    visibility: visible;
+    animation: heroYeahLayer 1s ease both;
+  }
+
+  .hero-desktop.is-celebrating .hero-yeah span {
+    animation: heroYeahText 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  @keyframes heroYeahLayer {
+    0% {
+      opacity: 0;
+    }
+    14%,
+    78% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes heroYeahText {
+    0% {
+      opacity: 0;
+      transform: scale(0.82) translateY(12px);
+    }
+    18% {
+      opacity: 1;
+      transform: scale(1.04) translateY(0);
+    }
+    35%,
+    78% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0.98) translateY(-8px);
+    }
+  }
+
+  .hero-copy {
+    min-width: 0;
+    padding-right: 1.4rem;
+  }
+
+  .hero-visual {
+    min-width: 0;
+  }
+
+  .hero-label {
+    color: #ff447c;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.77rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .hero-title {
+    position: relative;
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-size: clamp(3.2rem, 5.8vw, 5.15rem);
+    line-height: 0.92;
+    letter-spacing: 1px;
+    max-width: 100%;
+    margin-bottom: 1.75rem;
+    overflow: hidden;
+    transition: height 0.48s var(--ease);
+  }
+
+  .hero-title-text {
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.48s var(--ease), transform 0.48s var(--ease);
+  }
+
+  .hero-title-text.is-active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .hero-highlight {
+    display: inline;
+    color: #ff3d85;
+    -webkit-text-fill-color: #ff3d85;
+  }
+
+  /* Barra sticky de progreso / CTA */
+  .hero-ctas {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 80;
+    width: 100%;
+    margin: 0;
+    display: none;
+    pointer-events: none;
+    background: rgba(6, 9, 19, 0.86);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(16px) saturate(130%);
+    -webkit-backdrop-filter: blur(16px) saturate(130%);
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+  }
+
+  @media (min-width: 1100px) {
+    .hero-ctas {
+      display: block;
+    }
+  }
+
+  .hero-ctas :global(.btn-primary) {
+    --hero-progress: 0%;
+    position: relative;
+    width: 100%;
+    min-height: 66px;
+    padding: 1rem 1.4rem;
+    overflow: hidden;
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    color: #fff;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 1.65rem;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 0.05em;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .hero-ctas :global(.btn-primary)::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0 auto 0 0;
+    width: var(--hero-progress);
+    background: linear-gradient(90deg, #f45a60 0%, #ff447c 52%, #ff3292 100%);
+    box-shadow: 0 0 28px rgba(255, 68, 124, 0.22);
+    transition: width 0.08s linear;
+  }
+
+  .hero-ctas :global(.btn-primary)::after {
+    content: attr(data-progress);
+    position: absolute;
+    top: 50%;
+    left: clamp(5.2rem, var(--hero-progress), 100%);
+    transform: translate(calc(-100% - 14px), -50%);
+    font-family: "Bebas Neue", sans-serif;
+    font-size: clamp(2.9rem, 4.6vw, 4.5rem);
+    font-weight: 400;
+    line-height: 0.8;
+    letter-spacing: 0.035em;
+    color: #fff;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.28);
+    opacity: 1;
+    white-space: nowrap;
+    pointer-events: none;
+    transition: opacity 0.25s ease, left 0.08s linear;
+  }
+
+  .hero-ctas :global(.hero-cta-label) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(6px);
+    font-family: "Bebas Neue", sans-serif;
+    font-size: clamp(1.8rem, 3vw, 3rem);
+    font-weight: 400;
+    line-height: 0.86;
+    letter-spacing: 0.025em;
+    white-space: nowrap;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  :global(.hero-desktop.hero-cycle-complete) + .hero-ctas {
+    pointer-events: auto;
+  }
+
+  :global(.hero-desktop.hero-cycle-complete) + .hero-ctas :global(.btn-primary) {
+    pointer-events: auto;
+  }
+
+  :global(.hero-desktop.hero-cycle-complete) + .hero-ctas :global(.btn-primary)::before {
+    width: 100%;
+  }
+
+  :global(.hero-desktop.hero-cycle-complete) + .hero-ctas :global(.btn-primary)::after {
+    opacity: 0;
+  }
+
+  :global(.hero-desktop.hero-cycle-complete) + .hero-ctas :global(.hero-cta-label) {
+    opacity: 1;
+    transform: none;
+  }
+
+  :global(.hero-ctas.is-dismissing),
+  :global(.hero-first-unlocked) .hero-ctas {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  /* Visual del hero: workspace, workflow n8n y modo "tiempo recuperado" */
+  .hero-visual {
+    position: relative;
+    width: 100%;
+    margin-left: 0;
+    padding: 1.1rem;
+    border-radius: 28px;
+    background: linear-gradient(180deg, rgba(19, 29, 58, 0.85), rgba(10, 15, 30, 0.92));
+    border: 1px solid rgba(122, 92, 255, 0.24);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    min-height: 520px;
+  }
+
+  .hero-visual::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 82% 16%, rgba(33, 212, 253, 0.18), transparent 22%),
+      radial-gradient(circle at 18% 84%, rgba(255, 61, 133, 0.12), transparent 24%);
+    pointer-events: none;
+  }
+
+  .visual-topbar {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.2rem 0.15rem 0.95rem;
+  }
+
+  .visual-topbar span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #38435f;
+  }
+
+  .visual-topbar span:nth-child(1) {
+    background: #f45a60;
+  }
+  .visual-topbar span:nth-child(2) {
+    background: var(--accent-2);
+  }
+  .visual-topbar span:nth-child(3) {
+    background: var(--accent-3);
+  }
+
+  .visual-workspace {
+    position: relative;
+    height: 430px;
+    border-radius: 22px;
+    background: linear-gradient(180deg, rgba(10, 15, 29, 0.85), rgba(8, 12, 23, 0.96));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+  }
+
+  .visual-workspace::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 10%, rgba(255, 255, 255, 0.04), transparent 36%);
+    pointer-events: none;
+  }
+
+  .hero-visual-mode {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px) scale(0.992);
+    transition: opacity 0.46s ease, transform 0.46s ease, visibility 0s linear 0.46s;
+    pointer-events: none;
+  }
+
+  .hero-visual-mode.is-active {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition: opacity 0.46s ease, transform 0.46s ease, visibility 0s;
+  }
+
+  .hero-scene {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px);
+    transition: opacity 0.38s ease, transform 0.38s ease, visibility 0s linear 0.38s;
+    pointer-events: none;
+  }
+
+  .hero-scene.is-active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: opacity 0.38s ease, transform 0.38s ease, visibility 0s;
+  }
+
+  .hero-n8n {
+    position: absolute;
+    left: 5%;
+    right: 5%;
+    top: 5%;
+    height: 225px;
+    border-radius: 18px;
+    overflow: hidden;
+    background: radial-gradient(circle at 50% 10%, rgba(122, 92, 255, 0.08), transparent 38%),
+      linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    background-size: auto, 22px 22px, 22px 22px;
+    border: 1px solid rgba(255, 255, 255, 0.055);
+  }
+
+  .hero-n8n svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .hero-n8n :global(.wire) {
+    fill: none;
+    stroke: rgba(142, 156, 191, 0.3);
+    stroke-width: 2;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .hero-n8n :global(.wire-run) {
+    fill: none;
+    stroke: url(#heroWireGradient);
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-dasharray: 10 155;
+    vector-effect: non-scaling-stroke;
+    animation-name: none;
+    filter: drop-shadow(0 0 5px rgba(34, 212, 253, 0.28));
+  }
+
+  .hero-n8n :global(.run-2) {
+    animation-delay: 0.8s;
+  }
+  .hero-n8n :global(.run-3) {
+    animation-delay: 1.55s;
+  }
+
+  .n8n-node {
+    position: absolute;
+    width: 138px;
+    min-height: 58px;
+    padding: 0.62rem 0.7rem;
+    border-radius: 11px;
+    display: grid;
+    grid-template-columns: 34px 1fr;
+    gap: 0.58rem;
+    align-items: center;
+    background: rgba(15, 22, 41, 0.96);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.26), inset 0 1px rgba(255, 255, 255, 0.035);
+    opacity: 0.92;
+    animation-name: none;
+  }
+
+  .n8n-node::before,
+  .n8n-node::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #0b1020;
+    border: 2px solid #60708f;
+    transform: translateY(-50%);
+    z-index: 2;
+  }
+  .n8n-node::before {
+    left: -6px;
+  }
+  .n8n-node::after {
+    right: -6px;
+  }
+
+  .n8n-node .node-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    display: grid;
+    place-items: center;
+    font-size: 0.9rem;
+    font-weight: 900;
+    border: 1px solid rgba(var(--node-accent), 0.35);
+    color: rgb(var(--node-accent));
+    background: rgba(var(--node-accent), 0.1);
+    box-shadow: 0 0 15px rgba(var(--node-accent), 0.08);
+  }
+
+  .n8n-node strong {
+    display: block;
+    color: #fff;
+    font-size: 0.82rem;
+    line-height: 1.05;
+    margin-bottom: 0.2rem;
+    letter-spacing: 0.01em;
+  }
+
+  .n8n-node small {
+    display: block;
+    color: #96a4c0;
+    font-size: 0.63rem;
+    line-height: 1.15;
+  }
+
+  .n8n-node.webhook {
+    --node-accent: 255, 68, 124;
+    left: 4%;
+    top: 24px;
+    animation-delay: 0.1s;
+  }
+  .n8n-node.router {
+    --node-accent: 122, 92, 255;
+    left: 29%;
+    top: 110px;
+    animation-delay: 0.85s;
+  }
+  .n8n-node.crm {
+    --node-accent: 34, 212, 253;
+    left: 52%;
+    top: 18px;
+    width: 118px;
+    animation-delay: 1.6s;
+  }
+  .n8n-node.whatsapp {
+    --node-accent: 84, 229, 174;
+    right: 3%;
+    top: 132px;
+    animation-delay: 2.35s;
+  }
+  .n8n-node.router .node-icon {
+    border-radius: 50%;
+  }
+
+  .n8n-branch-label {
+    position: absolute;
+    font-family: var(--mono);
+    font-size: 0.52rem;
+    letter-spacing: 0.06em;
+    color: #6f7e9d;
+    text-transform: uppercase;
+  }
+  .n8n-branch-label.yes {
+    left: 54%;
+    top: 82px;
+  }
+
+  @keyframes heroN8nWire {
+    from {
+      stroke-dashoffset: 165;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes heroN8nNode {
+    0%,
+    100% {
+      opacity: 0.9;
+      transform: translateY(0) scale(1);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+    12% {
+      opacity: 1;
+      transform: translateY(-3px) scale(1.018);
+      border-color: rgba(var(--node-accent), 0.62);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.3), 0 0 18px rgba(var(--node-accent), 0.12);
+    }
+    26% {
+      opacity: 0.96;
+      transform: translateY(0) scale(1);
+    }
+    38% {
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+  }
+
+  .hero-life {
+    position: absolute;
+    inset: 5%;
+    border-radius: 18px;
+    overflow: hidden;
+    background: radial-gradient(circle at 50% 42%, rgba(255, 61, 133, 0.12), transparent 28%),
+      radial-gradient(circle at 82% 18%, rgba(33, 212, 253, 0.08), transparent 22%),
+      linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+    background-size: auto, auto, 24px 24px, 24px 24px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .life-center {
+    position: absolute;
+    left: 50%;
+    top: 46%;
+    width: 190px;
+    height: 190px;
+    translate: -50% -50%;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    background: radial-gradient(circle, rgba(255, 61, 133, 0.12), rgba(10, 15, 29, 0.96) 67%);
+    border: 1px solid rgba(255, 61, 133, 0.35);
+    box-shadow: 0 0 0 8px rgba(255, 61, 133, 0.025), 0 0 44px rgba(255, 61, 133, 0.12);
+  }
+
+  .life-center::before,
+  .life-center::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    inset: -18px;
+  }
+
+  .life-center::after {
+    inset: -38px;
+    border-style: dashed;
+    border-color: rgba(255, 255, 255, 0.045);
+    animation: lifeOrbitSpin 18s linear infinite;
+  }
+
+  .life-time {
+    display: block;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3.8rem;
+    line-height: 0.86;
+    letter-spacing: 0.04em;
+    color: #fff;
+    text-shadow: 0 0 24px rgba(255, 61, 133, 0.18);
+  }
+
+  .life-label {
+    display: block;
+    margin-top: 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: #ff3d85;
+  }
+
+  .life-choice {
+    --life-accent: 255, 68, 124;
+    position: absolute;
+    min-width: 132px;
+    padding: 0.72rem 0.85rem;
+    border-radius: 13px;
+    background: rgba(11, 17, 33, 0.93);
+    border: 1px solid rgba(var(--life-accent), 0.2);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.2);
+    color: #eef3ff;
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+
+  .life-choice strong {
+    display: block;
+    font-size: 0.86rem;
+    line-height: 1.05;
+    color: #fff;
+    margin-bottom: 0.18rem;
+  }
+
+  .life-choice span {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    color: #8291b0;
+    letter-spacing: 0.04em;
+  }
+
+  .life-choice::before {
+    content: "";
+    position: absolute;
+    left: -4px;
+    top: 50%;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    translate: 0 -50%;
+    background: rgb(var(--life-accent));
+    box-shadow: 0 0 12px rgba(var(--life-accent), 0.5);
+  }
+
+  .life-choice.cinema {
+    --life-accent: 166, 107, 255;
+    left: 5%;
+    top: 9%;
+  }
+  .life-choice.dinner {
+    --life-accent: 255, 68, 124;
+    right: 5%;
+    top: 10%;
+  }
+  .life-choice.sport {
+    --life-accent: 33, 212, 253;
+    left: 3%;
+    top: 48%;
+  }
+  .life-choice.friends {
+    --life-accent: 84, 229, 174;
+    right: 3%;
+    top: 48%;
+  }
+  .life-choice.rest {
+    --life-accent: 255, 80, 143;
+    left: 11%;
+    bottom: 7%;
+  }
+  .life-choice.nothing {
+    --life-accent: 255, 255, 255;
+    right: 8%;
+    bottom: 7%;
+  }
+
+  .hero-visual-mode.life-mode.is-active .life-center {
+    animation: lifeCenterIn 0.72s var(--ease) both;
+  }
+  .hero-visual-mode.life-mode.is-active .life-choice {
+    animation: lifeChoiceIn 0.58s var(--ease) forwards;
+  }
+  .hero-visual-mode.life-mode.is-active .life-choice.cinema {
+    animation-delay: 0.35s;
+  }
+  .hero-visual-mode.life-mode.is-active .life-choice.dinner {
+    animation-delay: 0.62s;
+  }
+  .hero-visual-mode.life-mode.is-active .life-choice.sport {
+    animation-delay: 0.89s;
+  }
+  .hero-visual-mode.life-mode.is-active .life-choice.friends {
+    animation-delay: 1.16s;
+  }
+  .hero-visual-mode.life-mode.is-active .life-choice.rest {
+    animation-delay: 1.43s;
+  }
+  .hero-visual-mode.life-mode.is-active .life-choice.nothing {
+    animation-delay: 1.7s;
+  }
+
+  .hero-visual-mode.life-mode.is-active .life-choice.nothing {
+    animation-name: lifeChoiceIn, lifeChoiceFloat;
+    animation-duration: 0.58s, 3.2s;
+    animation-delay: 1.7s, 2.45s;
+    animation-timing-function: var(--ease), ease-in-out;
+    animation-fill-mode: forwards, both;
+    animation-iteration-count: 1, infinite;
+  }
+
+  .life-foot {
+    position: absolute;
+    left: 50%;
+    bottom: 0.25rem;
+    translate: -50% 0;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: #71809f;
+    white-space: nowrap;
+    opacity: 0;
+  }
+
+  .hero-visual-mode.life-mode.is-active .life-foot {
+    animation: lifeFootIn 0.55s ease 2.15s forwards;
+  }
+
+  @keyframes lifeCenterIn {
+    from {
+      opacity: 0;
+      scale: 0.88;
+    }
+    to {
+      opacity: 1;
+      scale: 1;
+    }
+  }
+  @keyframes lifeChoiceIn {
+    0% {
+      opacity: 0;
+      transform: translateY(12px) scale(0.96);
+    }
+    70% {
+      opacity: 1;
+      transform: translateY(-3px) scale(1.015);
+    }
+    100% {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes lifeChoiceFloat {
+    0%,
+    100% {
+      translate: 0 0;
+    }
+    50% {
+      translate: 0 -5px;
+    }
+  }
+  @keyframes lifeFootIn {
+    from {
+      opacity: 0;
+      transform: translateY(5px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes lifeOrbitSpin {
+    to {
+      rotate: 360deg;
+    }
+  }
+
+  .terminal {
+    position: absolute;
+    left: 8%;
+    right: 18%;
+    bottom: 5%;
+    padding: 1rem 1rem 1.1rem;
+    border-radius: 18px;
+    background: rgba(7, 11, 20, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+  }
+
+  .terminal-title {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: #90a1c5;
+    margin-bottom: 0.8rem;
+  }
+
+  .terminal-line {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    margin-bottom: 0.35rem;
+    color: #c6d2f0;
+    opacity: 0.24;
+    transform: translateX(-8px);
+    animation-name: none;
+  }
+
+  .terminal-line :global(.prompt) {
+    color: #58e5ff;
+  }
+  .terminal-line :global(.ok) {
+    color: #6cf0bf;
+  }
+
+  .terminal::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.03) 50%, transparent 100%);
+    transform: translateX(-115%);
+    animation-name: none;
+    pointer-events: none;
+  }
+
+  .terminal-line:nth-of-type(1) {
+    animation-delay: 0.6s;
+  }
+  .terminal-line:nth-of-type(2) {
+    animation-delay: 1.4s;
+  }
+  .terminal-line:nth-of-type(3) {
+    animation-delay: 2.25s;
+  }
+  .terminal-line:nth-of-type(4) {
+    animation-delay: 3.1s;
+  }
+
+  .hero-scene.is-active .hero-n8n :global(.wire-run) {
+    animation-name: heroN8nWire;
+    animation-duration: 5.8s;
+    animation-timing-function: linear;
+    animation-iteration-count: 1;
+  }
+  .hero-scene.is-active .n8n-node {
+    animation-name: heroN8nNode;
+    animation-duration: 5.8s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+  }
+  .hero-scene.is-active .terminal::after {
+    animation-name: heroTerminalSweep;
+    animation-duration: 7.2s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+  }
+  .hero-scene.is-active .terminal-line {
+    animation-name: heroTerminalLine;
+    animation-duration: 7.2s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+  }
+
+  @keyframes heroTerminalLine {
+    0%,
+    100% {
+      opacity: 0.24;
+      transform: translateX(-8px);
+    }
+    16% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    32% {
+      opacity: 0.92;
+      transform: translateX(0);
+    }
+    40% {
+      opacity: 0.42;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes heroTerminalSweep {
+    0%,
+    42%,
+    100% {
+      transform: translateX(-115%);
+      opacity: 0;
+    }
+    48% {
+      opacity: 0.65;
+    }
+    64% {
+      transform: translateX(115%);
+      opacity: 0.18;
+    }
+  }
+
+</style>

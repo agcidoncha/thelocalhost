@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import HeaderDesktop from "../components/header/HeaderDesktop.astro";
 import HeaderMobile from "../components/header/HeaderMobile.astro";
 import HeaderCompactMobile from "../components/header/HeaderCompactMobile.astro";
+import HeroDesktop from "../components/hero/HeroDesktop.astro";
 ---
 
 <BaseLayout>
@@ -10,21 +11,15 @@ import HeaderCompactMobile from "../components/header/HeaderCompactMobile.astro"
   <HeaderMobile />
   <HeaderCompactMobile />
 
-  <main id="top" class="container" style="padding: 4rem 0;">
-    <p style="font-family: var(--mono); color: var(--accent-3); letter-spacing: 0.08em; text-transform: uppercase;">
-      Migración a Astro — en curso
+  <main id="top">
+    <HeroDesktop />
+
+    <p
+      class="container"
+      style="color: var(--ink-muted); padding: 2rem 0 8rem; font-size: 0.85rem; display: block;"
+    >
+      Fase 4 en curso: hero desktop migrado. Objetivos, método y diagnóstico
+      se migran a continuación siguiendo <code>migracion-astro.md</code>.
     </p>
-    <h1 style="font-family: 'Bebas Neue', sans-serif; font-weight: 400; font-size: clamp(2.5rem, 6vw, 4.5rem); margin-top: 1rem;">
-      The Localhost
-    </h1>
-    <p style="color: var(--ink-soft); max-width: 60ch; margin-top: 1rem;">
-      Fase 3: header, logo, selector de idioma y modal "Detrás de The Localhost"
-      migrados como componentes reales. El resto (hero, objetivos, método,
-      diagnóstico) se migra por fases siguiendo <code>migracion-astro.md</code>.
-    </p>
-    <p style="color: var(--ink-muted); max-width: 60ch; margin-top: 3rem; font-size: 0.85rem;">
-      Prueba de scroll: hazlo largo para ver aparecer la cabecera compacta en mobile.
-    </p>
-    <div style="height: 160vh;"></div>
   </main>
 </BaseLayout>

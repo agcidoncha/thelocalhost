@@ -69,3 +69,27 @@ button {
   width: min(1180px, calc(100% - 2rem));
   margin: 0 auto;
 }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 48px;
+  padding: 0.85rem 1.2rem;
+  border-radius: 14px;
+  font-weight: 700;
+  transition: 0.28s transform var(--ease), 0.28s background var(--ease), 0.28s border-color var(--ease),
+    0.28s box-shadow var(--ease);
+  border: 1px solid transparent;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  color: white;
+  background: var(--button-orange);
+  box-shadow: 0 12px 30px rgba(255, 95, 0, 0.22);
+}
