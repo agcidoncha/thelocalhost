@@ -12,6 +12,12 @@
       "runtimeExecutable": "python3",
       "runtimeArgs": ["-m", "http.server", "4502", "--directory", "00-masters-referencia"],
       "port": 4502
+    },
+    {
+      "name": "astro-thelocalhost",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "astro-thelocalhost", "run", "dev", "--", "--port", "4503"],
+      "port": 4503
     }
   ]
 }
