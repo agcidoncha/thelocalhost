@@ -396,17 +396,15 @@
 </script>
 
 <style>
-  .hero-desktop {
-    display: none;
+  @media (max-width: 1099px) {
+    .hero-desktop {
+      display: none;
+    }
   }
 
-  @media (min-width: 1100px) {
-    .hero-desktop {
-      display: block;
-      position: relative;
-      overflow: hidden;
-      padding: 5.2rem 0 2rem;
-    }
+  .hero-desktop {
+    position: relative;
+    overflow: hidden;
   }
 
   .hero-desktop::before {

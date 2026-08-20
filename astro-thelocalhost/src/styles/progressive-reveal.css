@@ -1,0 +1,103 @@
+/* =========================================================
+   PASEO PROGRESIVO DESKTOP · Hero -> Objetivos -> Método -> Diagnóstico
+   Bloquea el scroll hasta que el hero se completa; cada capítulo
+   siguiente permanece oculto/reservado hasta desbloquearse.
+   Mismo mecanismo que el original (html.progressive-js), ahora
+   compartido entre componentes en vez de vivir en un único archivo.
+
+   Todo bajo min-width:1100px (breakpoint desktop del proyecto): en el
+   original este archivo solo existía en el documento desktop, así que
+   estas reglas nunca convivían con mobile. Ahora que ambas experiencias
+   comparten un único DOM, hay que evitar que #necesitas/#proceso/
+   #experiencia (ocultos aquí por defecto para desktop) se cuelen o
+   reserven layout en mobile, que tiene su propio flujo.
+   ========================================================= */
+
+@media (min-width: 1100px) {
+  .progressive-js body:not(.hero-scroll-enabled) {
+    overflow: hidden;
+  }
+
+  .progressive-js .hero {
+    min-height: calc(100svh - 76px);
+    display: grid;
+    align-items: center;
+    padding: 2.2rem 0;
+  }
+
+  .progressive-js .hero.hero-compact {
+    min-height: auto;
+    padding: 1.2rem 0;
+  }
+
+  .progressive-js body:not(.hero-first-unlocked) #proceso,
+  .progressive-js body:not(.hero-first-unlocked) #experiencia {
+    display: none;
+  }
+
+  .progressive-js #necesitas {
+    display: grid;
+    align-items: center;
+    min-height: calc(100svh - 76px);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    scroll-margin-top: 76px;
+    overflow-anchor: none;
+    transition: opacity 0.82s var(--ease), transform 0.82s var(--ease);
+  }
+
+  .progressive-js #necesitas.progressive-open.progressive-visible {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  .progressive-js body:not(.hero-first-unlocked) .hero {
+    overflow-anchor: none;
+  }
+
+  #proceso {
+    display: none;
+  }
+
+  body.method-unlocked #proceso {
+    display: grid;
+    align-items: center;
+    min-height: calc(100svh - 76px);
+  }
+
+  body.method-unlocked.method-compact #proceso {
+    display: block;
+    min-height: 0;
+    padding-top: 2.4rem;
+    padding-bottom: 2.4rem;
+  }
+
+  #experiencia {
+    display: none;
+  }
+
+  body.diagnosis-preparing #experiencia,
+  body.diagnosis-unlocked #experiencia {
+    display: grid;
+    align-items: center;
+    min-height: calc(100svh - 76px);
+    overflow-anchor: none;
+  }
+
+  body.diagnosis-preparing #experiencia {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  body.diagnosis-unlocked #experiencia {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity 0.55s var(--ease);
+  }
+}
