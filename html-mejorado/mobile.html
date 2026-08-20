@@ -574,6 +574,8 @@
       display:grid;
       place-items:center;
       min-height:11rem;
+      margin:0;
+      font-weight:inherit;
     }
 
     .intro-title{
@@ -1440,19 +1442,19 @@
         <div>
           <div class="intro-line" aria-hidden="true"></div>
 
-          <div class="intro-copy" aria-live="polite">
-            <h1 class="intro-title is-active" data-intro-step="0">
+          <h1 class="intro-copy" aria-live="polite">
+            <span class="intro-title is-active" data-intro-step="0">
               <span class="intro-brand-highlight">Automatizamos el trabajo</span> que no te gusta.
-            </h1>
+            </span>
 
-            <h1 class="intro-title" data-intro-step="1">
+            <span class="intro-title" data-intro-step="1" aria-hidden="true">
               <span class="intro-brand-highlight">Recupera tiempo</span> para lo que sí importa.
-            </h1>
+            </span>
 
-            <h1 class="intro-title" data-intro-step="2">
+            <span class="intro-title" data-intro-step="2" aria-hidden="true">
               Déjame mostrarte si podemos hacer <em>algo mejor.</em>
-            </h1>
-          </div>
+            </span>
+          </h1>
         </div>
       </div>
 
@@ -1743,34 +1745,6 @@
     })();
 
     (() => {
-      const brandName = document.getElementById('mobileBrandName');
-      const brandTagline = document.getElementById('mobileBrandTagline');
-
-      function alignBrandTexts(){
-        if(!brandName || !brandTagline) return;
-
-        brandTagline.style.letterSpacing = '0px';
-
-        const titleWidth = brandName.getBoundingClientRect().width;
-        const taglineWidth = brandTagline.getBoundingClientRect().width;
-        const characters = brandTagline.textContent.trim().length;
-
-        if(characters > 1){
-          const spacing = (titleWidth - taglineWidth) / (characters - 1);
-          brandTagline.style.letterSpacing = `${spacing}px`;
-        }
-      }
-
-      if(document.fonts && document.fonts.ready){
-        document.fonts.ready.then(alignBrandTexts);
-      }else{
-        window.addEventListener('load', alignBrandTexts, {once:true});
-      }
-
-      window.addEventListener('resize', alignBrandTexts);
-    })();
-
-    (() => {
       const introTitles = [...document.querySelectorAll('[data-intro-step]')];
       const introNext = document.getElementById('introNext');
       const loadingFill = document.getElementById('loadingFill');
@@ -1786,7 +1760,9 @@
 
       function activateIntroStep(stepIndex){
         introTitles.forEach((title,index) => {
-          title.classList.toggle('is-active', index === stepIndex);
+          const active = index === stepIndex;
+          title.classList.toggle('is-active', active);
+          title.setAttribute('aria-hidden', active ? 'false' : 'true');
         });
       }
 
