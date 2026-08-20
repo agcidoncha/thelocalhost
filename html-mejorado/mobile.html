@@ -1,0 +1,2345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>The Localhost — Diagnóstico móvil</title>
+  <meta name="description" content="Diagnóstico rápido de The Localhost para detectar oportunidades de mejora en procesos, automatización y negocio.">
+  <meta name="theme-color" content="#070b17">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#070b17;
+      --bg-2:#0c1122;
+      --panel:#0f1730;
+      --panel-2:#121d3b;
+      --panel-3:#17254a;
+      --line:rgba(255,255,255,.09);
+      --line-strong:rgba(255,255,255,.16);
+      --ink:#f6f8ff;
+      --ink-soft:#c0cae0;
+      --ink-muted:#8290af;
+      --accent:#ff6a3d;
+      --accent-2:#7a5cff;
+      --accent-3:#21d4fd;
+      --orange:#ff5f00;
+      --green:#49df9a;
+      --shadow:0 26px 70px rgba(0,0,0,.38);
+      --sans:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      --ease:cubic-bezier(.16,1,.3,1);
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      min-width:320px;
+      overflow-x:hidden;
+      font-family:var(--sans);
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 12% 2%, rgba(122,92,255,.18), transparent 26rem),
+        radial-gradient(circle at 92% 20%, rgba(33,212,253,.08), transparent 23rem),
+        linear-gradient(180deg,#060913 0%,#090d1b 45%,#070b17 100%);
+      line-height:1.5;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+
+    button,a{font:inherit}
+    button{border:0;cursor:pointer}
+    a{text-decoration:none;color:inherit}
+    :focus-visible{outline:2px solid var(--accent-3);outline-offset:3px}
+
+    h1,h2,h3{
+      font-family:"Bebas Neue",sans-serif;
+      font-weight:400;
+      letter-spacing:.01em;
+    }
+
+    .mobile-page{
+      width:min(100%,540px);
+      margin:0 auto;
+      position:relative;
+      isolation:isolate;
+    }
+
+    .mobile-compact-header{
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      z-index:45;
+      height:calc(58px + env(safe-area-inset-top));
+      padding:env(safe-area-inset-top) 1rem 0;
+      display:grid;
+      grid-template-columns:38px 1fr 38px;
+      align-items:center;
+      gap:.7rem;
+      background:rgba(6,9,19,.88);
+      border-bottom:1px solid rgba(255,255,255,.07);
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+      opacity:0;
+      visibility:hidden;
+      transform:translateY(-100%);
+      pointer-events:none;
+      transition:
+        opacity .28s ease,
+        transform .34s var(--ease),
+        visibility .28s ease;
+    }
+
+    body.compact-header-visible .mobile-compact-header{
+      opacity:1;
+      visibility:visible;
+      transform:none;
+      pointer-events:auto;
+    }
+
+    .compact-language-trigger,
+    .compact-about-trigger{
+      width:38px;
+      height:38px;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.12);
+      color:#fff;
+      background:rgba(255,255,255,.035);
+    }
+
+    .compact-language-trigger svg,
+    .compact-about-trigger svg{
+      width:18px;
+      height:18px;
+      fill:none;
+      stroke:currentColor;
+      stroke-width:1.8;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
+
+    .compact-brand{
+      justify-self:center;
+      display:flex;
+      align-items:center;
+      gap:.38rem;
+      min-width:0;
+      font-family:"Inter",var(--sans);
+      color:#fff;
+    }
+
+    .compact-brand svg{
+      width:30px;
+      height:30px;
+      flex:0 0 auto;
+    }
+
+    .compact-brand span{
+      font-size:.98rem;
+      font-weight:800;
+      letter-spacing:-.035em;
+      white-space:nowrap;
+    }
+
+    .compact-language-wrap{
+      position:relative;
+    }
+
+    .compact-language-menu{
+      position:absolute;
+      top:calc(100% + .55rem);
+      left:0;
+      width:154px;
+      padding:.42rem;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(9,14,30,.98);
+      box-shadow:0 20px 48px rgba(0,0,0,.38);
+      opacity:0;
+      visibility:hidden;
+      transform:translateY(-6px) scale(.98);
+      transform-origin:top left;
+      pointer-events:none;
+      transition:
+        opacity .22s ease,
+        visibility .22s ease,
+        transform .22s var(--ease);
+    }
+
+    .compact-language-wrap.is-open .compact-language-menu{
+      opacity:1;
+      visibility:visible;
+      transform:none;
+      pointer-events:auto;
+    }
+
+    /* =========================================================
+       INTRO MÓVIL
+       ========================================================= */
+    body.mobile-locked{
+      height:100svh;
+      overflow:hidden;
+    }
+
+    .mobile-intro{
+      min-height:100svh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:calc(3rem + env(safe-area-inset-top)) 1.25rem 7.6rem;
+      position:relative;
+      overflow:hidden;
+      transition:opacity .38s ease, transform .38s var(--ease);
+    }
+
+    .mobile-brand{
+      position:absolute;
+      top:calc(2.1rem + env(safe-area-inset-top));
+      left:50%;
+      transform:translateX(-50%);
+      display:flex;
+      align-items:center;
+      gap:.46rem;
+      width:max-content;
+      max-width:calc(100% - 2rem);
+      z-index:5;
+    }
+
+    .mobile-brand-mark{
+      flex:0 0 auto;
+      width:47px;
+      height:47px;
+      display:block;
+    }
+
+    .mobile-brand-copy{
+      display:grid;
+      grid-template-columns:1fr;
+      justify-items:start;
+      align-items:start;
+      min-width:0;
+      font-family:"Inter",var(--sans);
+      color:#fff;
+      line-height:1;
+      text-align:left;
+    }
+
+    .mobile-brand-name,
+    .mobile-brand-tagline{
+      display:block;
+      width:100%;
+      margin-left:0;
+      padding-left:0;
+      text-align:left;
+    }
+
+    .mobile-brand-name{
+      font-size:1.24rem;
+      font-weight:800;
+      letter-spacing:-.035em;
+      white-space:nowrap;
+    }
+
+    .mobile-brand-tagline{
+      margin-top:.22rem;
+      font-size:.58rem;
+      font-weight:700;
+      letter-spacing:0;
+      white-space:nowrap;
+      color:rgba(255,255,255,.92);
+    }
+
+    .language-wrap{
+      position:absolute;
+      top:calc(2.35rem + env(safe-area-inset-top));
+      left:1rem;
+      z-index:7;
+    }
+
+    .language-trigger{
+      width:38px;
+      height:38px;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.12);
+      color:#fff;
+      background:rgba(255,255,255,.035);
+      box-shadow:0 10px 24px rgba(0,0,0,.20);
+      backdrop-filter:blur(10px);
+      transition:
+        transform .2s ease,
+        border-color .2s ease,
+        background .2s ease;
+    }
+
+    .language-trigger:active{
+      transform:scale(.96);
+    }
+
+    .language-trigger svg{
+      width:18px;
+      height:18px;
+      fill:none;
+      stroke:currentColor;
+      stroke-width:1.8;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
+
+    .language-menu{
+      position:absolute;
+      top:calc(100% + .55rem);
+      left:0;
+      width:154px;
+      padding:.42rem;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(9,14,30,.97);
+      box-shadow:0 20px 48px rgba(0,0,0,.38);
+      backdrop-filter:blur(16px);
+      opacity:0;
+      visibility:hidden;
+      transform:translateY(-6px) scale(.98);
+      transform-origin:top left;
+      pointer-events:none;
+      transition:
+        opacity .22s ease,
+        visibility .22s ease,
+        transform .22s var(--ease);
+    }
+
+    .language-wrap.is-open .language-menu{
+      opacity:1;
+      visibility:visible;
+      transform:none;
+      pointer-events:auto;
+    }
+
+    .language-option{
+      width:100%;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:.7rem;
+      padding:.65rem .68rem;
+      border-radius:10px;
+      color:var(--ink-soft);
+      background:transparent;
+      text-align:left;
+      font-size:.78rem;
+      font-weight:750;
+    }
+
+    .language-option + .language-option{
+      margin-top:.18rem;
+    }
+
+    .language-option.is-active{
+      color:#fff;
+      background:rgba(255,68,124,.09);
+    }
+
+    .language-code{
+      color:#FF447C;
+      font-size:.68rem;
+      font-weight:850;
+      letter-spacing:.08em;
+    }
+
+    .language-option[disabled]{
+      opacity:.48;
+      cursor:default;
+    }
+
+    .about-trigger{
+      position:absolute;
+      top:calc(2.35rem + env(safe-area-inset-top));
+      right:1rem;
+      z-index:6;
+      width:38px;
+      height:38px;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.12);
+      color:#fff;
+      background:rgba(255,255,255,.035);
+      box-shadow:0 10px 24px rgba(0,0,0,.20);
+      backdrop-filter:blur(10px);
+      transition:
+        transform .2s ease,
+        border-color .2s ease,
+        background .2s ease;
+    }
+
+    .about-trigger:active{
+      transform:scale(.96);
+    }
+
+    .about-trigger svg{
+      width:18px;
+      height:18px;
+      fill:none;
+      stroke:currentColor;
+      stroke-width:1.8;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
+
+    .about-modal{
+      position:fixed;
+      inset:0;
+      z-index:80;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:
+        calc(1rem + env(safe-area-inset-top))
+        1rem
+        calc(1rem + env(safe-area-inset-bottom));
+      background:rgba(2,5,14,.80);
+      backdrop-filter:blur(16px);
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+      transition:opacity .28s ease, visibility .28s ease;
+    }
+
+    .about-modal.is-active{
+      opacity:1;
+      visibility:visible;
+      pointer-events:auto;
+    }
+
+    .about-card{
+      width:min(100%,430px);
+      position:relative;
+      padding:1.35rem 1.15rem 1.15rem;
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.11);
+      background:
+        radial-gradient(circle at 100% 0%,rgba(255,68,124,.10),transparent 14rem),
+        linear-gradient(180deg,#121a35,#080d1c);
+      box-shadow:0 30px 90px rgba(0,0,0,.52);
+      transform:translateY(12px) scale(.985);
+      transition:transform .32s var(--ease);
+    }
+
+    .about-modal.is-active .about-card{
+      transform:none;
+    }
+
+    .about-close{
+      position:absolute;
+      top:.8rem;
+      right:.8rem;
+      width:34px;
+      height:34px;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      color:var(--ink-muted);
+      background:rgba(255,255,255,.045);
+      border:1px solid rgba(255,255,255,.09);
+      font-size:1.15rem;
+    }
+
+    .about-kicker{
+      color:#FF447C;
+      font-size:.68rem;
+      font-weight:850;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      margin-bottom:.72rem;
+    }
+
+    .about-card h2{
+      max-width:90%;
+      font-size:clamp(2.55rem,12vw,4rem);
+      line-height:.88;
+      margin-bottom:.8rem;
+    }
+
+    .about-card p{
+      color:var(--ink-soft);
+      font-size:.86rem;
+      line-height:1.55;
+    }
+
+    .about-points{
+      display:grid;
+      gap:.55rem;
+      margin-top:1rem;
+    }
+
+    .about-point{
+      padding:.7rem .75rem;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.07);
+      background:rgba(255,255,255,.025);
+      color:var(--ink-soft);
+      font-size:.8rem;
+      line-height:1.42;
+    }
+
+    .about-point strong{
+      color:#fff;
+    }
+
+    .about-brands{
+      margin-top:1rem;
+      padding-top:.95rem;
+      border-top:1px solid rgba(255,255,255,.08);
+    }
+
+    .about-brands-label{
+      display:block;
+      margin-bottom:.65rem;
+      color:rgba(255,255,255,.56);
+      font-size:.69rem;
+      font-weight:750;
+      line-height:1.35;
+    }
+
+    .about-brand-list{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.42rem;
+    }
+
+    .about-brand-list span{
+      padding:.42rem .58rem;
+      border:1px solid rgba(255,255,255,.09);
+      border-radius:999px;
+      background:rgba(255,255,255,.035);
+      color:rgba(255,255,255,.78);
+      font-size:.67rem;
+      font-weight:700;
+      line-height:1;
+      white-space:nowrap;
+    }
+
+    .mobile-intro::before,
+    .mobile-intro::after{
+      content:"";
+      position:absolute;
+      border-radius:50%;
+      pointer-events:none;
+      filter:blur(2px);
+      z-index:-1;
+    }
+
+    .mobile-intro::before{
+      width:17rem;height:17rem;
+      left:-8rem;top:18%;
+      border:1px solid rgba(122,92,255,.16);
+      box-shadow:
+        0 0 0 2.4rem rgba(122,92,255,.025),
+        0 0 0 5rem rgba(122,92,255,.018);
+    }
+
+    .mobile-intro::after{
+      width:13rem;height:13rem;
+      right:-7rem;bottom:13%;
+      border:1px solid rgba(33,212,253,.12);
+      box-shadow:0 0 70px rgba(33,212,253,.05);
+    }
+
+    .intro-inner{
+      width:100%;
+      min-height:15rem;
+      display:grid;
+      place-items:center;
+      text-align:center;
+      transform:translateY(-3vh);
+    }
+
+    .intro-line{
+      width:46px;
+      height:4px;
+      margin:0 auto 1.4rem;
+      border-radius:999px;
+      background:linear-gradient(90deg,#F45A60 0%,#FF447C 52%,#FF3292 100%);
+      box-shadow:0 0 22px rgba(255,68,124,.34);
+    }
+
+    .intro-copy{
+      width:100%;
+      display:grid;
+      place-items:center;
+      min-height:11rem;
+    }
+
+    .intro-title{
+      grid-area:1/1;
+      max-width:470px;
+      margin:0 auto;
+      font-size:clamp(3.35rem,15vw,5.7rem);
+      line-height:.87;
+      text-wrap:balance;
+      opacity:0;
+      transform:translateY(18px);
+      pointer-events:none;
+      transition:opacity .52s ease,transform .52s var(--ease);
+    }
+
+    .intro-title.is-active{
+      opacity:1;
+      transform:none;
+    }
+
+    .intro-title em{
+      font-style:normal;
+      color:#FF3D85;
+      -webkit-text-fill-color:#FF3D85;
+    }
+
+    .intro-brand-highlight{
+      display:inline;
+      color:#FF3D85;
+      -webkit-text-fill-color:#FF3D85;
+    }
+
+    .intro-next{
+      position:absolute;
+      left:50%;
+      bottom:calc(3.1rem + env(safe-area-inset-bottom));
+      transform:translate(-50%,10px);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:.36rem;
+      color:#fff;
+      background:transparent;
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+      font-size:.78rem;
+      font-weight:850;
+      letter-spacing:.075em;
+      text-transform:uppercase;
+      white-space:nowrap;
+      transition:opacity .35s ease,transform .35s var(--ease),visibility .35s ease;
+      z-index:4;
+    }
+
+    .intro-next.is-ready{
+      opacity:1;
+      visibility:visible;
+      pointer-events:auto;
+      transform:translate(-50%,0);
+    }
+
+    .intro-next span:last-child{
+      color:#FF447C;
+      font-size:1.22rem;
+      animation:down 1.5s ease-in-out infinite;
+    }
+
+    .loading-footer{
+      position:fixed;
+      left:0;
+      right:0;
+      bottom:0;
+      z-index:40;
+      height:calc(3.05rem + env(safe-area-inset-bottom));
+      padding:0 1rem env(safe-area-inset-bottom);
+      display:flex;
+      align-items:center;
+      background:rgba(5,8,17,.96);
+      border-top:1px solid rgba(255,255,255,.08);
+      backdrop-filter:blur(14px);
+      transition:opacity .3s ease,transform .3s ease,visibility .3s ease;
+    }
+
+    .loading-footer-inner{
+      width:min(100%,540px);
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:.8rem;
+      align-items:center;
+    }
+
+    .loading-track{
+      position:relative;
+      height:3px;
+      overflow:hidden;
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+    }
+
+    .loading-fill{
+      display:block;
+      width:0%;
+      height:100%;
+      border-radius:inherit;
+      background:linear-gradient(90deg,#F45A60 0%,#FF447C 52%,#FF3292 100%);
+      box-shadow:0 0 18px rgba(255,68,124,.42);
+      transition:width .08s linear;
+    }
+
+    .loading-percent{
+      min-width:3.2rem;
+      color:#fff;
+      font-family:"Bebas Neue",sans-serif;
+      font-size:1.4rem;
+      line-height:1;
+      text-align:right;
+      letter-spacing:.03em;
+    }
+
+    body.intro-ready .loading-footer{
+      opacity:0;
+      visibility:hidden;
+      transform:translateY(100%);
+      pointer-events:none;
+    }
+
+    @keyframes down{
+      0%,100%{transform:translateY(0);opacity:.55}
+      50%{transform:translateY(5px);opacity:1}
+    }
+
+    /* =========================================================
+       DIAGNÓSTICO
+       ========================================================= */
+    .diagnosis-section{
+      min-height:100svh;
+      padding:2rem 1rem calc(2.2rem + env(safe-area-inset-bottom));
+      display:none;
+      align-items:flex-start;
+      scroll-margin-top:calc(64px + env(safe-area-inset-top));
+    }
+
+    body.intro-ready .diagnosis-section{
+      display:flex;
+    }
+
+    body.quiz-unlocked .diagnosis-section{
+      animation:diagnosisReveal .5s var(--ease) both;
+    }
+
+    @keyframes diagnosisReveal{
+      from{opacity:0;transform:translateY(16px)}
+      to{opacity:1;transform:none}
+    }
+
+    .diagnosis-wrap{
+      width:100%;
+    }
+
+    .diagnosis-heading{
+      padding:.4rem .2rem 1.25rem;
+    }
+
+    .eyebrow{
+      color:var(--orange);
+      font-size:.72rem;
+      font-weight:800;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      margin-bottom:.45rem;
+    }
+
+    .diagnosis-heading h2{
+      font-size:clamp(2.5rem,12vw,4rem);
+      line-height:.9;
+      margin-bottom:.65rem;
+    }
+
+    .diagnosis-heading p:last-child{
+      max-width:31rem;
+      color:var(--ink-soft);
+      font-size:.94rem;
+    }
+
+    .diagnosis-shell{
+      position:relative;
+      width:100%;
+      border:1px solid rgba(255,255,255,.105);
+      border-radius:22px;
+      overflow:hidden;
+      background:
+        linear-gradient(180deg,rgba(18,29,59,.95),rgba(9,14,30,.98));
+      box-shadow:var(--shadow);
+    }
+
+    .diagnosis-shell::before{
+      content:"";
+      position:absolute;
+      inset:0 0 auto;
+      height:1px;
+      background:linear-gradient(90deg,transparent,rgba(255,95,0,.9),transparent);
+      opacity:.75;
+    }
+
+    .diagnosis-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      padding:1rem 1rem .72rem;
+    }
+
+    .diagnosis-label{
+      color:var(--ink-muted);
+      font-size:.65rem;
+      font-weight:800;
+      letter-spacing:.11em;
+      text-transform:uppercase;
+    }
+
+    .diagnosis-counter{
+      color:var(--orange);
+      font-family:"Bebas Neue",sans-serif;
+      font-size:1rem;
+      letter-spacing:.08em;
+    }
+
+    .diagnosis-progress{
+      height:1.5px;
+      background:rgba(255,255,255,.06);
+      overflow:hidden;
+    }
+
+    .diagnosis-progress span{
+      display:block;
+      width:25%;
+      height:100%;
+      background:linear-gradient(90deg,#F45A60 0%,#FF447C 52%,#FF3292 100%);
+      box-shadow:0 0 18px rgba(255,68,124,.42);
+      transition:width .45s var(--ease);
+    }
+
+    .diagnosis-body{
+      padding:1.15rem 1rem 1rem;
+    }
+
+    .diagnosis-step{display:none}
+    .diagnosis-step.is-active{
+      display:block;
+      animation:stepIn .35s var(--ease) both;
+    }
+
+    @keyframes stepIn{
+      from{opacity:0;transform:translateY(10px)}
+      to{opacity:1;transform:none}
+    }
+
+    .diagnosis-step-kicker{
+      color:var(--orange);
+      font-size:.67rem;
+      font-weight:800;
+      letter-spacing:.13em;
+      text-transform:uppercase;
+      margin-bottom:.35rem;
+    }
+
+    .diagnosis-question{
+      font-size:clamp(2.05rem,10vw,3rem);
+      line-height:.92;
+      margin-bottom:.55rem;
+    }
+
+    .diagnosis-copy{
+      color:var(--ink-muted);
+      font-size:.82rem;
+      line-height:1.45;
+      margin-bottom:1rem;
+    }
+
+    .diagnosis-options{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:.58rem;
+    }
+
+    .diagnosis-option{
+      width:100%;
+      min-height:54px;
+      padding:.85rem .92rem;
+      border:1px solid rgba(255,255,255,.09);
+      border-radius:14px;
+      color:var(--ink-soft);
+      background:rgba(255,255,255,.026);
+      text-align:left;
+      font-size:.89rem;
+      line-height:1.28;
+      transition:
+        background .22s ease,
+        border-color .22s ease,
+        color .22s ease,
+        transform .22s ease,
+        box-shadow .22s ease;
+    }
+
+    .diagnosis-option:active{transform:scale(.985)}
+
+    .diagnosis-option.is-selected{
+      color:#fff;
+      border-color:rgba(255,95,0,.72);
+      background:
+        linear-gradient(135deg,rgba(255,95,0,.18),rgba(255,95,0,.07));
+      box-shadow:inset 3px 0 0 var(--orange),0 8px 24px rgba(255,95,0,.08);
+    }
+
+    .diagnosis-nav{
+      display:grid;
+      grid-template-columns:auto 1fr;
+      align-items:end;
+      gap:.7rem;
+      margin-top:1.1rem;
+      padding-top:.9rem;
+      border-top:1px solid rgba(255,255,255,.07);
+    }
+
+    .diagnosis-back{
+      min-height:46px;
+      padding:.65rem .1rem;
+      color:var(--ink-muted);
+      background:transparent;
+      font-size:.8rem;
+    }
+
+    .diagnosis-back[hidden]{visibility:hidden}
+
+    .diagnosis-nav-actions{
+      display:flex;
+      flex-direction:column;
+      align-items:stretch;
+      gap:.45rem;
+      min-width:0;
+    }
+
+    .diagnosis-hint{
+      min-height:1rem;
+      color:var(--ink-muted);
+      font-size:.68rem;
+      text-align:right;
+    }
+
+    .diagnosis-next{
+      min-height:48px;
+      padding:.75rem 1rem;
+      border-radius:12px;
+      color:#fff;
+      background:var(--orange);
+      font-weight:850;
+      font-size:.84rem;
+      box-shadow:0 12px 28px rgba(255,95,0,.18);
+      transition:opacity .2s ease,transform .2s ease;
+    }
+
+    .diagnosis-next:disabled{
+      opacity:.28;
+      cursor:not-allowed;
+      box-shadow:none;
+    }
+
+    .diagnosis-next:not(:disabled):active{transform:scale(.985)}
+
+    /* =========================================================
+       RESULTADO
+       ========================================================= */
+    body.modal-open{overflow:hidden}
+
+    .result-modal{
+      position:fixed;
+      inset:0;
+      z-index:50;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:
+        calc(.7rem + env(safe-area-inset-top))
+        .7rem
+        calc(.7rem + env(safe-area-inset-bottom));
+      background:rgba(2,5,14,.84);
+      backdrop-filter:blur(16px);
+      opacity:0;
+      visibility:hidden;
+      transition:opacity .3s ease,visibility .3s ease;
+    }
+
+    .result-modal.is-active{
+      opacity:1;
+      visibility:visible;
+    }
+
+    .result-report{
+      width:min(100%,520px);
+      max-height:calc(100svh - 1.4rem - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+      overflow:auto;
+      position:relative;
+      padding:1.25rem 1rem 1rem;
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:22px;
+      background:
+        radial-gradient(circle at 95% 0%,rgba(122,92,255,.12),transparent 14rem),
+        linear-gradient(180deg,#121a35,#080d1c);
+      box-shadow:0 30px 100px rgba(0,0,0,.55);
+      transition:max-width .4s var(--ease),padding .4s var(--ease);
+    }
+
+    .modal-close{
+      position:sticky;
+      z-index:5;
+      top:0;
+      float:right;
+      width:36px;height:36px;
+      border-radius:50%;
+      color:var(--ink-muted);
+      background:rgba(255,255,255,.055);
+      border:1px solid rgba(255,255,255,.1);
+      font-size:1.25rem;
+    }
+
+    .result-top{padding-right:2.3rem}
+
+    .result-top h3{
+      font-size:clamp(2rem,9vw,3.1rem);
+      line-height:.9;
+      margin:.15rem 0 .55rem;
+    }
+
+    .result-lead{
+      color:var(--ink-soft);
+      font-size:.84rem;
+      line-height:1.45;
+    }
+
+    .priority{
+      display:inline-flex;
+      margin-top:.8rem;
+      padding:.35rem .58rem;
+      border:1px solid rgba(255,95,0,.28);
+      border-radius:999px;
+      background:rgba(255,95,0,.08);
+      color:#ff9e70;
+      font-size:.65rem;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .opportunities{
+      display:grid;
+      gap:.7rem;
+      margin-top:1rem;
+    }
+
+    .opportunity{
+      padding:.92rem;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:15px;
+      background:rgba(255,255,255,.025);
+    }
+
+    .opportunity-head{
+      display:flex;
+      gap:.65rem;
+      align-items:flex-start;
+      margin-bottom:.75rem;
+    }
+
+    .opportunity-num{
+      flex:0 0 auto;
+      width:28px;height:28px;
+      display:grid;
+      place-items:center;
+      border-radius:8px;
+      background:var(--orange);
+      color:#fff;
+      font-family:"Bebas Neue",sans-serif;
+      font-size:1rem;
+    }
+
+    .opportunity-head h4{
+      font-size:.96rem;
+      line-height:1.25;
+    }
+
+    .flow{
+      display:grid;
+      gap:.45rem;
+    }
+
+    .flow-step{
+      padding:.7rem .75rem;
+      border-radius:11px;
+      background:rgba(255,255,255,.032);
+      border-left:2px solid rgba(255,255,255,.14);
+    }
+
+    .flow-step.action{border-left-color:var(--orange)}
+    .flow-step.outcome{border-left-color:var(--green)}
+
+    .flow-step strong{
+      display:block;
+      color:var(--ink);
+      font-size:.67rem;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      margin-bottom:.18rem;
+    }
+
+    .flow-step p{
+      color:var(--ink-soft);
+      font-size:.78rem;
+      line-height:1.42;
+    }
+
+    .start-box{
+      margin-top:.8rem;
+      padding:.9rem;
+      border-radius:15px;
+      background:linear-gradient(135deg,rgba(255,95,0,.09),rgba(122,92,255,.06));
+      border:1px solid rgba(255,95,0,.14);
+    }
+
+    .start-label{
+      display:block;
+      color:var(--orange);
+      font-size:.65rem;
+      font-weight:800;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      margin-bottom:.25rem;
+    }
+
+    .start-box p{
+      color:var(--ink-soft);
+      font-size:.8rem;
+      line-height:1.45;
+    }
+
+    .summary{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.35rem;
+      margin-top:.8rem;
+    }
+
+    .summary span{
+      padding:.32rem .48rem;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.09);
+      color:var(--ink-muted);
+      font-size:.64rem;
+    }
+
+    .result-cta{
+      margin-top:1rem;
+      padding-top:1rem;
+      border-top:1px solid rgba(255,255,255,.08);
+    }
+
+    .result-cta p{
+      color:var(--ink-muted);
+      font-size:.76rem;
+      line-height:1.45;
+      margin-bottom:.75rem;
+    }
+
+    .study-btn{
+      width:100%;
+      min-height:51px;
+      padding:.8rem 1rem;
+      border-radius:13px;
+      background:var(--orange);
+      color:#fff;
+      font-weight:900;
+      font-size:.82rem;
+    }
+
+    /* Contacto */
+    .contact-choice{display:none}
+
+    .result-modal.is-contact .result-content{display:none}
+    .result-modal.is-contact .contact-choice{
+      display:block;
+      animation:stepIn .35s var(--ease) both;
+      padding-top:.4rem;
+    }
+
+    .result-modal.is-contact .result-report{
+      max-width:480px;
+    }
+
+    .contact-choice h3{
+      font-size:clamp(2.5rem,12vw,4rem);
+      line-height:.9;
+      margin:.15rem 0 .55rem;
+    }
+
+    .contact-choice > p:not(.diagnosis-step-kicker){
+      color:var(--ink-soft);
+      font-size:.82rem;
+      line-height:1.45;
+    }
+
+    .contact-actions{
+      display:grid;
+      gap:.6rem;
+      margin-top:1rem;
+    }
+
+    .contact-button{
+      min-height:52px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:.75rem 1rem;
+      border-radius:13px;
+      border:1px solid rgba(255,255,255,.1);
+      background:rgba(255,255,255,.035);
+      font-weight:850;
+      font-size:.84rem;
+      text-align:center;
+    }
+
+    .contact-button.whatsapp{
+      border-color:rgba(73,223,154,.24);
+      background:rgba(73,223,154,.07);
+      color:#9ff3c7;
+    }
+
+    .contact-button.email{
+      border-color:rgba(255,95,0,.28);
+      background:rgba(255,95,0,.08);
+      color:#ffb18c;
+    }
+
+    .contact-button.call{
+      border-color:rgba(122,92,255,.28);
+      background:rgba(122,92,255,.08);
+      color:#d8d0ff;
+      white-space:nowrap;
+      font-size:.81rem;
+    }
+
+    .contact-back{
+      width:100%;
+      margin-top:.8rem;
+      min-height:44px;
+      color:var(--ink-muted);
+      background:transparent;
+      font-size:.76rem;
+    }
+
+    /* Solo es un estudio móvil. En pantallas grandes lo mantenemos
+       con anchura de móvil para poder evaluarlo sin mezclar desktop. */
+    @media (min-width:700px) and (max-width:1099px){
+      body{
+        background:
+          radial-gradient(circle at 50% 0%,rgba(122,92,255,.10),transparent 36rem),
+          #050811;
+      }
+
+      .mobile-page{
+        width:min(100%,820px);
+        box-shadow:0 0 0 1px rgba(255,255,255,.035),0 0 100px rgba(0,0,0,.45);
+      }
+
+      .mobile-intro{
+        padding-left:2rem;
+        padding-right:2rem;
+      }
+
+      .intro-title{
+        max-width:680px;
+        font-size:clamp(4.6rem,9vw,6.4rem);
+      }
+
+      .diagnosis-section{
+        padding-left:2rem;
+        padding-right:2rem;
+      }
+
+      .diagnosis-wrap{
+        width:min(100%,760px);
+        margin:0 auto;
+      }
+
+      .diagnosis-body{
+        padding:1.35rem 1.25rem 1.2rem;
+      }
+
+      .diagnosis-options{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:.68rem;
+      }
+
+      .diagnosis-option{
+        min-height:58px;
+      }
+
+      .diagnosis-question{
+        font-size:clamp(2.6rem,6vw,3.6rem);
+      }
+
+      .result-report{
+        width:min(100%,680px);
+        padding:1.45rem 1.25rem 1.15rem;
+      }
+
+      .contact-actions{
+        grid-template-columns:repeat(3,minmax(0,1fr));
+      }
+    }
+
+    @media (min-width:1100px){
+      body{
+        background:
+          radial-gradient(circle at 50% 0%,rgba(122,92,255,.10),transparent 36rem),
+          #050811;
+      }
+    }
+      #aboutTitle{white-space:nowrap;}
+</style>
+</head>
+
+<body class="mobile-locked">
+
+  <header class="mobile-compact-header" id="mobileCompactHeader" aria-label="Cabecera compacta">
+    <div class="compact-language-wrap" id="compactLanguageWrap">
+      <button class="compact-language-trigger" id="compactLanguageTrigger" type="button"
+              aria-label="Cambiar idioma"
+              aria-expanded="false"
+              aria-controls="compactLanguageMenu">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="8"></circle>
+          <path d="M4 12h16"></path>
+          <path d="M12 4c2.1 2.2 3.1 4.9 3.1 8s-1 5.8-3.1 8"></path>
+          <path d="M12 4c-2.1 2.2-3.1 4.9-3.1 8s1 5.8 3.1 8"></path>
+        </svg>
+      </button>
+
+      <div class="compact-language-menu" id="compactLanguageMenu" role="menu" aria-label="Idioma">
+        <button class="language-option is-active" type="button" role="menuitem" aria-current="true">
+          <span>Español</span>
+          <span class="language-code">ES</span>
+        </button>
+        <button class="language-option" type="button" role="menuitem" disabled>
+          <span>English</span>
+          <span class="language-code">EN</span>
+        </button>
+      </div>
+    </div>
+
+    <a class="compact-brand" href="#inicio" aria-label="The Localhost, volver arriba">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <defs>
+          <linearGradient id="compactBrandGradient" x1="32" y1="6" x2="32" y2="58" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#F45A60"/>
+            <stop offset="52%" stop-color="#FF447C"/>
+            <stop offset="100%" stop-color="#FF3292"/>
+          </linearGradient>
+        </defs>
+        <rect x="7" y="7" width="50" height="50" rx="9"
+              fill="none" stroke="url(#compactBrandGradient)" stroke-width="4.8"/>
+        <path d="M21 23.5L31.5 32L21 40.5"
+              fill="none" stroke="url(#compactBrandGradient)" stroke-width="4.8"
+              stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M37 40.5H48"
+              fill="none" stroke="url(#compactBrandGradient)" stroke-width="4.8"
+              stroke-linecap="round"/>
+      </svg>
+      <span>The Localhost</span>
+    </a>
+
+    <button class="compact-about-trigger" id="compactAboutTrigger" type="button"
+            aria-label="Quién está detrás de The Localhost">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="8" r="3.2"></circle>
+        <path d="M5.8 19c.7-3.4 3-5.1 6.2-5.1s5.5 1.7 6.2 5.1"></path>
+      </svg>
+    </button>
+  </header>
+
+  <main class="mobile-page">
+
+    <section class="mobile-intro" id="inicio">
+
+      <div class="language-wrap" id="languageWrap">
+        <button class="language-trigger" id="languageTrigger" type="button"
+                aria-label="Cambiar idioma"
+                aria-expanded="false"
+                aria-controls="languageMenu">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="8"></circle>
+            <path d="M4 12h16"></path>
+            <path d="M12 4c2.1 2.2 3.1 4.9 3.1 8s-1 5.8-3.1 8"></path>
+            <path d="M12 4c-2.1 2.2-3.1 4.9-3.1 8s1 5.8 3.1 8"></path>
+          </svg>
+        </button>
+
+        <div class="language-menu" id="languageMenu" role="menu" aria-label="Idioma">
+          <button class="language-option is-active" type="button" role="menuitem" aria-current="true">
+            <span>Español</span>
+            <span class="language-code">ES</span>
+          </button>
+
+          <button class="language-option" type="button" role="menuitem" disabled>
+            <span>English</span>
+            <span class="language-code">EN</span>
+          </button>
+        </div>
+      </div>
+
+      <button class="about-trigger" id="aboutTrigger" type="button" aria-label="Quién está detrás de The Localhost">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="8" r="3.2"></circle>
+          <path d="M5.8 19c.7-3.4 3-5.1 6.2-5.1s5.5 1.7 6.2 5.1"></path>
+        </svg>
+      </button>
+
+      <div class="mobile-brand" aria-label="The Localhost — Automatización de procesos">
+        <svg class="mobile-brand-mark" viewBox="0 0 64 64" role="img" aria-hidden="true">
+          <defs>
+            <linearGradient id="brandGradient" x1="32" y1="6" x2="32" y2="58" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#F45A60"/>
+              <stop offset="52%" stop-color="#FF447C"/>
+              <stop offset="100%" stop-color="#FF3292"/>
+            </linearGradient>
+          </defs>
+
+          <rect x="7" y="7" width="50" height="50" rx="9"
+                fill="none"
+                stroke="url(#brandGradient)"
+                stroke-width="4.8"/>
+
+          <path d="M21 23.5L31.5 32L21 40.5"
+                fill="none"
+                stroke="url(#brandGradient)"
+                stroke-width="4.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"/>
+
+          <path d="M37 40.5H48"
+                fill="none"
+                stroke="url(#brandGradient)"
+                stroke-width="4.8"
+                stroke-linecap="round"/>
+        </svg>
+
+        <div class="mobile-brand-copy">
+          <span class="mobile-brand-name" id="mobileBrandName">The Localhost</span>
+          <span class="mobile-brand-tagline" id="mobileBrandTagline">Automatización de procesos</span>
+        </div>
+      </div>
+
+      <div class="intro-inner">
+        <div>
+          <div class="intro-line" aria-hidden="true"></div>
+
+          <div class="intro-copy" aria-live="polite">
+            <h1 class="intro-title is-active" data-intro-step="0">
+              <span class="intro-brand-highlight">Automatizamos el trabajo</span> que no te gusta.
+            </h1>
+
+            <h1 class="intro-title" data-intro-step="1">
+              <span class="intro-brand-highlight">Recupera tiempo</span> para lo que sí importa.
+            </h1>
+
+            <h1 class="intro-title" data-intro-step="2">
+              Déjame mostrarte si podemos hacer <em>algo mejor.</em>
+            </h1>
+          </div>
+        </div>
+      </div>
+
+      <button class="intro-next" id="introNext" type="button" aria-label="Descubrirlo en 4 preguntas">
+        <span>Descúbrelo en 4 preguntas</span>
+        <span aria-hidden="true">↓</span>
+      </button>
+    </section>
+
+    <section class="diagnosis-section" id="diagnostico">
+      <div class="diagnosis-wrap">
+
+        <header class="diagnosis-heading">
+          <p class="eyebrow">Diagnóstico rápido</p>
+          <h2>Cuéntame qué quieres mejorar.</h2>
+          <p>Responde 4 preguntas y te mostramos dónde vemos una oportunidad de mejora.</p>
+        </header>
+
+        <div class="diagnosis-shell" id="businessDiagnosis">
+          <div class="diagnosis-top">
+            <span class="diagnosis-label">Diagnóstico The Localhost</span>
+            <span class="diagnosis-counter" id="diagnosisCounter">01 / 04</span>
+          </div>
+
+          <div class="diagnosis-progress" aria-hidden="true">
+            <span id="diagnosisProgress"></span>
+          </div>
+
+          <div class="diagnosis-body">
+
+            <section class="diagnosis-step is-active" data-step="0" data-selection="multi" data-key="goal">
+              <p class="diagnosis-step-kicker">Pregunta 01</p>
+              <h3 class="diagnosis-question">¿Qué quieres mejorar?</h3>
+              <p class="diagnosis-copy">Puedes elegir varios objetivos si todos son importantes para tu negocio.</p>
+
+              <div class="diagnosis-options">
+                <button class="diagnosis-option" type="button" data-value="clientes">Captar clientes</button>
+                <button class="diagnosis-option" type="button" data-value="tiempo">Ahorrar tiempo</button>
+                <button class="diagnosis-option" type="button" data-value="respuesta">Responder más rápido</button>
+                <button class="diagnosis-option" type="button" data-value="organizacion">Organizar mejor</button>
+                <button class="diagnosis-option" type="button" data-value="repetitivas">Automatizar tareas repetitivas</button>
+              </div>
+            </section>
+
+            <section class="diagnosis-step" data-step="1" data-selection="multi" data-key="area">
+              <p class="diagnosis-step-kicker">Pregunta 02</p>
+              <h3 class="diagnosis-question">¿En qué parte del trabajo lo notas?</h3>
+              <p class="diagnosis-copy">Puedes elegir varias si el problema aparece en más de un punto del proceso.</p>
+
+              <div class="diagnosis-options">
+                <button class="diagnosis-option" type="button" data-value="email">Email</button>
+                <button class="diagnosis-option" type="button" data-value="whatsapp">WhatsApp</button>
+                <button class="diagnosis-option" type="button" data-value="web">Web / formularios</button>
+                <button class="diagnosis-option" type="button" data-value="reservas">Reservas / citas</button>
+                <button class="diagnosis-option" type="button" data-value="facturacion">Facturación</button>
+                <button class="diagnosis-option" type="button" data-value="crm">CRM / seguimiento</button>
+                <button class="diagnosis-option" type="button" data-value="redes">Redes sociales</button>
+                <button class="diagnosis-option" type="button" data-value="otro">Otro</button>
+              </div>
+            </section>
+
+            <section class="diagnosis-step" data-step="2" data-selection="multi" data-key="current">
+              <p class="diagnosis-step-kicker">Pregunta 03</p>
+              <h3 class="diagnosis-question">¿Qué pasa hoy con ese trabajo?</h3>
+              <p class="diagnosis-copy">Puedes elegir varias si el proceso combina distintos pasos o formas de gestión.</p>
+
+              <div class="diagnosis-options">
+                <button class="diagnosis-option" type="button" data-value="manual">Lo gestiono manualmente</button>
+                <button class="diagnosis-option" type="button" data-value="excel">Apunto o copio datos en Excel</button>
+                <button class="diagnosis-option" type="button" data-value="herramientas">Paso información entre varias herramientas</button>
+                <button class="diagnosis-option" type="button" data-value="falla">Ya tengo una automatización, pero falla</button>
+              </div>
+            </section>
+
+            <section class="diagnosis-step" data-step="3" data-selection="single" data-key="load">
+              <p class="diagnosis-step-kicker">Pregunta 04</p>
+              <h3 class="diagnosis-question">¿Cuánto te afecta este proceso?</h3>
+              <p class="diagnosis-copy">Elige una sola opción: la que mejor describa su impacto real en el día a día.</p>
+
+              <div class="diagnosis-options">
+                <button class="diagnosis-option" type="button" data-value="poco">Bajo · molesta, pero se gestiona</button>
+                <button class="diagnosis-option" type="button" data-value="semana">Medio · me quita varias horas a la semana</button>
+                <button class="diagnosis-option" type="button" data-value="dia">Alto · me quita varias horas al día</button>
+                <button class="diagnosis-option" type="button" data-value="serio">Crítico · provoca bloqueos, errores o pérdida de seguimiento</button>
+              </div>
+            </section>
+
+            <div class="diagnosis-nav">
+              <button class="diagnosis-back" id="diagnosisBack" type="button" hidden>← Anterior</button>
+
+              <div class="diagnosis-nav-actions">
+                <span class="diagnosis-hint" id="diagnosisHint">Puedes elegir varias opciones</span>
+                <button class="diagnosis-next" id="diagnosisNext" type="button" disabled>Continuar →</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="loading-footer" id="loadingFooter" aria-label="Preparando diagnóstico">
+    <div class="loading-footer-inner">
+      <div class="loading-track" aria-hidden="true">
+        <span class="loading-fill" id="loadingFill"></span>
+      </div>
+      <span class="loading-percent" id="loadingPercent">0%</span>
+    </div>
+  </footer>
+
+  <div class="about-modal" id="aboutModal" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
+    <div class="about-card">
+      <button class="about-close" id="aboutClose" type="button" aria-label="Cerrar">×</button>
+
+      <p class="about-kicker">Detrás de The Localhost</p>
+      <h2 id="aboutTitle">Ángel G. Cidoncha</h2>
+
+      <p>
+        Llevo más de 20 años trabajando entre frontend, diseño digital y tecnología.
+        Esa experiencia es la base desde la que hoy abordo la automatización:
+        entender primero el problema y después elegir la herramienta adecuada.
+      </p>
+
+      <div class="about-points">
+        <div class="about-point"><strong>Frontend Design &amp; Layout · UX/UI · SEO · Project Management · CMS</strong></div>
+        <div class="about-point"><strong>Formador de la Comunidad de Madrid</strong> durante más de 10 años.</div>
+      </div>
+
+      <div class="about-brands" aria-label="Marcas para las que ha trabajado">
+        <span class="about-brands-label">He participado en proyectos para marcas como</span>
+        <div class="about-brand-list">
+          <span>El Corte Inglés</span>
+          <span>Sanitas</span>
+          <span>Endesa</span>
+          <span>Mercedes-Benz</span>
+          <span>BMW</span>
+          <span>Repsol</span>
+          <span>Packlink</span>
+          <span>Kinepolis</span>
+          <span>Autopia</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="result-modal" id="resultModal" role="dialog" aria-modal="true" aria-labelledby="resultHeadline">
+    <div class="result-report">
+      <button class="modal-close" id="modalClose" type="button" aria-label="Cerrar diagnóstico">×</button>
+
+      <div class="result-content">
+        <div class="result-top">
+          <p class="diagnosis-step-kicker">Tu diagnóstico</p>
+          <h3 id="resultHeadline">Hay una oportunidad clara de mejora.</h3>
+          <p class="result-lead" id="resultLead"></p>
+          <span class="priority" id="resultPriority">Oportunidad clara</span>
+        </div>
+
+        <div class="opportunities" id="opportunities"></div>
+
+        <div class="start-box">
+          <span class="start-label">Por dónde empezaría</span>
+          <p id="startText"></p>
+        </div>
+
+        <div class="summary" id="summary"></div>
+
+        <div class="result-cta">
+          <p>Si quieres que revisemos este caso con contexto real de tu negocio, el siguiente paso será enviarnos este diagnóstico.</p>
+          <button class="study-btn" id="studyButton" type="button">Quiero que estudiéis mi caso →</button>
+        </div>
+      </div>
+
+      <div class="contact-choice">
+        <p class="diagnosis-step-kicker">Seguimos</p>
+        <h3>¿Cómo prefieres hablar?</h3>
+        <p>Elige el canal que te resulte más cómodo. Te dejamos el mensaje preparado con el contexto básico del diagnóstico.</p>
+
+        <div class="contact-actions">
+          <a class="contact-button whatsapp" id="whatsappLink" href="#" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="contact-button email" id="emailLink" href="mailto:angel@thelocalhost.es">Email</a>
+          <a class="contact-button call" id="callLink" href="mailto:angel@thelocalhost.es">Reservar una llamada</a>
+        </div>
+
+        <button class="contact-back" id="contactBack" type="button">← Volver al diagnóstico</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const languageWrap = document.getElementById('languageWrap');
+      const languageTrigger = document.getElementById('languageTrigger');
+      const compactLanguageWrap = document.getElementById('compactLanguageWrap');
+      const compactLanguageTrigger = document.getElementById('compactLanguageTrigger');
+
+      function closeCompactLanguage(){
+        if(!compactLanguageWrap || !compactLanguageTrigger) return;
+        compactLanguageWrap.classList.remove('is-open');
+        compactLanguageTrigger.setAttribute('aria-expanded','false');
+      }
+
+      function toggleCompactLanguage(){
+        if(!compactLanguageWrap || !compactLanguageTrigger) return;
+        const opening = !compactLanguageWrap.classList.contains('is-open');
+        compactLanguageWrap.classList.toggle('is-open', opening);
+        compactLanguageTrigger.setAttribute('aria-expanded', String(opening));
+        if(opening) closeLanguage();
+      }
+
+      function closeLanguage(){
+        if(!languageWrap || !languageTrigger) return;
+        languageWrap.classList.remove('is-open');
+        languageTrigger.setAttribute('aria-expanded','false');
+      }
+
+      function toggleLanguage(){
+        if(!languageWrap || !languageTrigger) return;
+        const opening = !languageWrap.classList.contains('is-open');
+        languageWrap.classList.toggle('is-open', opening);
+        languageTrigger.setAttribute('aria-expanded', String(opening));
+      }
+
+      if(languageTrigger){
+        languageTrigger.addEventListener('click', event => {
+          event.stopPropagation();
+          toggleLanguage();
+        });
+      }
+
+      if(compactLanguageTrigger){
+        compactLanguageTrigger.addEventListener('click', event => {
+          event.stopPropagation();
+          toggleCompactLanguage();
+        });
+      }
+
+      document.addEventListener('click', event => {
+        if(languageWrap && !languageWrap.contains(event.target)){
+          closeLanguage();
+        }
+        if(compactLanguageWrap && !compactLanguageWrap.contains(event.target)){
+          closeCompactLanguage();
+        }
+      });
+
+      document.addEventListener('keydown', event => {
+        if(event.key === 'Escape'){
+          closeLanguage();
+          closeCompactLanguage();
+        }
+      });
+    })();
+
+    (() => {
+      const aboutTrigger = document.getElementById('aboutTrigger');
+      const compactAboutTrigger = document.getElementById('compactAboutTrigger');
+      const aboutModal = document.getElementById('aboutModal');
+      const aboutClose = document.getElementById('aboutClose');
+
+      function openAbout(){
+        if(!aboutModal) return;
+        aboutModal.classList.add('is-active');
+      }
+
+      function closeAbout(){
+        if(!aboutModal) return;
+        aboutModal.classList.remove('is-active');
+      }
+
+      if(aboutTrigger) aboutTrigger.addEventListener('click', openAbout);
+      if(compactAboutTrigger) compactAboutTrigger.addEventListener('click', openAbout);
+      if(aboutClose) aboutClose.addEventListener('click', closeAbout);
+
+      if(aboutModal){
+        aboutModal.addEventListener('click', event => {
+          if(event.target === aboutModal) closeAbout();
+        });
+      }
+
+      document.addEventListener('keydown', event => {
+        if(event.key === 'Escape' && aboutModal?.classList.contains('is-active')){
+          closeAbout();
+        }
+      });
+    })();
+
+    (() => {
+      const brandName = document.getElementById('mobileBrandName');
+      const brandTagline = document.getElementById('mobileBrandTagline');
+
+      function alignBrandTexts(){
+        if(!brandName || !brandTagline) return;
+
+        brandTagline.style.letterSpacing = '0px';
+
+        const titleWidth = brandName.getBoundingClientRect().width;
+        const taglineWidth = brandTagline.getBoundingClientRect().width;
+        const characters = brandTagline.textContent.trim().length;
+
+        if(characters > 1){
+          const spacing = (titleWidth - taglineWidth) / (characters - 1);
+          brandTagline.style.letterSpacing = `${spacing}px`;
+        }
+      }
+
+      if(document.fonts && document.fonts.ready){
+        document.fonts.ready.then(alignBrandTexts);
+      }else{
+        window.addEventListener('load', alignBrandTexts, {once:true});
+      }
+
+      window.addEventListener('resize', alignBrandTexts);
+    })();
+
+    (() => {
+      const introTitles = [...document.querySelectorAll('[data-intro-step]')];
+      const introNext = document.getElementById('introNext');
+      const loadingFill = document.getElementById('loadingFill');
+      const loadingPercent = document.getElementById('loadingPercent');
+      const diagnosisSection = document.getElementById('diagnostico');
+      const originalBrand = document.querySelector('.mobile-brand');
+
+      const totalDuration = 8000;
+      const phaseOneEnd = 2600;
+      const phaseTwoEnd = 5200;
+      let startedAt = null;
+      let introFinished = false;
+
+      function activateIntroStep(stepIndex){
+        introTitles.forEach((title,index) => {
+          title.classList.toggle('is-active', index === stepIndex);
+        });
+      }
+
+      function finishIntro(){
+        if(introFinished) return;
+        introFinished = true;
+
+        activateIntroStep(2);
+        loadingFill.style.width = '100%';
+        loadingPercent.textContent = '100%';
+
+        document.body.classList.remove('mobile-locked');
+        document.body.classList.add('intro-ready');
+        introNext.classList.add('is-ready');
+
+        requestAnimationFrame(syncCompactHeader);
+      }
+
+      function animateIntro(timestamp){
+        if(startedAt === null) startedAt = timestamp;
+
+        const elapsed = timestamp - startedAt;
+        const progress = Math.min(1, elapsed / totalDuration);
+        const percent = Math.round(progress * 100);
+
+        loadingFill.style.width = `${percent}%`;
+        loadingPercent.textContent = `${percent}%`;
+
+        if(elapsed < phaseOneEnd){
+          activateIntroStep(0);
+        }else if(elapsed < phaseTwoEnd){
+          activateIntroStep(1);
+        }else{
+          activateIntroStep(2);
+        }
+
+        if(progress < 1){
+          requestAnimationFrame(animateIntro);
+        }else{
+          finishIntro();
+        }
+      }
+
+      introNext.addEventListener('click', () => {
+        if(!introFinished) return;
+
+        document.body.classList.add('quiz-unlocked');
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            diagnosisSection.scrollIntoView({
+              behavior:'smooth',
+              block:'start'
+            });
+          });
+        });
+      });
+
+      let scrollUnlockMarked = false;
+
+      window.addEventListener('scroll', () => {
+        if(!introFinished || scrollUnlockMarked) return;
+
+        if(window.scrollY > 12){
+          scrollUnlockMarked = true;
+          document.body.classList.add('quiz-unlocked');
+        }
+      }, {passive:true});
+
+      const syncCompactHeader = () => {
+        if(!introFinished || !originalBrand){
+          document.body.classList.remove('compact-header-visible');
+          return;
+        }
+
+        const rect = originalBrand.getBoundingClientRect();
+        const originalHeaderVisible = rect.bottom > 0 && rect.top < window.innerHeight;
+
+        document.body.classList.toggle(
+          'compact-header-visible',
+          !originalHeaderVisible
+        );
+      };
+
+      if('IntersectionObserver' in window && originalBrand){
+        const brandObserver = new IntersectionObserver(
+          entries => {
+            const entry = entries[0];
+            if(!introFinished){
+              document.body.classList.remove('compact-header-visible');
+              return;
+            }
+
+            document.body.classList.toggle(
+              'compact-header-visible',
+              !entry.isIntersecting
+            );
+          },
+          {
+            root:null,
+            threshold:0
+          }
+        );
+
+        brandObserver.observe(originalBrand);
+      }else{
+        window.addEventListener('scroll', syncCompactHeader, {passive:true});
+        window.addEventListener('resize', syncCompactHeader);
+      }
+
+      window.addEventListener('pageshow', syncCompactHeader);
+      window.addEventListener('resize', syncCompactHeader);
+
+      requestAnimationFrame(animateIntro);
+    })();
+
+    (() => {
+      const root = document.getElementById('businessDiagnosis');
+      const diagnosisSection = document.getElementById('diagnostico');
+      const steps = [...root.querySelectorAll('.diagnosis-step')];
+      const back = document.getElementById('diagnosisBack');
+      const next = document.getElementById('diagnosisNext');
+      const hint = document.getElementById('diagnosisHint');
+      const counter = document.getElementById('diagnosisCounter');
+      const progress = document.getElementById('diagnosisProgress');
+
+      const modal = document.getElementById('resultModal');
+      const modalClose = document.getElementById('modalClose');
+      const resultHeadline = document.getElementById('resultHeadline');
+      const resultLead = document.getElementById('resultLead');
+      const resultPriority = document.getElementById('resultPriority');
+      const opportunities = document.getElementById('opportunities');
+      const startText = document.getElementById('startText');
+      const summary = document.getElementById('summary');
+
+      const studyButton = document.getElementById('studyButton');
+      const contactBack = document.getElementById('contactBack');
+      const whatsappLink = document.getElementById('whatsappLink');
+      const emailLink = document.getElementById('emailLink');
+      const callLink = document.getElementById('callLink');
+
+      let index = 0;
+
+      const answers = {
+        goal:[],
+        area:[],
+        current:[],
+        load:''
+      };
+
+      const labels = {
+        goal:{
+          clientes:'Captar clientes',
+          tiempo:'Ahorrar tiempo',
+          respuesta:'Responder más rápido',
+          organizacion:'Organizar mejor',
+          repetitivas:'Automatizar tareas repetitivas'
+        },
+        area:{
+          email:'Email',
+          whatsapp:'WhatsApp',
+          web:'Web / formularios',
+          reservas:'Reservas / citas',
+          facturacion:'Facturación',
+          crm:'CRM / seguimiento',
+          redes:'Redes sociales',
+          otro:'Otro'
+        },
+        current:{
+          manual:'Gestión manual',
+          excel:'Datos en Excel',
+          herramientas:'Información entre herramientas',
+          falla:'Automatización que falla'
+        },
+        load:{
+          poco:'Impacto bajo',
+          semana:'Impacto medio',
+          dia:'Impacto alto',
+          serio:'Impacto crítico'
+        }
+      };
+
+      const priorityResults = {
+        poco:{
+          headline:'Hay una oportunidad clara de mejora.',
+          label:'Oportunidad clara',
+          text:'El proceso todavía es manejable, así que podemos estudiar una mejora concreta sin complicarlo de más.'
+        },
+        semana:{
+          headline:'Aquí ya se está escapando tiempo.',
+          label:'Prioridad media',
+          text:'Si este proceso consume varias horas cada semana, ya existe margen real para simplificarlo y recuperar tiempo.'
+        },
+        dia:{
+          headline:'Este proceso merece prioridad.',
+          label:'Prioridad alta',
+          text:'Cuando una tarea consume horas cada día, conviene revisar primero el flujo y eliminar pasos manuales innecesarios.'
+        },
+        serio:{
+          headline:'Aquí hay un problema que conviene atacar.',
+          label:'Prioridad crítica',
+          text:'Si el proceso provoca bloqueos, errores o pérdida de seguimiento, primero hay que estabilizarlo y después automatizar.'
+        }
+      };
+
+      const areaContent = {
+        email:{
+          title:'Reducir trabajo manual alrededor del email',
+          now:'El correo forma parte del proceso y exige intervención o seguimiento manual.',
+          action:'Revisaríamos qué mensajes disparan acciones repetitivas y qué datos podrían moverse automáticamente.',
+          outcome:'Menos bandeja de entrada como lista de tareas y menos seguimientos olvidados.'
+        },
+        whatsapp:{
+          title:'Ordenar y acelerar la gestión de WhatsApp',
+          now:'WhatsApp está participando en un proceso que depende de respuestas, avisos o datos gestionados a mano.',
+          action:'Separaríamos conversación humana de acciones que sí pueden automatizarse o registrarse.',
+          outcome:'Responder antes sin convertir WhatsApp en un cuello de botella.'
+        },
+        web:{
+          title:'Hacer que la web trabaje después del formulario',
+          now:'La web o los formularios recogen información, pero parte del trabajo posterior sigue dependiendo de alguien.',
+          action:'Conectaríamos la entrada de datos con el siguiente paso real del negocio.',
+          outcome:'Menos copiar, avisar o perseguir información después de cada contacto.'
+        },
+        reservas:{
+          title:'Simplificar reservas, confirmaciones y seguimiento',
+          now:'Las citas generan coordinación manual antes o después de la reserva.',
+          action:'Revisaríamos agenda, confirmaciones, recordatorios y registro de información.',
+          outcome:'Menos coordinación repetitiva y menos huecos o seguimientos perdidos.'
+        },
+        facturacion:{
+          title:'Reducir pasos repetitivos de facturación',
+          now:'Parte de la información de facturación se introduce, consulta o traslada manualmente.',
+          action:'Estudiaríamos dónde nace el dato y qué pasos pueden conectarse sin duplicarlo.',
+          outcome:'Menos errores y menos tiempo administrativo.'
+        },
+        crm:{
+          title:'Dar continuidad real al seguimiento comercial',
+          now:'El seguimiento depende de actualizar información o recordar próximos pasos manualmente.',
+          action:'Conectaríamos entradas, estados, tareas y avisos para que el CRM refleje lo que ocurre.',
+          outcome:'Menos oportunidades que se enfrían por falta de seguimiento.'
+        },
+        redes:{
+          title:'Quitar trabajo repetitivo alrededor de redes',
+          now:'Las redes generan tareas que se repiten o información que termina moviéndose a otros sistemas.',
+          action:'Identificaríamos qué parte puede programarse, reutilizarse o conectarse con el resto del proceso.',
+          outcome:'Más continuidad con menos trabajo operativo.'
+        },
+        otro:{
+          title:'Mapear el proceso antes de automatizar',
+          now:'El problema está en una parte del trabajo que necesita contexto para entender bien dónde se atasca.',
+          action:'Dibujaríamos el flujo actual y detectaríamos el punto exacto donde se pierde tiempo o información.',
+          outcome:'Una mejora concreta en lugar de automatizar por automatizar.'
+        }
+      };
+
+      function currentStep(){
+        return steps[index];
+      }
+
+      function valuesFor(key){
+        const value = answers[key];
+        return Array.isArray(value) ? value : (value ? [value] : []);
+      }
+
+      function updateUI(){
+        steps.forEach((step,i) => step.classList.toggle('is-active', i === index));
+
+        const step = currentStep();
+        const key = step.dataset.key;
+        const selected = valuesFor(key);
+
+        step.querySelectorAll('.diagnosis-option').forEach(button => {
+          const isSelected = selected.includes(button.dataset.value);
+          button.classList.toggle('is-selected', isSelected);
+          button.setAttribute('aria-pressed', String(isSelected));
+        });
+
+        counter.textContent = `${String(index + 1).padStart(2,'0')} / 04`;
+        progress.style.width = `${((index + 1) / steps.length) * 100}%`;
+
+        back.hidden = index === 0;
+        next.disabled = selected.length === 0;
+        next.textContent = index === steps.length - 1 ? 'Ver diagnóstico →' : 'Continuar →';
+        hint.textContent = step.dataset.selection === 'multi'
+          ? 'Puedes elegir varias opciones'
+          : 'Elige una sola opción';
+      }
+
+      function scrollQuestionIntoView(){
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            const rect = root.getBoundingClientRect();
+            const availableTop = 14;
+            const availableBottom = window.innerHeight - 18;
+            const availableHeight = availableBottom - availableTop;
+
+            let delta = 0;
+
+            if(rect.height <= availableHeight){
+              delta = rect.top - (availableTop + (availableHeight - rect.height) / 2);
+            }else if(rect.bottom > availableBottom){
+              delta = rect.bottom - availableBottom;
+            }else if(rect.top < availableTop){
+              delta = rect.top - availableTop;
+            }
+
+            if(Math.abs(delta) > 2){
+              window.scrollBy({top:delta,behavior:'smooth'});
+            }
+          });
+        });
+      }
+
+      root.addEventListener('click', event => {
+        const button = event.target.closest('.diagnosis-option');
+        if(!button) return;
+
+        const step = button.closest('.diagnosis-step');
+        const key = step.dataset.key;
+        const value = button.dataset.value;
+        const multi = step.dataset.selection === 'multi';
+
+        if(multi){
+          let values = [...answers[key]];
+
+          if(key === 'area'){
+            if(value === 'otro'){
+              values = values.includes('otro') ? [] : ['otro'];
+            }else{
+              values = values.filter(item => item !== 'otro');
+              values = values.includes(value)
+                ? values.filter(item => item !== value)
+                : [...values,value];
+            }
+          }else{
+            values = values.includes(value)
+              ? values.filter(item => item !== value)
+              : [...values,value];
+          }
+
+          answers[key] = values;
+        }else{
+          answers[key] = value;
+        }
+
+        updateUI();
+      });
+
+      back.addEventListener('click', () => {
+        if(index === 0) return;
+        index -= 1;
+        updateUI();
+        scrollQuestionIntoView();
+      });
+
+      next.addEventListener('click', () => {
+        const key = currentStep().dataset.key;
+        if(valuesFor(key).length === 0) return;
+
+        if(index < steps.length - 1){
+          index += 1;
+          updateUI();
+          scrollQuestionIntoView();
+        }else{
+          buildResult();
+        }
+      });
+
+      function rankedAreas(){
+        const chosen = [...answers.area];
+
+        if(answers.current.includes('falla')){
+          return chosen.slice(0,2);
+        }
+
+        const priority = ['crm','reservas','web','email','whatsapp','facturacion','redes','otro'];
+        return chosen
+          .sort((a,b) => priority.indexOf(a) - priority.indexOf(b))
+          .slice(0,2);
+      }
+
+      function contextText(){
+        const parts = [];
+
+        if(answers.current.includes('falla')){
+          parts.push('Ya existe una automatización que falla, por lo que antes de añadir nada nuevo revisaría qué está rompiendo el proceso.');
+        }else if(answers.current.includes('herramientas')){
+          parts.push('Hay información moviéndose entre herramientas, una señal clara de que merece la pena revisar conexiones y duplicidades.');
+        }else if(answers.current.includes('excel')){
+          parts.push('Parte del proceso depende de copiar o mantener datos en Excel.');
+        }else if(answers.current.includes('manual')){
+          parts.push('El flujo depende actualmente de gestión manual.');
+        }
+
+        if(answers.goal.includes('tiempo') || answers.goal.includes('repetitivas')){
+          parts.push('El objetivo principal debería ser quitar pasos repetitivos sin complicar el sistema.');
+        }else if(answers.goal.includes('clientes')){
+          parts.push('La mejora debería proteger especialmente el seguimiento y la conversión de oportunidades.');
+        }
+
+        return parts.join(' ');
+      }
+
+      function buildResult(){
+        const priority = priorityResults[answers.load];
+        const areas = rankedAreas();
+        const fallbackArea = areas[0] || answers.area[0] || 'otro';
+
+        resultHeadline.textContent = priority.headline;
+        resultPriority.textContent = priority.label;
+
+        const context = contextText();
+        resultLead.textContent = context || priority.text;
+
+        opportunities.innerHTML = '';
+
+        areas.length ? areas : [fallbackArea].forEach(() => {});
+
+        const renderedAreas = areas.length ? areas : [fallbackArea];
+
+        renderedAreas.forEach((areaKey,i) => {
+          const data = areaContent[areaKey] || areaContent.otro;
+
+          const article = document.createElement('article');
+          article.className = 'opportunity';
+
+          const head = document.createElement('div');
+          head.className = 'opportunity-head';
+          head.innerHTML = `
+            <span class="opportunity-num">${String(i + 1).padStart(2,'0')}</span>
+            <h4>${data.title}</h4>
+          `;
+
+          const flow = document.createElement('div');
+          flow.className = 'flow';
+          flow.innerHTML = `
+            <div class="flow-step">
+              <strong>Ahora</strong>
+              <p>${data.now}</p>
+            </div>
+            <div class="flow-step action">
+              <strong>Qué haríamos</strong>
+              <p>${data.action}</p>
+            </div>
+            <div class="flow-step outcome">
+              <strong>Qué buscamos</strong>
+              <p>${data.outcome}</p>
+            </div>
+          `;
+
+          article.append(head,flow);
+          opportunities.appendChild(article);
+        });
+
+        const firstLabel = labels.area[fallbackArea] || 'el proceso principal';
+        startText.textContent =
+          `${priority.text} Empezaría revisando ${firstLabel} y, antes de añadir nada nuevo, comprobaría cómo encaja con la forma en la que trabajas ahora.`;
+
+        summary.innerHTML = '';
+        ['goal','area','current','load'].forEach(key => {
+          valuesFor(key).forEach(value => {
+            const chip = document.createElement('span');
+            chip.textContent = labels[key][value] || value;
+            summary.appendChild(chip);
+          });
+        });
+
+        prepareContactLinks();
+
+        modal.classList.remove('is-contact');
+        modal.classList.add('is-active');
+        document.body.classList.add('modal-open');
+
+        const report = modal.querySelector('.result-report');
+        report.scrollTop = 0;
+      }
+
+      function buildContactMessage(){
+        const lines = [
+          'Hola, he hecho el diagnóstico de The Localhost y quiero que estudiéis mi caso.',
+          ''
+        ];
+
+        [
+          ['Quiero mejorar','goal'],
+          ['Dónde ocurre','area'],
+          ['Ahora ocurre','current'],
+          ['Impacto','load']
+        ].forEach(([label,key]) => {
+          const text = valuesFor(key)
+            .map(value => labels[key][value] || value)
+            .filter(Boolean)
+            .join(', ');
+
+          if(text) lines.push(`${label}: ${text}`);
+        });
+
+        lines.push('');
+        lines.push('Me gustaría que lo revisáramos con más contexto.');
+
+        return lines.join('\n');
+      }
+
+      function prepareContactLinks(){
+        const message = buildContactMessage();
+
+        emailLink.href =
+          `mailto:angel@thelocalhost.es?subject=${encodeURIComponent('Quiero que estudiéis mi caso')}&body=${encodeURIComponent(message)}`;
+
+        callLink.href =
+          `mailto:angel@thelocalhost.es?subject=${encodeURIComponent('Quiero reservar una llamada')}&body=${encodeURIComponent(message + '\n\nPrefiero comentarlo en una llamada. ¿Qué disponibilidad tienes?')}`;
+
+        whatsappLink.href =
+          `https://wa.me/?text=${encodeURIComponent(message)}`;
+      }
+
+      studyButton.addEventListener('click', () => {
+        prepareContactLinks();
+        modal.classList.add('is-contact');
+        modal.querySelector('.result-report').scrollTop = 0;
+      });
+
+      contactBack.addEventListener('click', () => {
+        modal.classList.remove('is-contact');
+        modal.querySelector('.result-report').scrollTop = 0;
+      });
+
+      function closeModal(){
+        modal.classList.remove('is-active','is-contact');
+        document.body.classList.remove('modal-open');
+        index = steps.length - 1;
+        updateUI();
+
+        setTimeout(() => {
+          diagnosisSection.scrollIntoView({behavior:'smooth',block:'start'});
+        },80);
+      }
+
+      modalClose.addEventListener('click', closeModal);
+
+      modal.addEventListener('click', event => {
+        if(event.target === modal) closeModal();
+      });
+
+      document.addEventListener('keydown', event => {
+        if(event.key === 'Escape' && modal.classList.contains('is-active')){
+          closeModal();
+        }
+      });
+
+      updateUI();
+    })();
+  </script>
+</body>
+</html>

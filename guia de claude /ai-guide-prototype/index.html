@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Guía visual para entender Skills, MCP, documentación, instrucciones y scripts mediante flujos de decisión." />
+  <title>AI Field Guide · Flujo de conceptos</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grid-bg" aria-hidden="true"></div>
+  <header class="topbar">
+    <div class="brand"><span>&gt;_</span> AI FIELD GUIDE</div>
+    <nav class="mode-nav" aria-label="Secciones">
+      <button class="active" data-jump="flowStage">ENTENDER</button>
+      <button data-jump="relations">CONECTAR</button>
+      <button data-jump="practice">PRACTICAR</button>
+    </nav>
+    <div class="status"><i></i> MODO FLUJO</div>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <span class="eyebrow">01 · ENTENDER CONCEPTOS</span>
+      <h1>No memorices términos.<br><em>Aprende a decidir.</em></h1>
+      <p>Empieza por una necesidad real. El flujo te lleva al concepto correcto y te enseña por qué.</p>
+    </section>
+
+    <section class="flow-stage" id="flowStage">
+      <svg class="wires" id="wires" aria-hidden="true"></svg>
+
+      <article class="flow-node start-node" id="startNode">
+        <span class="node-tag">EMPIEZA AQUÍ</span>
+        <h2>¿Qué necesitas de Claude?</h2>
+        <div class="decision-grid">
+          <button data-choice="method">Que siga una forma concreta de trabajar</button>
+          <button data-choice="access">Que acceda a algo externo</button>
+          <button data-choice="knowledge">Que conozca información del proyecto</button>
+          <button data-choice="rules">Que respete reglas siempre</button>
+          <button data-choice="automation">Que ejecute una operación técnica</button>
+        </div>
+      </article>
+
+      <article class="flow-node result-node hidden" id="resultNode" aria-live="polite">
+        <span class="node-tag" id="resultTag">PROCEDIMIENTO</span>
+        <h2 id="resultTitle">SKILL</h2>
+        <p class="big-definition" id="resultDefinition">Cómo quiero que haga algo.</p>
+        <div class="remember" id="resultRemember">SKILL = una receta reutilizable.</div>
+        <div class="node-actions">
+          <button class="ghost" id="whyButton">¿POR QUÉ?</button>
+          <button class="primary" id="continueButton">VER CÓMO SE CONECTA →</button>
+        </div>
+      </article>
+
+      <article class="flow-node question-node hidden" id="questionNode">
+        <span class="node-tag">SIGUIENTE DECISIÓN</span>
+        <h2 id="questionText">¿Necesita además acceso externo?</h2>
+        <div class="yes-no">
+          <button data-answer="yes">SÍ</button>
+          <button data-answer="no">NO, OTRO CASO</button>
+        </div>
+      </article>
+
+      <article class="flow-node combo-node hidden" id="comboNode">
+        <span class="node-tag">ASÍ SE CONECTAN</span>
+        <div class="combo-line">
+          <strong id="comboA">SKILL</strong>
+          <span id="comboVerb">USA</span>
+          <strong id="comboB">MCP</strong>
+        </div>
+        <p id="comboExplanation">El Skill define el procedimiento y el MCP abre la conexión.</p>
+        <button class="primary" id="restartButton">PROBAR OTRO CASO ↺</button>
+      </article>
+
+      <aside class="why-panel" id="whyPanel" aria-hidden="true">
+        <button class="close" id="closeWhy" aria-label="Cerrar">×</button>
+        <span id="whyTag">SKILL</span>
+        <h3 id="whyTitle">Piensa en una receta.</h3>
+        <p id="whyText"></p>
+        <div class="example" id="whyExample"></div>
+      </aside>
+    </section>
+
+    <section class="relations" id="relations">
+      <div class="section-head">
+        <span class="eyebrow">02 · CONECTAR CONCEPTOS</span>
+        <h2>Una misma tarea puede necesitar varias piezas.</h2>
+        <p>No compiten entre sí. Cada concepto resuelve una parte distinta del trabajo.</p>
+      </div>
+
+      <div class="system-flow" aria-label="Relación entre conceptos">
+        <div class="system-node user-node"><span>1</span><b>TÚ PIDES</b><small>“Revisa este producto”</small></div>
+        <div class="system-arrow">→</div>
+        <div class="system-node"><span>2</span><b>INSTRUCCIONES</b><small>marcan los límites</small></div>
+        <div class="system-arrow">→</div>
+        <div class="system-node"><span>3</span><b>DOCS</b><small>aportan contexto</small></div>
+        <div class="system-arrow">→</div>
+        <div class="system-node focus"><span>4</span><b>SKILL</b><small>define el procedimiento</small></div>
+        <div class="system-arrow">→</div>
+        <div class="system-node"><span>5</span><b>MCP / SCRIPT</b><small>permiten actuar</small></div>
+        <div class="system-arrow">→</div>
+        <div class="system-node end-node"><span>6</span><b>RESULTADO</b><small>trabajo ejecutado</small></div>
+      </div>
+
+      <div class="relationship-note">
+        <strong>IDEA CLAVE</strong>
+        <p><b>Skill</b> no sustituye a MCP, documentación o instrucciones. Los coordina dentro de una forma de trabajar.</p>
+      </div>
+    </section>
+
+    <section class="practice" id="practice">
+      <div class="section-head">
+        <span class="eyebrow">03 · PRACTICAR</span>
+        <h2>¿Dónde pondrías esto?</h2>
+        <p>Elige por función, no por nombre.</p>
+      </div>
+
+      <div class="quiz-shell">
+        <div class="quiz-progress"><span id="quizStep">1 / 5</span><i><b id="quizBar"></b></i></div>
+        <div class="quiz-case" id="quizCase">“Quiero que Claude revise siempre SEO antes de publicar una ficha de producto.”</div>
+        <div class="quiz-options" id="quizOptions"></div>
+        <div class="quiz-feedback hidden" id="quizFeedback"></div>
+        <button class="primary hidden" id="quizNext">SIGUIENTE →</button>
+      </div>
+    </section>
+
+    <section class="concept-strip" aria-label="Resumen rápido">
+      <div><b>SKILL</b><span>cómo hago algo</span></div>
+      <div><b>MCP</b><span>con qué me conecto</span></div>
+      <div><b>DOCS</b><span>qué sabemos</span></div>
+      <div><b>INSTRUCCIONES</b><span>qué se cumple siempre</span></div>
+      <div><b>SCRIPT</b><span>qué operación ejecuto</span></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
