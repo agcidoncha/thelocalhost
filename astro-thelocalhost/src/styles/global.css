@@ -103,3 +103,28 @@ button {
   background: var(--button-orange);
   box-shadow: 0 12px 30px rgba(255, 95, 0, 0.22);
 }
+
+.eyebrow {
+  color: #9eabca;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-family: var(--mono);
+  margin-bottom: 0.9rem;
+}
+
+.section-head {
+  max-width: 720px;
+  margin-bottom: 2.3rem;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}

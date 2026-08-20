@@ -1,0 +1,367 @@
+---
+---
+
+    <section class="section method-desktop" id="proceso">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Así trabajamos</p>
+          <h2>Nuestro método claro en 5 pasos</h2>
+          <p>Un proceso simple, realista y sin humo: entendemos tu negocio, proponemos con criterio y ejecutamos con foco en resultados.</p>
+        </div>
+
+        <div class="process-grid reveal">
+          <article class="process-step">
+            <div class="process-step-number">01</div>
+            <div class="process-step-body">
+              <h3>Descubrimiento</h3>
+              <p>Entendemos tu negocio, objetivos y puntos de mejora.</p>
+            </div>
+          </article>
+          <article class="process-step">
+            <div class="process-step-number">02</div>
+            <div class="process-step-body">
+              <h3>Estrategia</h3>
+              <p>Diseñamos la solución adecuada y el plan de implementación.</p>
+            </div>
+          </article>
+          <article class="process-step">
+            <div class="process-step-number">03</div>
+            <div class="process-step-body">
+              <h3>Desarrollo</h3>
+              <p>Implementamos, integramos y probamos todo a fondo.</p>
+            </div>
+          </article>
+          <article class="process-step">
+            <div class="process-step-number">04</div>
+            <div class="process-step-body">
+              <h3>Lanzamiento</h3>
+              <p>Puesta en marcha con acompañamiento y formación.</p>
+            </div>
+          </article>
+          <article class="process-step">
+            <div class="process-step-number">05</div>
+            <div class="process-step-body">
+              <h3>Optimización</h3>
+              <p>Medimos resultados y optimizamos de forma continua.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="method-next-bar method-desktop" id="methodNextBar" aria-hidden="true">
+      <button class="method-next-button" id="methodNextButton" type="button">
+        <span>Cuéntame qué quieres mejorar.</span>
+        <span class="method-next-arrow" aria-hidden="true">→</span>
+      </button>
+    </div>
+
+
+<style>
+    .method-desktop{display:none}
+    @media (min-width:1100px){
+      .method-desktop{display:block}
+      #methodNextBar.method-desktop{display:flex}
+    }
+
+    .process-grid{
+      --process-line-y:20px;
+      position:relative;
+      display:grid;
+      grid-template-columns:repeat(5,minmax(0,1fr));
+      gap:1rem;
+      margin-top:2.2rem;
+    }
+    .process-grid::before,
+    .process-grid::after{
+      content:"";
+      position:absolute;
+      left:20px;
+      right:20px;
+      top:var(--process-line-y);
+      height:2px;
+      border-radius:999px;
+      pointer-events:none;
+    }
+    .process-grid::before{
+      background:rgba(255,255,255,.09);
+    }
+    .process-grid::after{
+      background:linear-gradient(90deg,#ff6a3d 0%,#7a5cff 48%,#21d4fd 76%,#12ff87 100%);
+      box-shadow:0 0 14px rgba(33,212,253,.28);
+      transform:scaleX(0);
+      transform-origin:left center;
+    }
+    .process-grid.is-visible::after{
+      animation:processRailFill 3.4s cubic-bezier(.22,.8,.25,1) .15s forwards;
+    }
+
+    .process-step{
+      --process-accent:122,92,255;
+      position:relative;
+      z-index:1;
+      min-width:0;
+      opacity:.46;
+      transform:translateY(9px);
+    }
+    .process-step:nth-child(1){--process-accent:255,106,61}
+    .process-step:nth-child(2){--process-accent:166,107,255}
+    .process-step:nth-child(3){--process-accent:84,151,255}
+    .process-step:nth-child(4){--process-accent:33,212,253}
+    .process-step:nth-child(5){--process-accent:18,255,135}
+
+    .process-step-number{
+      position:relative;
+      z-index:3;
+      width:40px;height:40px;
+      display:grid;place-items:center;
+      margin:0 0 1rem 0;
+      border-radius:11px;
+      font-family:var(--mono);
+      font-size:.72rem;
+      font-weight:800;
+      letter-spacing:.04em;
+      color:#dce6fb;
+      background:#0b1121;
+      border:1px solid rgba(255,255,255,.15);
+      box-shadow:0 10px 24px rgba(0,0,0,.28);
+    }
+    .process-step-number::after{
+      content:"";
+      position:absolute;
+      inset:7px;
+      border-radius:6px;
+      border:1px solid rgba(var(--process-accent),.24);
+    }
+
+    .process-step-body{
+      position:relative;
+      min-height:158px;
+      padding:1.25rem 1.1rem 1.15rem;
+      border-radius:16px;
+      overflow:hidden;
+      background:
+        linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.012)),
+        rgba(9,14,28,.92);
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:0 18px 34px rgba(0,0,0,.18);
+    }
+    .process-step-body::before{
+      content:"";
+      position:absolute;
+      left:0;top:18%;bottom:18%;
+      width:2px;
+      border-radius:99px;
+      background:rgb(var(--process-accent));
+      opacity:.42;
+      transform:scaleY(.35);
+      transition:transform .45s ease,opacity .45s ease;
+    }
+    .process-step-body::after{
+      content:"";
+      position:absolute;
+      left:1.1rem;
+      right:1.1rem;
+      bottom:.72rem;
+      height:1px;
+      background:linear-gradient(90deg,rgb(var(--process-accent)),transparent);
+      transform:scaleX(0);
+      transform-origin:left center;
+    }
+    .process-step h3{
+      font-size:1.35rem;
+      line-height:1;
+      letter-spacing:.03em;
+      margin-bottom:.62rem;
+    }
+    .process-step p{
+      color:var(--ink-soft);
+      font-size:.86rem;
+      line-height:1.55;
+    }
+
+    .process-grid.is-visible .process-step{
+      animation:processStepActivate .62s var(--ease) forwards;
+    }
+    .process-grid.is-visible .process-step:nth-child(1){animation-delay:.35s}
+    .process-grid.is-visible .process-step:nth-child(2){animation-delay:.95s}
+    .process-grid.is-visible .process-step:nth-child(3){animation-delay:1.55s}
+    .process-grid.is-visible .process-step:nth-child(4){animation-delay:2.15s}
+    .process-grid.is-visible .process-step:nth-child(5){animation-delay:2.75s}
+
+    .process-grid.is-visible .process-step .process-step-body{
+      animation:processBorderGlow .72s ease forwards;
+    }
+    .process-grid.is-visible .process-step:nth-child(1) .process-step-body{animation-delay:.35s}
+    .process-grid.is-visible .process-step:nth-child(2) .process-step-body{animation-delay:.95s}
+    .process-grid.is-visible .process-step:nth-child(3) .process-step-body{animation-delay:1.55s}
+    .process-grid.is-visible .process-step:nth-child(4) .process-step-body{animation-delay:2.15s}
+    .process-grid.is-visible .process-step:nth-child(5) .process-step-body{animation-delay:2.75s}
+
+    .process-grid.is-visible .process-step .process-step-number{
+      animation:processNodePulse .52s ease forwards;
+    }
+    .process-grid.is-visible .process-step:nth-child(1) .process-step-number{animation-delay:.35s}
+    .process-grid.is-visible .process-step:nth-child(2) .process-step-number{animation-delay:.95s}
+    .process-grid.is-visible .process-step:nth-child(3) .process-step-number{animation-delay:1.55s}
+    .process-grid.is-visible .process-step:nth-child(4) .process-step-number{animation-delay:2.15s}
+    .process-grid.is-visible .process-step:nth-child(5) .process-step-number{animation-delay:2.75s}
+
+    .process-grid.is-visible .process-step .process-step-body::before{
+      transform:scaleY(1);
+      opacity:.9;
+    }
+    .process-grid.is-visible .process-step .process-step-body::after{
+      animation:processModuleLine .5s ease forwards;
+    }
+    .process-grid.is-visible .process-step:nth-child(1) .process-step-body::after{animation-delay:.45s}
+    .process-grid.is-visible .process-step:nth-child(2) .process-step-body::after{animation-delay:1.05s}
+    .process-grid.is-visible .process-step:nth-child(3) .process-step-body::after{animation-delay:1.65s}
+    .process-grid.is-visible .process-step:nth-child(4) .process-step-body::after{animation-delay:2.25s}
+    .process-grid.is-visible .process-step:nth-child(5) .process-step-body::after{animation-delay:2.85s}
+
+    .process-grid.is-visible .process-step:nth-child(5) .process-step-number{
+      color:#12ff87;
+      border-color:rgba(18,255,135,.72);
+      box-shadow:0 0 0 1px rgba(18,255,135,.12),0 0 22px rgba(18,255,135,.24);
+    }
+    .process-grid.is-visible .process-step:nth-child(5) .process-step-body{
+      border-color:rgba(18,255,135,.32);
+      box-shadow:0 18px 34px rgba(0,0,0,.18),0 0 24px rgba(18,255,135,.06);
+    }
+
+    @keyframes processRailFill{
+      to{transform:scaleX(1)}
+    }
+    @keyframes processStepActivate{
+      0%{opacity:.46;transform:translateY(9px)}
+      62%{opacity:1;transform:translateY(-3px)}
+      100%{opacity:1;transform:translateY(0)}
+    }
+    @keyframes processBorderGlow{
+      0%{
+        border-color:rgba(255,255,255,.08);
+        box-shadow:0 18px 34px rgba(0,0,0,.18);
+      }
+      48%{
+        border-color:rgba(var(--process-accent),1);
+        box-shadow:
+          0 18px 34px rgba(0,0,0,.18),
+          0 0 0 1px rgba(var(--process-accent),.20),
+          0 0 28px rgba(var(--process-accent),.38);
+      }
+      100%{
+        border-color:rgba(var(--process-accent),.36);
+        box-shadow:
+          0 18px 34px rgba(0,0,0,.18),
+          0 0 18px rgba(var(--process-accent),.10);
+      }
+    }
+
+    @keyframes processNodePulse{
+      0%{
+        border-color:rgba(255,255,255,.15);
+        box-shadow:0 10px 24px rgba(0,0,0,.28);
+      }
+      55%{
+        color:#fff;
+        border-color:rgba(var(--process-accent),.9);
+        box-shadow:0 0 0 1px rgba(var(--process-accent),.12),0 0 24px rgba(var(--process-accent),.3);
+      }
+      100%{
+        border-color:rgba(var(--process-accent),.55);
+        box-shadow:0 0 18px rgba(var(--process-accent),.13);
+      }
+    }
+    @keyframes processModuleLine{
+      to{transform:scaleX(1)}
+    }
+    @keyframes processRailFillVertical{
+      to{transform:scaleY(1)}
+    }
+
+    .method-next-bar{
+      position:fixed;
+      left:0;
+      right:0;
+      bottom:0;
+      z-index:78;
+      min-height:66px;
+      display:flex;
+      align-items:stretch;
+      background:rgba(6,9,19,.88);
+      border-top:1px solid rgba(255,255,255,.10);
+      backdrop-filter:blur(16px) saturate(130%);
+      -webkit-backdrop-filter:blur(16px) saturate(130%);
+      opacity:0;
+      visibility:hidden;
+      transform:translateY(100%);
+      pointer-events:none;
+      transition:
+        opacity .38s ease,
+        visibility .38s ease,
+        transform .52s var(--ease);
+    }
+
+    :global(body.method-next-ready:not(.diagnosis-unlocked)) .method-next-bar{
+      opacity:1;
+      visibility:visible;
+      transform:none;
+      pointer-events:auto;
+    }
+
+    .method-next-bar.is-dismissing{
+      opacity:0 !important;
+      visibility:hidden !important;
+      transform:translateY(100%) !important;
+      pointer-events:none !important;
+    }
+
+    .method-next-button{
+      width:100%;
+      min-height:66px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:.8rem;
+      padding:1rem 1.4rem;
+      background:linear-gradient(90deg,#F45A60 0%,#FF447C 52%,#FF3292 100%);
+      color:#fff;
+      font-family:"Bebas Neue",sans-serif;
+      font-size:clamp(1.7rem,3vw,2.35rem);
+      font-weight:400;
+      line-height:1;
+      letter-spacing:.045em;
+      text-align:center;
+      border:0;
+      border-radius:0;
+      box-shadow:0 -10px 34px rgba(255,68,124,.18);
+      transition:filter .25s ease;
+    }
+
+    .method-next-button:hover{
+      filter:brightness(1.06);
+    }
+
+    .method-next-arrow{
+      display:inline-block;
+      transition:transform .3s var(--ease);
+    }
+
+    .method-next-button:hover .method-next-arrow{
+      transform:translateX(7px);
+    }
+
+    @media(max-width:620px){
+      .method-next-bar,
+      .method-next-button{
+        min-height:60px;
+      }
+
+      .method-next-button{
+        font-size:1.55rem;
+        padding:.9rem 1rem;
+      }
+    }
+
+</style>
