@@ -1,0 +1,1797 @@
+---
+---
+
+<section class="section diagnosis-section" id="experiencia">
+  <div class="container">
+    <div class="section-head diagnosis-head reveal">
+      <p class="eyebrow">Diagnóstico rápido</p>
+      <h2>Cuéntame qué quieres mejorar.</h2>
+      <p>Responde 4 preguntas y te mostramos dónde vemos una oportunidad de mejora.</p>
+    </div>
+
+    <div class="diagnosis-shell reveal" id="businessDiagnosis">
+      <div class="diagnosis-top">
+        <span class="diagnosis-label">Diagnóstico The Localhost</span>
+        <span class="diagnosis-counter" id="diagnosisCounter">01 / 04</span>
+      </div>
+      <div class="diagnosis-progress" aria-hidden="true">
+        <span id="diagnosisProgress"></span>
+      </div>
+
+      <div class="diagnosis-body">
+        <div class="diagnosis-step is-active" data-diagnosis-step="1" data-selection="multi">
+          <p class="diagnosis-step-kicker">Pregunta 01</p>
+          <h3 class="diagnosis-question">¿Qué quieres mejorar?</h3>
+          <p class="diagnosis-copy">Puedes elegir varios objetivos si todos son importantes para tu negocio.</p>
+          <div class="diagnosis-options">
+            <button class="diagnosis-option" type="button" data-answer-key="goal" data-answer-value="clientes">Captar clientes</button>
+            <button class="diagnosis-option" type="button" data-answer-key="goal" data-answer-value="tiempo">Ahorrar tiempo</button>
+            <button class="diagnosis-option" type="button" data-answer-key="goal" data-answer-value="respuesta">Responder más rápido</button>
+            <button class="diagnosis-option" type="button" data-answer-key="goal" data-answer-value="organizacion">Organizar mejor</button>
+            <button class="diagnosis-option" type="button" data-answer-key="goal" data-answer-value="repetitivas">Automatizar tareas repetitivas</button>
+          </div>
+        </div>
+
+        <div class="diagnosis-step" data-diagnosis-step="2" data-selection="multi">
+          <p class="diagnosis-step-kicker">Pregunta 02</p>
+          <h3 class="diagnosis-question">¿En qué parte del trabajo lo notas?</h3>
+          <p class="diagnosis-copy">Puedes elegir varias si el problema aparece en más de un punto del proceso.</p>
+          <div class="diagnosis-options">
+            <button class="diagnosis-option" type="button" data-answer-key="area" data-answer-value="email">Email</button>
+            <button class="diagnosis-option" type="button" data-answer-key="area" data-answer-value="whatsapp">WhatsApp</button>
+            <button class="diagnosis-option" type="button" data-answer-key="area" data-answer-value="web">Web / formularios</button>
+            <button class="diagnosis-option" type="button" data-answer-key="area" data-answer-value="reservas">Reservas / citas</button>
+            <button class="diagnosis-option" type="button" data-answer-key="area" data-answer-value="facturacion">Facturación</button>
+            <button class="diagnosis-option" type="button" data-answer-key="area" data-answer-value="crm">CRM / seguimiento</button>
+            <button class="diagnosis-option" type="button" data-answer-key="area" data-answer-value="redes">Redes sociales</button>
+            <button class="diagnosis-option" type="button" data-answer-key="area" data-answer-value="otro">Otro</button>
+          </div>
+        </div>
+
+        <div class="diagnosis-step" data-diagnosis-step="3" data-selection="multi">
+          <p class="diagnosis-step-kicker">Pregunta 03</p>
+          <h3 class="diagnosis-question">¿Qué pasa hoy con ese trabajo?</h3>
+          <p class="diagnosis-copy">Puedes elegir varias si el proceso combina distintos pasos o formas de gestión.</p>
+          <div class="diagnosis-options">
+            <button class="diagnosis-option" type="button" data-answer-key="current" data-answer-value="manual">Lo gestiono manualmente</button>
+            <button class="diagnosis-option" type="button" data-answer-key="current" data-answer-value="excel">Apunto o copio datos en Excel</button>
+            <button class="diagnosis-option" type="button" data-answer-key="current" data-answer-value="herramientas">Paso información entre varias herramientas</button>
+            <button class="diagnosis-option" type="button" data-answer-key="current" data-answer-value="falla">Ya tengo una automatización, pero falla</button>
+          </div>
+        </div>
+
+        <div class="diagnosis-step" data-diagnosis-step="4" data-selection="single">
+          <p class="diagnosis-step-kicker">Pregunta 04</p>
+          <h3 class="diagnosis-question">¿Cuánto te afecta este proceso?</h3>
+          <p class="diagnosis-copy">Elige una sola opción: la que mejor describa su impacto real en el día a día.</p>
+          <div class="diagnosis-options">
+            <button class="diagnosis-option" type="button" data-answer-key="load" data-answer-value="poco">Bajo · molesta, pero se gestiona</button>
+            <button class="diagnosis-option" type="button" data-answer-key="load" data-answer-value="semana">Medio · me quita varias horas a la semana</button>
+            <button class="diagnosis-option" type="button" data-answer-key="load" data-answer-value="dia">Alto · me quita varias horas al día</button>
+            <button class="diagnosis-option" type="button" data-answer-key="load" data-answer-value="serio">Crítico · provoca bloqueos, errores o pérdida de seguimiento</button>
+          </div>
+        </div>
+
+        <div class="diagnosis-nav" id="diagnosisNav">
+          <button class="diagnosis-back" type="button" id="diagnosisBack">← Anterior</button>
+          <div class="diagnosis-nav-actions">
+            <span class="diagnosis-hint" id="diagnosisHint">Puedes elegir varias opciones</span>
+            <button class="diagnosis-next" type="button" id="diagnosisNext" disabled>Continuar →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="diagnosis-result" id="diagnosisResult" aria-live="polite" role="dialog" aria-modal="true" aria-labelledby="diagnosisHeadline">
+  <div class="diagnosis-report" role="document">
+    <button class="diagnosis-modal-close" type="button" id="diagnosisModalClose" aria-label="Cerrar diagnóstico">×</button>
+
+    <div class="diagnosis-result-top">
+      <div>
+        <p class="diagnosis-step-kicker">Tu diagnóstico</p>
+        <h3 id="diagnosisHeadline">Hay una oportunidad clara de mejora.</h3>
+        <p class="diagnosis-result-lead" id="diagnosisPriorityText"></p>
+      </div>
+      <span class="diagnosis-priority" id="diagnosisPriority">Oportunidad clara</span>
+    </div>
+
+    <div class="diagnosis-opportunities" id="diagnosisOpportunityList"></div>
+
+    <div class="diagnosis-start">
+      <span class="diagnosis-start-label">Por dónde empezaría</span>
+      <p id="diagnosisStartText"></p>
+    </div>
+
+    <div class="diagnosis-summary" id="diagnosisSummary" aria-label="Resumen de respuestas"></div>
+
+    <div class="diagnosis-result-cta" id="contacto">
+      <p>Si quieres que revisemos este caso con contexto real de tu negocio, el siguiente paso será enviarnos este diagnóstico.</p>
+      <button class="diagnosis-study-btn" type="button" id="diagnosisStudyButton">Quiero que estudiéis mi caso →</button>
+    </div>
+
+    <div class="diagnosis-contact-choice" id="diagnosisContactChoice">
+      <p class="diagnosis-step-kicker">Seguimos</p>
+      <h3>¿Cómo prefieres hablar?</h3>
+      <p>Elige el canal que te resulte más cómodo. Te dejamos el mensaje preparado con el contexto básico del diagnóstico.</p>
+
+      <div class="diagnosis-contact-actions">
+        <a class="diagnosis-contact-button whatsapp" id="diagnosisWhatsApp" href="#" target="_blank" rel="noopener">
+          <span>WhatsApp</span>
+        </a>
+
+        <a class="diagnosis-contact-button email" id="diagnosisEmail" href="mailto:angel@thelocalhost.es">
+          <span>Email</span>
+        </a>
+
+        <a class="diagnosis-contact-button call" id="diagnosisCall" href="mailto:angel@thelocalhost.es">
+          <span>Reservar una llamada</span>
+        </a>
+      </div>
+
+      <button class="diagnosis-contact-back" type="button" id="diagnosisContactBack">← Volver al diagnóstico</button>
+    </div>
+
+    <button class="diagnosis-restart" type="button" id="diagnosisRestart">← Revisar mis respuestas</button>
+  </div>
+</div>
+
+<script>
+  import {
+    diagnosisLabels,
+    areaResults,
+    currentResults,
+    goalResults,
+    areaGoalScores,
+    priorityResults,
+  } from "../../lib/diagnosis-data.js";
+
+  const diagnosisRoot = document.getElementById("businessDiagnosis");
+
+  if (diagnosisRoot) {
+    const diagnosisSteps = Array.from(diagnosisRoot.querySelectorAll(".diagnosis-step"));
+    const diagnosisResult = document.getElementById("diagnosisResult");
+    const diagnosisCounter = document.getElementById("diagnosisCounter");
+    const diagnosisProgress = document.getElementById("diagnosisProgress");
+    const diagnosisBack = document.getElementById("diagnosisBack");
+    const diagnosisNext = document.getElementById("diagnosisNext");
+    const diagnosisHint = document.getElementById("diagnosisHint");
+    const diagnosisNav = document.getElementById("diagnosisNav");
+    const diagnosisRestart = document.getElementById("diagnosisRestart");
+    const diagnosisStudyButton = document.getElementById("diagnosisStudyButton");
+    const diagnosisContactChoice = document.getElementById("diagnosisContactChoice");
+    const diagnosisWhatsApp = document.getElementById("diagnosisWhatsApp");
+    const diagnosisEmail = document.getElementById("diagnosisEmail");
+    const diagnosisCall = document.getElementById("diagnosisCall");
+    const diagnosisContactBack = document.getElementById("diagnosisContactBack");
+    const diagnosisModalClose = document.getElementById("diagnosisModalClose");
+    const diagnosisHeadline = document.getElementById("diagnosisHeadline");
+    const diagnosisPriority = document.getElementById("diagnosisPriority");
+    const diagnosisPriorityText = document.getElementById("diagnosisPriorityText");
+    const diagnosisOpportunityList = document.getElementById("diagnosisOpportunityList");
+    const diagnosisStartText = document.getElementById("diagnosisStartText");
+    const diagnosisSummary = document.getElementById("diagnosisSummary");
+
+    const diagnosisAnswers = {
+      goal: [],
+      area: [],
+      current: [],
+      load: null,
+    };
+
+    let diagnosisStepIndex = 0;
+
+    function answerCountForKey(key) {
+      const answer = diagnosisAnswers[key];
+      return Array.isArray(answer) ? answer.length : answer ? 1 : 0;
+    }
+
+    /*
+     * Reposiciona la pregunta activa dejando hueco para la cabecera que esté
+     * realmente visible en ese momento (nav de escritorio o compacta de
+     * mobile) — a diferencia del original, que asumía una altura de 76px
+     * fija porque cada documento solo conocía su propia cabecera. Aquí
+     * ambas cabeceras conviven en el DOM, así que medimos la real.
+     */
+    function visibleHeaderHeight() {
+      const desktopNav = document.querySelector(".nav.desktop-header");
+      if (desktopNav) {
+        const height = desktopNav.getBoundingClientRect().height;
+        if (height > 0) return height;
+      }
+      if (document.body.classList.contains("compact-header-visible")) {
+        const compact = document.querySelector(".mobile-compact-header");
+        if (compact) return compact.getBoundingClientRect().height;
+      }
+      return 0;
+    }
+
+    function repositionDiagnosis() {
+      if (!diagnosisRoot) return;
+      /* Desktop: la sección permanece display:none hasta 'diagnosis-unlocked'.
+         Mobile: permanece display:none hasta 'intro-ready'. En vez de
+         acoplar esta función a un nombre de clase concreto de un solo
+         flujo, comprobamos si el navegador ya la está pintando de verdad. */
+      const section = document.getElementById("experiencia");
+      if (section && getComputedStyle(section).display === "none") return;
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          const viewport = window.visualViewport;
+          const viewportHeight = viewport ? viewport.height : window.innerHeight;
+          const viewportOffsetTop = viewport ? viewport.offsetTop : 0;
+
+          const navHeight = visibleHeaderHeight();
+          const topGap = 22;
+          const bottomGap = 28;
+
+          const visibleTop = viewportOffsetTop + navHeight + topGap;
+          const visibleBottom = viewportOffsetTop + viewportHeight - bottomGap;
+
+          const rect = diagnosisRoot.getBoundingClientRect();
+          const availableHeight = visibleBottom - visibleTop;
+
+          let targetDelta = 0;
+
+          if (rect.height <= availableHeight) {
+            const visibleCenter = visibleTop + availableHeight / 2;
+            const diagnosisCenter = rect.top + rect.height / 2;
+            targetDelta = diagnosisCenter - visibleCenter;
+          } else {
+            targetDelta = rect.bottom - visibleBottom;
+          }
+
+          if (Math.abs(targetDelta) > 1) {
+            window.scrollBy({ top: targetDelta, behavior: "smooth" });
+          }
+        });
+      });
+    }
+
+    function updateDiagnosisUI() {
+      diagnosisSteps.forEach((step, index) => {
+        step.classList.toggle("is-active", index === diagnosisStepIndex);
+      });
+
+      if (diagnosisResult) diagnosisResult.classList.remove("is-active");
+      document.body.classList.remove("diagnosis-modal-open");
+      if (diagnosisNav) diagnosisNav.style.display = "";
+
+      const displayStep = diagnosisStepIndex + 1;
+      if (diagnosisCounter) diagnosisCounter.textContent = `0${displayStep} / 04`;
+      if (diagnosisProgress) diagnosisProgress.style.width = `${displayStep * 25}%`;
+      if (diagnosisBack) diagnosisBack.classList.toggle("is-visible", diagnosisStepIndex > 0);
+
+      const activeStep = diagnosisSteps[diagnosisStepIndex];
+      if (!activeStep) return;
+
+      const key = activeStep.querySelector(".diagnosis-option")?.dataset.answerKey;
+      const isMulti = activeStep.dataset.selection === "multi";
+      const answer = key ? diagnosisAnswers[key] : null;
+
+      activeStep.querySelectorAll(".diagnosis-option").forEach((option) => {
+        const selected = isMulti
+          ? Array.isArray(answer) && answer.includes(option.dataset.answerValue)
+          : option.dataset.answerValue === answer;
+        option.classList.toggle("is-selected", selected);
+        option.setAttribute("aria-pressed", selected ? "true" : "false");
+      });
+
+      const hasAnswer = key ? answerCountForKey(key) > 0 : false;
+      if (diagnosisNext) {
+        diagnosisNext.disabled = !hasAnswer;
+        diagnosisNext.textContent =
+          diagnosisStepIndex === diagnosisSteps.length - 1 ? "Ver diagnóstico →" : "Continuar →";
+      }
+      if (diagnosisHint) {
+        if (isMulti) {
+          const count = answerCountForKey(key);
+          diagnosisHint.textContent = count
+            ? `${count} seleccionada${count === 1 ? "" : "s"} · puedes marcar más`
+            : "Puedes elegir varias opciones";
+        } else {
+          diagnosisHint.textContent = hasAnswer ? "Opción seleccionada" : "Elige una opción";
+        }
+      }
+    }
+
+    function scoreArea(area) {
+      return diagnosisAnswers.goal.reduce((total, goal) => {
+        return total + (areaGoalScores[goal]?.[area] || 0);
+      }, 0);
+    }
+
+    function prioritizedAreas() {
+      const selected = diagnosisAnswers.area.filter(Boolean);
+      if (selected.length <= 2) return selected;
+
+      return selected
+        .map((area, index) => ({ area, index, score: scoreArea(area) }))
+        .sort((a, b) => b.score - a.score || a.index - b.index)
+        .slice(0, 2)
+        .map((item) => item.area);
+    }
+
+    function buildCurrentText() {
+      const values = new Set(diagnosisAnswers.current);
+
+      if (values.has("falla")) {
+        let text = currentResults.falla;
+        if (values.has("herramientas")) {
+          text +=
+            " También comprobaríamos cómo se conectan las herramientas existentes, porque el fallo puede estar en el traspaso de datos entre sistemas.";
+        } else if (values.has("manual") && values.has("excel")) {
+          text +=
+            " Después revisaríamos qué trabajo manual y qué hojas de cálculo pueden simplificarse sin reconstruir todo el proceso.";
+        } else if (values.has("excel")) {
+          text +=
+            " Después revisaríamos qué parte de las hojas de cálculo puede centralizarse sin interferir con el flujo que ya existe.";
+        } else if (values.has("manual")) {
+          text += " Después revisaríamos qué pasos manuales siguen siendo necesarios y cuáles pueden desaparecer.";
+        }
+        return text;
+      }
+
+      if (values.has("herramientas") && values.has("excel") && values.has("manual")) {
+        return "Hoy el proceso mezcla trabajo manual, hojas de cálculo y varias herramientas. El primer paso sería centralizar la información y conectar los sistemas para reducir duplicidades antes de automatizar más.";
+      }
+      if (values.has("herramientas") && values.has("excel")) {
+        return "El principal margen de mejora está en conectar las herramientas y centralizar la información que hoy depende de hojas de cálculo, evitando dobles actualizaciones.";
+      }
+      if (values.has("herramientas") && values.has("manual")) {
+        return "El proceso combina varias herramientas con pasos manuales. Primero conectaríamos los sistemas y después eliminaríamos solo las tareas repetitivas que no necesitan intervención humana.";
+      }
+      if (values.has("manual") && values.has("excel")) {
+        return "Hay dependencia de trabajo manual y hojas de cálculo. La mejora pasaría por centralizar la información y automatizar los pasos repetitivos sin perder control sobre el proceso.";
+      }
+
+      const first = diagnosisAnswers.current[0];
+      return first ? currentResults[first] || "" : "";
+    }
+
+    function goalAlignment(goal, areas) {
+      if (!areas.length) return 0;
+      return areas.reduce((total, area) => total + (areaGoalScores[goal]?.[area] || 0), 0) / areas.length;
+    }
+
+    function bestGoalForArea(area) {
+      const goals = diagnosisAnswers.goal;
+      if (!goals.length) return null;
+      return (
+        goals
+          .map((goal, index) => ({
+            goal,
+            index,
+            score: areaGoalScores[goal]?.[area] || 0,
+          }))
+          .sort((a, b) => b.score - a.score || a.index - b.index)[0] || null
+      );
+    }
+
+    function opportunityOutcomeText(area) {
+      const best = bestGoalForArea(area);
+      if (!best) return "";
+      if (best.goal === "clientes" && best.score <= 1) {
+        return "Tu objetivo es captar clientes, pero aquí no asumiríamos una relación directa. Primero comprobaríamos si mejorar este proceso influye realmente en la captación o el seguimiento comercial.";
+      }
+      return goalResults[best.goal] || "";
+    }
+
+    function opportunityActionText(area) {
+      if (diagnosisAnswers.current.includes("falla")) {
+        const areaLabel = diagnosisLabels.area[area] || area;
+        if (area === "otro") {
+          return "Primero revisaríamos el flujo que ya existe, localizaríamos dónde falla y comprobaríamos qué parte merece repararse, simplificarse o replantearse.";
+        }
+        return `Primero revisaríamos la automatización que ya interviene en ${areaLabel}, localizaríamos dónde se rompe el flujo y decidiríamos si conviene repararla, simplificarla o rehacer solo la parte problemática.`;
+      }
+      return areaResults[area] || "";
+    }
+
+    function currentStateText(area) {
+      const methodPhrases = {
+        manual: "gestión manual",
+        excel: "datos apuntados o copiados en Excel",
+        herramientas: "traspasos de información entre varias herramientas",
+        falla: "una automatización que está fallando",
+      };
+      const methods = diagnosisAnswers.current.map((value) => methodPhrases[value]).filter(Boolean);
+
+      const areaLabel = diagnosisLabels.area[area] || area;
+      if (!methods.length) return `El problema que has señalado está en ${areaLabel}.`;
+      if (methods.length === 1) return `${areaLabel}: hoy depende de ${methods[0]}.`;
+      return `${areaLabel}: hoy combina ${methods.join(", ").replace(/, ([^,]*)$/, " y $1")}.`;
+    }
+
+    function renderOpportunities() {
+      if (!diagnosisOpportunityList) return;
+      diagnosisOpportunityList.innerHTML = "";
+
+      const areas = prioritizedAreas();
+      areas.forEach((area, index) => {
+        const article = document.createElement("article");
+        article.className = "diagnosis-opportunity";
+
+        const head = document.createElement("div");
+        head.className = "diagnosis-opportunity-head";
+
+        const number = document.createElement("span");
+        number.className = "diagnosis-opportunity-number";
+        number.textContent = String(index + 1).padStart(2, "0");
+
+        const title = document.createElement("div");
+        title.className = "diagnosis-opportunity-title";
+        title.textContent = diagnosisLabels.area[area] || area;
+
+        const meta = document.createElement("span");
+        meta.className = "diagnosis-opportunity-meta";
+        meta.textContent = index === 0 ? "Primer frente" : "Segundo frente";
+
+        head.append(number, title, meta);
+
+        const flow = document.createElement("div");
+        flow.className = "diagnosis-flow";
+
+        const now = document.createElement("div");
+        now.className = "diagnosis-flow-step";
+        now.innerHTML = "<strong>Ahora</strong>";
+        const nowText = document.createElement("p");
+        nowText.textContent = currentStateText(area);
+        now.appendChild(nowText);
+
+        const arrow1 = document.createElement("div");
+        arrow1.className = "diagnosis-flow-arrow";
+        arrow1.textContent = "→";
+
+        const action = document.createElement("div");
+        action.className = "diagnosis-flow-step action";
+        action.innerHTML = "<strong>Qué haríamos</strong>";
+        const actionText = document.createElement("p");
+        actionText.textContent = opportunityActionText(area);
+        action.appendChild(actionText);
+
+        const arrow2 = document.createElement("div");
+        arrow2.className = "diagnosis-flow-arrow";
+        arrow2.textContent = "→";
+
+        const outcome = document.createElement("div");
+        outcome.className = "diagnosis-flow-step outcome";
+        outcome.innerHTML = "<strong>Qué buscamos</strong>";
+        const outcomeText = document.createElement("p");
+        outcomeText.textContent = opportunityOutcomeText(area);
+        outcome.appendChild(outcomeText);
+
+        flow.append(now, arrow1, action, arrow2, outcome);
+        article.append(head, flow);
+        diagnosisOpportunityList.appendChild(article);
+      });
+
+      if (diagnosisStartText) {
+        const first = areas[0];
+        const firstLabel = first ? diagnosisLabels.area[first] || first : "el proceso principal";
+        diagnosisStartText.textContent = `${priorityResults[diagnosisAnswers.load]?.text || ""} Empezaría revisando ${firstLabel} y, antes de añadir nada nuevo, comprobaría cómo encaja con la forma en la que trabajas ahora.`;
+      }
+    }
+
+    function buildContactMessage() {
+      const lines = ["Hola, he hecho el diagnóstico de The Localhost y quiero que estudiéis mi caso.", ""];
+
+      const groups = [
+        ["Quiero mejorar", "goal"],
+        ["Dónde ocurre", "area"],
+        ["Ahora ocurre", "current"],
+        ["Impacto", "load"],
+      ];
+
+      groups.forEach(([label, key]) => {
+        const raw = diagnosisAnswers[key];
+        const values = Array.isArray(raw) ? raw : raw ? [raw] : [];
+        const labels = values.map((value) => diagnosisLabels[key]?.[value] || value).filter(Boolean);
+
+        if (labels.length) {
+          lines.push(`${label}: ${labels.join(", ")}`);
+        }
+      });
+
+      lines.push("");
+      lines.push("Me gustaría que lo revisáramos con más contexto.");
+
+      return lines.join("\n");
+    }
+
+    function prepareContactLinks() {
+      const message = buildContactMessage();
+
+      if (diagnosisEmail) {
+        const subject = "Quiero que estudiéis mi caso";
+        diagnosisEmail.href = `mailto:angel@thelocalhost.es?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+      }
+
+      if (diagnosisCall) {
+        const callSubject = "Quiero reservar una llamada";
+        const callMessage = `${message}\n\nPrefiero comentarlo en una llamada. ¿Qué disponibilidad tienes?`;
+
+        diagnosisCall.href = `mailto:angel@thelocalhost.es?subject=${encodeURIComponent(callSubject)}&body=${encodeURIComponent(callMessage)}`;
+      }
+
+      if (diagnosisWhatsApp) {
+        diagnosisWhatsApp.href = `https://wa.me/?text=${encodeURIComponent(message)}`;
+      }
+    }
+
+    function openDiagnosisContactChoice() {
+      if (!diagnosisResult) return;
+
+      prepareContactLinks();
+
+      const report = diagnosisResult.querySelector(".diagnosis-report");
+      if (report) report.scrollTop = 0;
+
+      diagnosisResult.classList.add("is-contact-mode");
+    }
+
+    function closeDiagnosisContactChoice() {
+      if (!diagnosisResult) return;
+
+      diagnosisResult.classList.remove("is-contact-mode");
+
+      const report = diagnosisResult.querySelector(".diagnosis-report");
+      if (report) report.scrollTop = 0;
+    }
+
+    function buildDiagnosisResult() {
+      const priority = priorityResults[diagnosisAnswers.load];
+      if (!priority) return;
+
+      if (diagnosisResult) {
+        diagnosisResult.classList.remove("is-contact-mode");
+      }
+
+      diagnosisSteps.forEach((step) => step.classList.remove("is-active"));
+      if (diagnosisResult) diagnosisResult.classList.add("is-active");
+      document.body.classList.add("diagnosis-modal-open");
+      if (diagnosisNav) diagnosisNav.style.display = "none";
+      if (diagnosisCounter) diagnosisCounter.textContent = "RESULTADO";
+      if (diagnosisProgress) diagnosisProgress.style.width = "100%";
+
+      if (diagnosisHeadline) diagnosisHeadline.textContent = priority.headline;
+      if (diagnosisPriority) diagnosisPriority.textContent = priority.label;
+      if (diagnosisPriorityText) diagnosisPriorityText.textContent = buildCurrentText();
+      renderOpportunities();
+
+      if (diagnosisSummary) {
+        diagnosisSummary.innerHTML = "";
+        ["goal", "area", "current", "load"].forEach((key) => {
+          const raw = diagnosisAnswers[key];
+          const values = Array.isArray(raw) ? raw : raw ? [raw] : [];
+          values.forEach((value) => {
+            const chip = document.createElement("span");
+            chip.textContent = diagnosisLabels[key][value] || value || "";
+            diagnosisSummary.appendChild(chip);
+          });
+        });
+      }
+    }
+
+    diagnosisRoot.querySelectorAll(".diagnosis-option").forEach((option) => {
+      option.setAttribute("aria-pressed", "false");
+      option.addEventListener("click", () => {
+        const key = option.dataset.answerKey;
+        const value = option.dataset.answerValue;
+        const step = option.closest(".diagnosis-step");
+        if (!key || !value || !step) return;
+
+        const isMulti = step.dataset.selection === "multi";
+        if (isMulti) {
+          const values = diagnosisAnswers[key];
+
+          if (key === "area") {
+            if (value === "otro") {
+              diagnosisAnswers.area = values.includes("otro") ? [] : ["otro"];
+            } else {
+              const withoutOther = values.filter((item) => item !== "otro");
+              const index = withoutOther.indexOf(value);
+              if (index >= 0) {
+                withoutOther.splice(index, 1);
+              } else {
+                withoutOther.push(value);
+              }
+              diagnosisAnswers.area = withoutOther;
+            }
+          } else {
+            const index = values.indexOf(value);
+            if (index >= 0) {
+              values.splice(index, 1);
+            } else {
+              values.push(value);
+            }
+          }
+        } else {
+          diagnosisAnswers[key] = value;
+        }
+
+        updateDiagnosisUI();
+      });
+    });
+
+    if (diagnosisNext) {
+      diagnosisNext.addEventListener("click", () => {
+        const activeStep = diagnosisSteps[diagnosisStepIndex];
+        const key = activeStep?.querySelector(".diagnosis-option")?.dataset.answerKey;
+        if (!key || answerCountForKey(key) === 0) return;
+
+        if (diagnosisStepIndex < diagnosisSteps.length - 1) {
+          diagnosisStepIndex += 1;
+          updateDiagnosisUI();
+          repositionDiagnosis();
+        } else {
+          buildDiagnosisResult();
+        }
+      });
+    }
+
+    if (diagnosisBack) {
+      diagnosisBack.addEventListener("click", () => {
+        if (diagnosisStepIndex <= 0) return;
+        diagnosisStepIndex -= 1;
+        updateDiagnosisUI();
+        repositionDiagnosis();
+      });
+    }
+
+    function closeDiagnosisModal(returnToLastStep = true) {
+      if (diagnosisResult) {
+        diagnosisResult.classList.remove("is-active");
+        diagnosisResult.classList.remove("is-contact-mode");
+      }
+      document.body.classList.remove("diagnosis-modal-open");
+      if (returnToLastStep) {
+        diagnosisStepIndex = diagnosisSteps.length - 1;
+        updateDiagnosisUI();
+        repositionDiagnosis();
+      }
+    }
+
+    if (diagnosisStudyButton) {
+      diagnosisStudyButton.addEventListener("click", openDiagnosisContactChoice);
+    }
+
+    if (diagnosisContactBack) {
+      diagnosisContactBack.addEventListener("click", closeDiagnosisContactChoice);
+    }
+
+    if (diagnosisModalClose) {
+      diagnosisModalClose.addEventListener("click", () => closeDiagnosisModal(true));
+    }
+
+    if (diagnosisResult) {
+      diagnosisResult.addEventListener("click", (event) => {
+        if (event.target === diagnosisResult) closeDiagnosisModal(true);
+      });
+    }
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && diagnosisResult?.classList.contains("is-active")) {
+        closeDiagnosisModal(true);
+      }
+    });
+
+    if (diagnosisRestart) {
+      diagnosisRestart.addEventListener("click", () => {
+        diagnosisStepIndex = 0;
+        updateDiagnosisUI();
+        diagnosisRoot.scrollIntoView({ behavior: "smooth", block: "center" });
+      });
+    }
+
+    updateDiagnosisUI();
+  }
+</script>
+<style>
+    .diagnosis-head{
+      max-width:760px;
+      margin-bottom:2rem;
+    }
+    .diagnosis-shell{
+      position:relative;
+      overflow:hidden;
+      border-radius:26px;
+      border:1px solid rgba(255,255,255,.11);
+      background:
+        radial-gradient(circle at 92% 8%,rgba(33,212,253,.08),transparent 26%),
+        radial-gradient(circle at 8% 92%,rgba(255,95,0,.08),transparent 28%),
+        linear-gradient(180deg,rgba(15,23,48,.94),rgba(8,13,27,.98));
+      box-shadow:0 28px 70px rgba(0,0,0,.26);
+    }
+    .diagnosis-shell::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+      background-size:28px 28px;
+      mask-image:linear-gradient(to bottom,black,transparent 82%);
+    }
+    .diagnosis-top{
+      position:relative;
+      z-index:1;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      padding:1.15rem 1.35rem;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .diagnosis-label{
+      display:inline-flex;
+      align-items:center;
+      gap:.55rem;
+      color:#d9e1f3;
+      font-family:var(--mono);
+      font-size:.69rem;
+      font-weight:800;
+      letter-spacing:.11em;
+      text-transform:uppercase;
+    }
+    .diagnosis-label::before{
+      content:"";
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:#ff5f00;
+      box-shadow:0 0 15px rgba(255,95,0,.5);
+    }
+    .diagnosis-counter{
+      color:#8d9ab8;
+      font-family:var(--mono);
+      font-size:.72rem;
+      letter-spacing:.08em;
+    }
+    .diagnosis-progress{
+      position:relative;
+      z-index:1;
+      height:2px;
+      background:rgba(255,255,255,.055);
+      overflow:hidden;
+    }
+    .diagnosis-progress span{
+      display:block;
+      width:25%;
+      height:100%;
+      transform-origin:left center;
+      background:linear-gradient(90deg,#F45A60 0%,#FF447C 52%,#FF3292 100%);
+      box-shadow:0 0 16px rgba(255,68,124,.30);
+      transition:width .42s var(--ease);
+    }
+    .diagnosis-body{
+      position:relative;
+      z-index:1;
+      min-height:470px;
+      padding:clamp(1.4rem,3vw,2.6rem);
+      display:flex;
+      flex-direction:column;
+    }
+    .diagnosis-step{
+      display:none;
+      animation:diagnosisStepIn .42s var(--ease) both;
+    }
+    .diagnosis-step.is-active{display:block}
+    .diagnosis-step-kicker{
+      margin-bottom:.7rem;
+      color:#8290af;
+      font-family:var(--mono);
+      font-size:.7rem;
+      letter-spacing:.11em;
+      text-transform:uppercase;
+    }
+    .diagnosis-question{
+      max-width:none;
+      margin-bottom:.55rem;
+      font-size:clamp(1.85rem,3.6vw,3.4rem);
+      line-height:.94;
+      letter-spacing:.02em;
+      white-space:nowrap;
+    }
+    .diagnosis-copy{
+      max-width:62ch;
+      color:var(--ink-soft);
+      font-size:.98rem;
+    }
+    .diagnosis-options{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:.8rem;
+      margin-top:1.7rem;
+    }
+    .diagnosis-option{
+      position:relative;
+      min-height:76px;
+      padding:1rem 1.05rem;
+      border-radius:15px;
+      border:1px solid rgba(255,255,255,.1);
+      background:rgba(7,12,25,.66);
+      color:#e8eefb;
+      text-align:left;
+      font-weight:720;
+      line-height:1.25;
+      transition:transform .25s var(--ease),border-color .25s ease,background .25s ease,box-shadow .25s ease;
+    }
+    .diagnosis-option::after{
+      content:"+";
+      position:absolute;
+      right:1rem;
+      top:50%;
+      transform:translateY(-50%);
+      color:#647392;
+      font-size:1.05rem;
+      transition:transform .25s var(--ease),color .25s ease;
+    }
+    .diagnosis-step[data-selection="single"] .diagnosis-option::after{content:"○"}
+    .diagnosis-step[data-selection="multi"] .diagnosis-option.is-selected::after{content:"✓"}
+    .diagnosis-step[data-selection="single"] .diagnosis-option.is-selected::after{content:"●"}
+    .diagnosis-option:hover{
+      transform:translateY(-2px);
+      border-color:rgba(255,95,0,.34);
+      background:rgba(255,95,0,.055);
+      box-shadow:0 16px 34px rgba(0,0,0,.16);
+    }
+    .diagnosis-option:hover::after{
+      color:#ff7a2b;
+      transform:translate(3px,-50%);
+    }
+    .diagnosis-option.is-selected{
+      border-color:rgba(255,95,0,.65);
+      background:rgba(255,95,0,.1);
+      box-shadow:inset 0 0 28px rgba(255,95,0,.04),0 0 24px rgba(255,95,0,.07);
+    }
+    .diagnosis-nav{
+      margin-top:auto;
+      padding-top:1.4rem;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+    }
+    .diagnosis-back{
+      display:inline-flex;
+      align-items:center;
+      gap:.45rem;
+      color:#aab5cd;
+      font-size:.88rem;
+      font-weight:700;
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+      transition:color .2s ease,opacity .2s ease;
+    }
+    .diagnosis-back.is-visible{
+      opacity:1;
+      visibility:visible;
+      pointer-events:auto;
+    }
+    .diagnosis-back:hover{color:#fff}
+    .diagnosis-nav-actions{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:.85rem;
+      margin-left:auto;
+    }
+    .diagnosis-hint{
+      color:#687795;
+      font-family:var(--mono);
+      font-size:.67rem;
+      letter-spacing:.05em;
+    }
+    .diagnosis-next{
+      min-height:42px;
+      padding:.72rem 1rem;
+      border-radius:10px;
+      border:1px solid rgba(255,95,0,.42);
+      background:#ff5f00;
+      color:#fff;
+      font-weight:800;
+      transition:transform .22s var(--ease),opacity .22s ease,box-shadow .22s ease;
+    }
+    .diagnosis-next:not(:disabled):hover{
+      transform:translateY(-2px);
+      box-shadow:0 12px 26px rgba(255,95,0,.22);
+    }
+    .diagnosis-next:disabled{
+      opacity:.32;
+      cursor:not-allowed;
+      box-shadow:none;
+    }
+
+    
+
+    .diagnosis-result{
+      display:none;
+      animation:diagnosisStepIn .5s var(--ease) both;
+    }
+    .diagnosis-result.is-active{display:block}
+    .diagnosis-report{
+      position:relative;
+      overflow:hidden;
+      padding:clamp(1.25rem,2.4vw,2rem);
+      border:1px solid rgba(255,255,255,.09);
+      border-radius:20px;
+      background:
+        radial-gradient(circle at 100% 0%,rgba(255,95,0,.07),transparent 32%),
+        linear-gradient(180deg,rgba(10,16,31,.92),rgba(7,12,24,.94));
+      box-shadow:0 24px 60px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.025);
+    }
+    .diagnosis-report::before{
+      content:"";
+      position:absolute;
+      left:0;right:0;top:0;
+      height:2px;
+      background:linear-gradient(90deg,#ff5f00,#7a5cff 58%,#21d4fd);
+      opacity:.9;
+    }
+    .diagnosis-result-top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:1.5rem;
+      padding-bottom:1.45rem;
+      border-bottom:1px solid rgba(255,255,255,.07);
+    }
+    .diagnosis-priority{
+      display:inline-flex;
+      align-items:center;
+      gap:.45rem;
+      padding:.42rem .65rem;
+      border-radius:999px;
+      border:1px solid rgba(18,255,135,.24);
+      background:rgba(18,255,135,.07);
+      color:#7dffc0;
+      font-family:var(--mono);
+      font-size:.65rem;
+      font-weight:800;
+      letter-spacing:.09em;
+      text-transform:uppercase;
+      white-space:nowrap;
+    }
+    .diagnosis-priority::before{
+      content:"";
+      width:6px;height:6px;border-radius:50%;
+      background:#12ff87;
+      box-shadow:0 0 12px rgba(18,255,135,.6);
+    }
+    .diagnosis-result h3{
+      max-width:20ch;
+      margin-bottom:.65rem;
+      font-size:clamp(2.35rem,4.8vw,4.5rem);
+      line-height:.9;
+      letter-spacing:.02em;
+    }
+    #diagnosisHeadline{
+      max-width:none;
+      font-size:clamp(1.9rem,3vw,2.8rem);
+      line-height:.95;
+      white-space:nowrap;
+    }
+
+    .diagnosis-result-lead{
+      max-width:67ch;
+      color:var(--ink-soft);
+      font-size:.96rem;
+    }
+    .diagnosis-opportunities{
+      display:grid;
+      gap:0;
+      margin-top:.15rem;
+    }
+    :global(.diagnosis-opportunity) {
+      position:relative;
+      padding:1.55rem 0 1.65rem;
+      border-bottom:1px solid rgba(255,255,255,.07);
+    }
+    :global(.diagnosis-opportunity:last-child){border-bottom:0}
+    :global(.diagnosis-opportunity-head) {
+      display:flex;
+      align-items:center;
+      gap:.85rem;
+      margin-bottom:1rem;
+    }
+    :global(.diagnosis-opportunity-number) {
+      flex:0 0 auto;
+      width:38px;height:38px;
+      display:grid;place-items:center;
+      border-radius:10px;
+      border:1px solid rgba(255,95,0,.3);
+      background:rgba(255,95,0,.08);
+      color:#ff8b4a;
+      font-family:var(--mono);
+      font-size:.7rem;
+      font-weight:900;
+      letter-spacing:.06em;
+      box-shadow:0 0 22px rgba(255,95,0,.06);
+    }
+    :global(.diagnosis-opportunity-title) {
+      font-family:"Bebas Neue",sans-serif;
+      font-size:1.65rem;
+      line-height:1;
+      letter-spacing:.03em;
+      color:#fff;
+    }
+    :global(.diagnosis-opportunity-meta) {
+      margin-left:auto;
+      color:#71809f;
+      font-family:var(--mono);
+      font-size:.6rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    :global(.diagnosis-flow) {
+      display:grid;
+      grid-template-columns:minmax(0,.9fr) 34px minmax(0,1.35fr) 34px minmax(0,1.05fr);
+      align-items:stretch;
+      gap:.25rem;
+    }
+    :global(.diagnosis-flow-step) {
+      min-width:0;
+      padding:.9rem .95rem;
+      border-radius:13px;
+      background:rgba(255,255,255,.018);
+      border:1px solid rgba(255,255,255,.055);
+    }
+    :global(.diagnosis-flow-step strong) {
+      display:block;
+      margin-bottom:.42rem;
+      color:#8290af;
+      font-family:var(--mono);
+      font-size:.6rem;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+    }
+    :global(.diagnosis-flow-step p) {
+      color:#d3dced;
+      font-size:.84rem;
+      line-height:1.48;
+    }
+    :global(.diagnosis-flow-step.action) {
+      border-color:rgba(255,95,0,.13);
+      background:rgba(255,95,0,.028);
+    }
+    :global(.diagnosis-flow-step.action strong){color:#ff7a2b}
+    :global(.diagnosis-flow-step.outcome) {
+      border-color:rgba(18,255,135,.11);
+      background:rgba(18,255,135,.022);
+    }
+    :global(.diagnosis-flow-step.outcome strong){color:#65eeb0}
+    :global(.diagnosis-flow-arrow) {
+      display:grid;
+      place-items:center;
+      color:#52617f;
+      font-family:var(--mono);
+      font-size:1rem;
+    }
+    .diagnosis-start{
+      display:grid;
+      grid-template-columns:auto 1fr;
+      gap:.85rem 1rem;
+      align-items:start;
+      margin-top:.7rem;
+      padding:1rem 1.05rem;
+      border-radius:14px;
+      border:1px solid rgba(18,255,135,.13);
+      background:linear-gradient(90deg,rgba(18,255,135,.045),rgba(18,255,135,.012));
+    }
+    .diagnosis-start-label{
+      color:#65eeb0;
+      font-family:var(--mono);
+      font-size:.62rem;
+      font-weight:900;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      white-space:nowrap;
+    }
+    .diagnosis-start p{
+      color:#dbe5f3;
+      font-size:.88rem;
+      line-height:1.5;
+    }
+    .diagnosis-summary{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.45rem;
+      margin-top:1rem;
+    }
+    :global(.diagnosis-summary span){
+      padding:.38rem .58rem;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.09);
+      background:rgba(255,255,255,.025);
+      color:#8897b5;
+      font-family:var(--mono);
+      font-size:.62rem;
+    }
+    .diagnosis-result-cta{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      margin-top:1.45rem;
+      padding-top:1.25rem;
+      border-top:1px solid rgba(255,255,255,.08);
+    }
+    .diagnosis-result-cta p{
+      max-width:52ch;
+      color:#8e9bb7;
+      font-size:.84rem;
+    }
+    .diagnosis-study-btn{
+      flex:0 0 auto;
+      min-height:54px;
+      padding:.9rem 1.2rem;
+      border-radius:12px;
+      background:#ff5f00;
+      color:#fff;
+      font-weight:800;
+      box-shadow:0 14px 32px rgba(255,95,0,.18);
+      transition:transform .25s var(--ease),box-shadow .25s ease;
+    }
+    .diagnosis-study-btn:hover{
+      transform:translateY(-2px);
+      box-shadow:0 18px 38px rgba(255,95,0,.26);
+    }
+    .diagnosis-restart{
+      display:inline-flex;
+      margin-top:1rem;
+      color:#9aa8c3;
+      font-size:.82rem;
+      font-weight:700;
+    }
+    .diagnosis-restart:hover{color:#fff}
+
+    @keyframes diagnosisStepIn{
+      from{opacity:0;transform:translateY(10px)}
+      to{opacity:1;transform:none}
+    }
+
+    
+
+
+    /* =========================================================
+       Resultado del diagnóstico · modal de foco completo
+       Las preguntas permanecen en la landing; solo el resultado
+       toma la pantalla para facilitar lectura y decisión.
+       ========================================================= */
+    :global(body.diagnosis-modal-open){
+      overflow:hidden !important;
+    }
+    .diagnosis-result{
+      position:fixed;
+      inset:0;
+      z-index:300;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:clamp(.75rem,2.4vw,2rem);
+      background:rgba(3,6,14,.82);
+      backdrop-filter:blur(14px) saturate(115%);
+      -webkit-backdrop-filter:blur(14px) saturate(115%);
+      overflow:auto;
+      overscroll-behavior:contain;
+    }
+    .diagnosis-result.is-active{
+      display:flex;
+      animation:diagnosisModalBackdropIn .28s ease both;
+    }
+    .diagnosis-result .diagnosis-report{
+      width:min(1120px,96vw);
+      max-height:min(90vh,920px);
+      overflow:auto;
+      overscroll-behavior:contain;
+      scrollbar-gutter:stable;
+      padding:clamp(1.35rem,2.7vw,2.25rem);
+      border-radius:24px;
+      border:1px solid rgba(255,255,255,.13);
+      background:
+        radial-gradient(circle at 100% 0%,rgba(255,95,0,.085),transparent 31%),
+        radial-gradient(circle at 4% 100%,rgba(33,212,253,.055),transparent 30%),
+        linear-gradient(180deg,rgba(11,17,33,.985),rgba(6,10,21,.995));
+      box-shadow:0 40px 110px rgba(0,0,0,.58),inset 0 1px rgba(255,255,255,.035);
+      animation:diagnosisModalPanelIn .42s var(--ease) both;
+      transition:
+        width .52s var(--ease),
+        max-height .52s var(--ease),
+        padding .52s var(--ease);
+    }
+
+    /* Cierre del paseo: el informe se convierte en una decisión de contacto. */
+    .diagnosis-contact-choice{
+      display:none;
+      clear:both;
+      padding:1.25rem .2rem .3rem;
+      text-align:center;
+      animation:diagnosisContactIn .42s var(--ease) both;
+    }
+
+    .diagnosis-contact-choice .diagnosis-step-kicker{
+      margin-bottom:.7rem;
+    }
+
+    .diagnosis-contact-choice h3{
+      max-width:none !important;
+      margin:0 auto .75rem;
+      font-size:clamp(2.4rem,5vw,4rem);
+      line-height:.92;
+    }
+
+    .diagnosis-contact-choice > p{
+      max-width:52ch;
+      margin:0 auto;
+      color:var(--ink-soft);
+      font-size:.94rem;
+    }
+
+    .diagnosis-contact-actions{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:.8rem;
+      margin-top:1.5rem;
+    }
+
+    .diagnosis-contact-button{
+      min-height:68px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:.7rem;
+      padding:1rem 1.2rem;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      font-weight:850;
+      transition:
+        transform .25s var(--ease),
+        border-color .25s ease,
+        background .25s ease,
+        box-shadow .25s ease;
+    }
+
+    .diagnosis-contact-button:hover{
+      transform:translateY(-2px);
+    }
+
+    .diagnosis-contact-button.whatsapp{
+      background:rgba(18,255,135,.08);
+      border-color:rgba(18,255,135,.25);
+      color:#8fffc6;
+    }
+
+    .diagnosis-contact-button.whatsapp:hover{
+      background:rgba(18,255,135,.13);
+      border-color:rgba(18,255,135,.42);
+      box-shadow:0 14px 34px rgba(18,255,135,.08);
+    }
+
+    .diagnosis-contact-button.email{
+      background:#ff5f00;
+      border-color:#ff5f00;
+      color:#fff;
+      box-shadow:0 14px 30px rgba(255,95,0,.16);
+    }
+
+    .diagnosis-contact-button.email:hover{
+      box-shadow:0 18px 38px rgba(255,95,0,.24);
+    }
+
+    .diagnosis-contact-button.call{
+      background:rgba(122,92,255,.10);
+      border-color:rgba(122,92,255,.30);
+      color:#d8d0ff;
+      font-size:.88rem;
+      white-space:nowrap;
+    }
+
+    .diagnosis-contact-button.call:hover{
+      background:rgba(122,92,255,.16);
+      border-color:rgba(122,92,255,.48);
+      box-shadow:0 14px 34px rgba(122,92,255,.10);
+    }
+
+    .diagnosis-contact-back{
+      display:inline-flex;
+      margin-top:1.1rem;
+      color:#8f9db8;
+      font-size:.8rem;
+      font-weight:750;
+    }
+
+    .diagnosis-contact-back:hover{color:#fff}
+
+    .diagnosis-result.is-contact-mode .diagnosis-report{
+      width:min(650px,94vw);
+      max-height:min(76vh,680px);
+      overflow:hidden;
+      padding:clamp(1.2rem,3vw,2rem);
+    }
+
+    .diagnosis-result.is-contact-mode .diagnosis-result-top,
+    .diagnosis-result.is-contact-mode .diagnosis-opportunities,
+    .diagnosis-result.is-contact-mode .diagnosis-start,
+    .diagnosis-result.is-contact-mode .diagnosis-summary,
+    .diagnosis-result.is-contact-mode .diagnosis-result-cta,
+    .diagnosis-result.is-contact-mode .diagnosis-restart{
+      display:none;
+    }
+
+    .diagnosis-result.is-contact-mode .diagnosis-contact-choice{
+      display:block;
+    }
+
+    @keyframes diagnosisContactIn{
+      from{opacity:0;transform:translateY(12px) scale(.985)}
+      to{opacity:1;transform:none}
+    }
+    .diagnosis-modal-close{
+      position:sticky;
+      top:0;
+      z-index:5;
+      float:right;
+      width:42px;
+      height:42px;
+      margin:-.35rem -.35rem .25rem .75rem;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(8,13,27,.92);
+      color:#c5cfe3;
+      font-size:1.5rem;
+      line-height:1;
+      box-shadow:0 8px 24px rgba(0,0,0,.22);
+      transition:color .2s ease,border-color .2s ease,background .2s ease,transform .2s var(--ease);
+    }
+    .diagnosis-modal-close:hover{
+      color:#fff;
+      border-color:rgba(255,95,0,.55);
+      background:rgba(255,95,0,.11);
+      transform:rotate(4deg) scale(1.04);
+    }
+    .diagnosis-result .diagnosis-result-top{
+      clear:both;
+      padding-right:.2rem;
+    }
+    .diagnosis-result .diagnosis-result h3,
+    .diagnosis-result h3{
+      max-width:18ch;
+    }
+    .diagnosis-result .diagnosis-restart{
+      margin-top:1rem;
+    }
+    @keyframes diagnosisModalBackdropIn{
+      from{opacity:0}
+      to{opacity:1}
+    }
+    @keyframes diagnosisModalPanelIn{
+      from{opacity:0;transform:translateY(22px) scale(.975)}
+      to{opacity:1;transform:none}
+    }
+
+  /* =========================================================
+     OVERRIDES MOBILE/TABLET (<1100px)
+     Traducidos desde mobile.html, con las clases del modal de
+     resultado renombradas a la nomenclatura unificada de desktop
+     (.result-* -> .diagnosis-*, .opportunity-* -> .diagnosis-opportunity-*,
+     .flow-* -> .diagnosis-flow-*, .contact-* -> .diagnosis-contact-*) para
+     que ambas experiencias compartan un único juego de clases.
+     ========================================================= */
+  @media (max-width: 1099px) {
+    /* En desktop la sección se revela vía progressive-reveal.css
+       (#experiencia gateado por body.diagnosis-unlocked). En mobile no
+       existe ese sistema: la sección permanece oculta hasta que termina
+       la intro del hero (body.intro-ready) y se anima al desbloquear
+       el diagnóstico (body.quiz-unlocked), igual que el original. */
+    .diagnosis-section {
+      min-height: 100svh;
+      padding: 2rem 1rem calc(2.2rem + env(safe-area-inset-bottom));
+      display: none;
+      align-items: flex-start;
+      scroll-margin-top: calc(64px + env(safe-area-inset-top));
+    }
+
+    :global(body.intro-ready) .diagnosis-section {
+      display: flex;
+    }
+
+    :global(body.quiz-unlocked) .diagnosis-section {
+      animation: diagnosisReveal 0.5s var(--ease) both;
+    }
+
+    @keyframes diagnosisReveal {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .diagnosis-head {
+      max-width: none;
+    }
+
+    .diagnosis-shell {
+      border-radius: 22px;
+      border-color: rgba(255, 255, 255, 0.105);
+      background: linear-gradient(180deg, rgba(18, 29, 59, 0.95), rgba(9, 14, 30, 0.98));
+    }
+
+    .diagnosis-shell::before {
+      inset: 0 0 auto;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 95, 0, 0.9), transparent);
+      background-size: auto;
+      mask-image: none;
+      opacity: 0.75;
+    }
+
+    .diagnosis-top {
+      padding: 1rem 1rem 0.72rem;
+    }
+
+    .diagnosis-label {
+      color: var(--ink-muted);
+      font-size: 0.65rem;
+    }
+
+    .diagnosis-label::before {
+      content: none;
+    }
+
+    .diagnosis-counter {
+      color: #ff5f00;
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 1rem;
+    }
+
+    .diagnosis-progress {
+      height: 1.5px;
+    }
+
+    .diagnosis-progress span {
+      box-shadow: 0 0 18px rgba(255, 68, 124, 0.42);
+      transition: width 0.45s var(--ease);
+    }
+
+    .diagnosis-body {
+      min-height: 0;
+      padding: 1.15rem 1rem 1rem;
+    }
+
+    .diagnosis-question {
+      font-size: clamp(2.05rem, 10vw, 3rem);
+      white-space: normal;
+      margin-bottom: 0.55rem;
+    }
+
+    .diagnosis-copy {
+      font-size: 0.82rem;
+      line-height: 1.45;
+    }
+
+    .diagnosis-options {
+      grid-template-columns: 1fr;
+      gap: 0.58rem;
+      margin-top: 0;
+    }
+
+    .diagnosis-option {
+      min-height: 54px;
+      padding: 0.85rem 0.92rem;
+      font-size: 0.89rem;
+      line-height: 1.28;
+      font-weight: normal;
+    }
+
+    .diagnosis-option.is-selected {
+      color: #fff;
+      border-color: rgba(255, 95, 0, 0.72);
+      background: linear-gradient(135deg, rgba(255, 95, 0, 0.18), rgba(255, 95, 0, 0.07));
+      box-shadow: inset 3px 0 0 #ff5f00, 0 8px 24px rgba(255, 95, 0, 0.08);
+    }
+
+    .diagnosis-nav {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: end;
+      gap: 0.7rem;
+      margin-top: 1.1rem;
+      padding-top: 0.9rem;
+    }
+
+    .diagnosis-back {
+      min-height: 46px;
+      padding: 0.65rem 0.1rem;
+      color: var(--ink-muted);
+      font-size: 0.8rem;
+    }
+
+    .diagnosis-nav-actions {
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      gap: 0.45rem;
+      margin-left: 0;
+      min-width: 0;
+    }
+
+    .diagnosis-hint {
+      display: block;
+      min-height: 1rem;
+      font-size: 0.68rem;
+      text-align: right;
+    }
+
+    .diagnosis-next {
+      min-height: 48px;
+      padding: 0.75rem 1rem;
+      border-radius: 12px;
+      font-size: 0.84rem;
+    }
+
+    /* Modal de resultado */
+    .diagnosis-result {
+      align-items: flex-start;
+      padding: calc(0.7rem + env(safe-area-inset-top)) 0.7rem calc(0.7rem + env(safe-area-inset-bottom));
+    }
+
+    .diagnosis-report {
+      width: min(100%, 520px);
+      max-height: calc(100svh - 1.4rem - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+      padding: 1.25rem 1rem 1rem;
+      border-radius: 22px;
+    }
+
+    .diagnosis-modal-close {
+      width: 36px;
+      height: 36px;
+    }
+
+    .diagnosis-result-top {
+      display: block;
+      padding-right: 2.3rem;
+    }
+
+    .diagnosis-result h3 {
+      max-width: none;
+      font-size: clamp(2rem, 9vw, 3.1rem);
+      margin: 0.15rem 0 0.55rem;
+    }
+
+    /* #diagnosisHeadline es más específico (ID) que la regla de arriba y
+       lleva white-space:nowrap pensado para el ancho de escritorio; en
+       mobile eso fuerza desbordamiento horizontal con textos largos. */
+    #diagnosisHeadline {
+      white-space: normal;
+    }
+
+    .diagnosis-result-lead {
+      font-size: 0.84rem;
+      line-height: 1.45;
+    }
+
+    .diagnosis-priority {
+      margin-top: 0.8rem;
+      color: #ff9e70;
+    }
+
+    .diagnosis-opportunities {
+      gap: 0.7rem;
+      margin-top: 1rem;
+    }
+
+    :global(.diagnosis-opportunity) {
+      padding: 0.92rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    :global(.diagnosis-opportunity-head) {
+      align-items: flex-start;
+      gap: 0.65rem;
+      margin-bottom: 0.75rem;
+    }
+
+    :global(.diagnosis-opportunity-number) {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+    }
+
+    :global(.diagnosis-opportunity-title) {
+      font-size: 0.96rem;
+      line-height: 1.25;
+    }
+
+    :global(.diagnosis-opportunity-meta) {
+      display: none;
+    }
+
+    :global(.diagnosis-flow) {
+      grid-template-columns: 1fr;
+      gap: 0.45rem;
+    }
+
+    :global(.diagnosis-flow-step) {
+      padding: 0.7rem 0.75rem;
+      border-radius: 11px;
+      background: rgba(255, 255, 255, 0.032);
+      border: 0;
+      border-left: 2px solid rgba(255, 255, 255, 0.14);
+    }
+
+    :global(.diagnosis-flow-step.action) {
+      background: rgba(255, 255, 255, 0.032);
+      border-left-color: #ff5f00;
+    }
+
+    :global(.diagnosis-flow-step.outcome) {
+      background: rgba(255, 255, 255, 0.032);
+      border-left-color: #12ff87;
+    }
+
+    :global(.diagnosis-flow-step strong) {
+      color: var(--ink);
+      font-size: 0.67rem;
+    }
+
+    :global(.diagnosis-flow-step p) {
+      font-size: 0.78rem;
+      line-height: 1.42;
+    }
+
+    :global(.diagnosis-flow-arrow) {
+      display: none;
+    }
+
+    .diagnosis-start {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+      margin-top: 0.8rem;
+      padding: 0.9rem;
+      border-radius: 15px;
+    }
+
+    .diagnosis-start p {
+      font-size: 0.8rem;
+      line-height: 1.45;
+    }
+
+    .diagnosis-summary {
+      gap: 0.35rem;
+      margin-top: 0.8rem;
+    }
+
+    :global(.diagnosis-summary span) {
+      padding: 0.32rem 0.48rem;
+      font-size: 0.64rem;
+    }
+
+    .diagnosis-result-cta {
+      align-items: stretch;
+      flex-direction: column;
+      margin-top: 1rem;
+      padding-top: 1rem;
+    }
+
+    .diagnosis-result-cta p {
+      font-size: 0.76rem;
+      line-height: 1.45;
+      margin-bottom: 0.75rem;
+    }
+
+    .diagnosis-study-btn {
+      width: 100%;
+      min-height: 51px;
+      padding: 0.8rem 1rem;
+      border-radius: 13px;
+      font-size: 0.82rem;
+    }
+
+    .diagnosis-restart {
+      margin-top: 1rem;
+    }
+
+    /* Contacto */
+    .diagnosis-result.is-contact-mode .diagnosis-report {
+      width: 100%;
+      max-width: 480px;
+      max-height: calc(100svh - 1.4rem - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    }
+
+    .diagnosis-contact-choice h3 {
+      font-size: clamp(2.5rem, 12vw, 4rem);
+      margin: 0.15rem 0 0.55rem;
+    }
+
+    .diagnosis-contact-choice > p:not(.diagnosis-step-kicker) {
+      font-size: 0.82rem;
+      line-height: 1.45;
+    }
+
+    .diagnosis-contact-actions {
+      grid-template-columns: 1fr;
+      gap: 0.6rem;
+      margin-top: 1rem;
+    }
+
+    .diagnosis-contact-button {
+      min-height: 52px;
+      padding: 0.75rem 1rem;
+      border-radius: 13px;
+      font-size: 0.84rem;
+    }
+
+    .diagnosis-contact-button.whatsapp {
+      border-color: rgba(73, 223, 154, 0.24);
+      background: rgba(73, 223, 154, 0.07);
+      color: #9ff3c7;
+    }
+
+    .diagnosis-contact-button.email {
+      border-color: rgba(255, 95, 0, 0.28);
+      background: rgba(255, 95, 0, 0.08);
+      color: #ffb18c;
+      box-shadow: none;
+    }
+
+    .diagnosis-contact-button.call {
+      border-color: rgba(122, 92, 255, 0.28);
+      background: rgba(122, 92, 255, 0.08);
+      color: #d8d0ff;
+      white-space: nowrap;
+      font-size: 0.81rem;
+    }
+
+    .diagnosis-contact-back {
+      width: 100%;
+      margin-top: 0.8rem;
+      min-height: 44px;
+      font-size: 0.76rem;
+    }
+  }
+
+  @media (min-width: 700px) and (max-width: 1099px) {
+    .diagnosis-section {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    .diagnosis-body {
+      padding: 1.35rem 1.25rem 1.2rem;
+    }
+
+    .diagnosis-options {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.68rem;
+    }
+
+    .diagnosis-option {
+      min-height: 58px;
+    }
+
+    .diagnosis-question {
+      font-size: clamp(2.6rem, 6vw, 3.6rem);
+    }
+
+    .diagnosis-report {
+      width: min(100%, 680px);
+      padding: 1.45rem 1.25rem 1.15rem;
+    }
+
+    .diagnosis-contact-actions {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

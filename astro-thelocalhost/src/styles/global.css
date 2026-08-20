@@ -80,6 +80,26 @@ button {
   margin: 0 auto;
 }
 
+.section {
+  padding: 5.2rem 0;
+  position: relative;
+}
+
+.section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1180px, calc(100% - 2rem));
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.14), transparent);
+}
+
+.section:first-of-type::before {
+  display: none;
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
