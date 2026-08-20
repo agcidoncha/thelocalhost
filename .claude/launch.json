@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "html-mejorado",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "4501", "--directory", "html-mejorado"],
+      "port": 4501
+    },
+    {
+      "name": "masters-referencia",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "4502", "--directory", "00-masters-referencia"],
+      "port": 4502
+    }
+  ]
+}
