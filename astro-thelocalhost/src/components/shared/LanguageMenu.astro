@@ -1,0 +1,297 @@
+---
+interface Props {
+  classPrefix: "desktop-language" | "language" | "compact-language";
+  wrapId: string;
+  triggerId: string;
+  menuId: string;
+}
+
+const { classPrefix, wrapId, triggerId, menuId } = Astro.props;
+---
+
+<div class={`${classPrefix}-wrap`} id={wrapId} data-language-menu>
+  <button
+    class={`${classPrefix}-trigger`}
+    id={triggerId}
+    type="button"
+    aria-label="Cambiar idioma"
+    aria-expanded="false"
+    aria-controls={menuId}
+  >
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="12" r="8"></circle>
+      <path d="M4 12h16"></path>
+      <path d="M12 4c2.1 2.2 3.1 4.9 3.1 8s-1 5.8-3.1 8"></path>
+      <path d="M12 4c-2.1 2.2-3.1 4.9-3.1 8s1 5.8 3.1 8"></path>
+    </svg>
+  </button>
+
+  <div class={`${classPrefix}-menu`} id={menuId} role="menu" aria-label="Idioma">
+    <button class="language-option is-active" type="button" role="menuitem" aria-current="true">
+      <span>Español</span>
+      <span class="language-code">ES</span>
+    </button>
+
+    <button class="language-option" type="button" role="menuitem" disabled>
+      <span>English</span>
+      <span class="language-code">EN</span>
+    </button>
+  </div>
+</div>
+
+<script>
+  function initLanguageMenu(wrap: HTMLElement) {
+    const trigger = wrap.querySelector<HTMLButtonElement>(":scope > button");
+    if (!trigger) return;
+
+    const close = () => {
+      wrap.classList.remove("is-open");
+      trigger.setAttribute("aria-expanded", "false");
+    };
+
+    const toggle = () => {
+      const opening = !wrap.classList.contains("is-open");
+      wrap.classList.toggle("is-open", opening);
+      trigger.setAttribute("aria-expanded", String(opening));
+      if (opening) {
+        document.querySelectorAll<HTMLElement>("[data-language-menu]").forEach((other) => {
+          if (other !== wrap) other.classList.remove("is-open");
+        });
+      }
+    };
+
+    trigger.addEventListener("click", (event) => {
+      event.stopPropagation();
+      toggle();
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!wrap.contains(event.target as Node)) close();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") close();
+    });
+  }
+
+  document.querySelectorAll<HTMLElement>("[data-language-menu]").forEach(initLanguageMenu);
+</script>
+
+<style>
+  .language-option {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.7rem;
+    padding: 0.65rem 0.68rem;
+    border-radius: 10px;
+    color: var(--ink-soft);
+    background: transparent;
+    text-align: left;
+    font-size: 0.78rem;
+    font-weight: 750;
+  }
+
+  .language-option + .language-option {
+    margin-top: 0.18rem;
+  }
+
+  .language-option.is-active {
+    color: #fff;
+    background: rgba(255, 68, 124, 0.09);
+  }
+
+  .language-code {
+    color: #ff447c;
+    font-size: 0.68rem;
+    font-weight: 850;
+    letter-spacing: 0.08em;
+  }
+
+  .language-option[disabled] {
+    opacity: 0.48;
+    cursor: default;
+  }
+
+  /* Variante desktop */
+  .desktop-language-wrap {
+    position: absolute;
+    left: 1.2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 7;
+  }
+
+  .desktop-language-trigger {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #fff;
+    background: rgba(255, 255, 255, 0.035);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  }
+
+  .desktop-language-trigger:hover {
+    border-color: rgba(255, 68, 124, 0.34);
+    background: rgba(255, 68, 124, 0.06);
+  }
+
+  .desktop-language-trigger:active {
+    transform: scale(0.96);
+  }
+
+  .desktop-language-trigger svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .desktop-language-menu {
+    position: absolute;
+    top: calc(100% + 0.55rem);
+    left: 0;
+    width: 154px;
+    padding: 0.42rem;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(9, 14, 30, 0.97);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.38);
+    backdrop-filter: blur(16px);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px) scale(0.98);
+    transform-origin: top left;
+    pointer-events: none;
+    transition: opacity 0.22s ease, visibility 0.22s ease, transform 0.22s var(--ease);
+  }
+
+  .desktop-language-wrap.is-open .desktop-language-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  /* Variante mobile */
+  .language-wrap {
+    position: absolute;
+    top: calc(2.35rem + env(safe-area-inset-top));
+    left: 1rem;
+    z-index: 7;
+  }
+
+  .language-trigger {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #fff;
+    background: rgba(255, 255, 255, 0.035);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  }
+
+  .language-trigger:active {
+    transform: scale(0.96);
+  }
+
+  .language-trigger svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .language-menu {
+    position: absolute;
+    top: calc(100% + 0.55rem);
+    left: 0;
+    width: 154px;
+    padding: 0.42rem;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(9, 14, 30, 0.97);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.38);
+    backdrop-filter: blur(16px);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px) scale(0.98);
+    transform-origin: top left;
+    pointer-events: none;
+    transition: opacity 0.22s ease, visibility 0.22s ease, transform 0.22s var(--ease);
+  }
+
+  .language-wrap.is-open .language-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  /* Variante compact (header sticky mobile) */
+  .compact-language-wrap {
+    position: relative;
+  }
+
+  .compact-language-trigger {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #fff;
+    background: rgba(255, 255, 255, 0.035);
+  }
+
+  .compact-language-trigger svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .compact-language-menu {
+    position: absolute;
+    top: calc(100% + 0.55rem);
+    left: 0;
+    width: 154px;
+    padding: 0.42rem;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(9, 14, 30, 0.98);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.38);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px) scale(0.98);
+    transform-origin: top left;
+    pointer-events: none;
+    transition: opacity 0.22s ease, visibility 0.22s ease, transform 0.22s var(--ease);
+  }
+
+  .compact-language-wrap.is-open .compact-language-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    pointer-events: auto;
+  }
+</style>

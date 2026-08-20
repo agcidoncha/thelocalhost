@@ -1,0 +1,126 @@
+---
+import BrandLogo from "../shared/BrandLogo.astro";
+import LanguageMenu from "../shared/LanguageMenu.astro";
+---
+
+<header class="mobile-compact-header" aria-label="Cabecera compacta">
+  <LanguageMenu
+    classPrefix="compact-language"
+    wrapId="compactLanguageWrap"
+    triggerId="compactLanguageTrigger"
+    menuId="compactLanguageMenu"
+  />
+
+  <a class="compact-brand" href="#top" aria-label="The Localhost, volver arriba">
+    <BrandLogo gradientId="compactBrandGradient" />
+    <span>The Localhost</span>
+  </a>
+
+  <button class="compact-about-trigger" type="button" aria-label="Quién está detrás de The Localhost" data-about-trigger="aboutModal">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="8" r="3.2"></circle>
+      <path d="M5.8 19c.7-3.4 3-5.1 6.2-5.1s5.5 1.7 6.2 5.1"></path>
+    </svg>
+  </button>
+</header>
+
+<script>
+  const originalBrand = document.querySelector<HTMLElement>(".mobile-brand");
+
+  const syncCompactHeader = (visible: boolean) => {
+    document.body.classList.toggle("compact-header-visible", visible);
+  };
+
+  if ("IntersectionObserver" in window && originalBrand) {
+    const brandObserver = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        syncCompactHeader(!entry.isIntersecting);
+      },
+      { root: null, threshold: 0 }
+    );
+    brandObserver.observe(originalBrand);
+  }
+</script>
+
+<style>
+  .mobile-compact-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 45;
+    height: calc(58px + env(safe-area-inset-top));
+    padding: env(safe-area-inset-top) 1rem 0;
+    display: grid;
+    grid-template-columns: 38px 1fr 38px;
+    align-items: center;
+    gap: 0.7rem;
+    background: rgba(6, 9, 19, 0.88);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-100%);
+    pointer-events: none;
+    transition: opacity 0.28s ease, transform 0.34s var(--ease), visibility 0.28s ease;
+  }
+
+  @media (min-width: 1100px) {
+    .mobile-compact-header {
+      display: none;
+    }
+  }
+
+  :global(body.compact-header-visible) .mobile-compact-header {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  .compact-about-trigger {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #fff;
+    background: rgba(255, 255, 255, 0.035);
+  }
+
+  .compact-about-trigger svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .compact-brand {
+    justify-self: center;
+    display: flex;
+    align-items: center;
+    gap: 0.38rem;
+    min-width: 0;
+    font-family: "Inter", var(--sans);
+    color: #fff;
+  }
+
+  :global(.compact-brand svg) {
+    width: 30px;
+    height: 30px;
+    flex: 0 0 auto;
+  }
+
+  .compact-brand span {
+    font-size: 0.98rem;
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    white-space: nowrap;
+  }
+</style>

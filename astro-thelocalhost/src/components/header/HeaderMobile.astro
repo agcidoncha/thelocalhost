@@ -1,0 +1,135 @@
+---
+import BrandLogo from "../shared/BrandLogo.astro";
+import LanguageMenu from "../shared/LanguageMenu.astro";
+import AboutModal from "../shared/AboutModal.astro";
+---
+
+<div class="mobile-header-anchor">
+  <LanguageMenu classPrefix="language" wrapId="languageWrap" triggerId="languageTrigger" menuId="languageMenu" />
+
+  <button class="about-trigger" type="button" aria-label="Quién está detrás de The Localhost" data-about-trigger="aboutModal">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="8" r="3.2"></circle>
+      <path d="M5.8 19c.7-3.4 3-5.1 6.2-5.1s5.5 1.7 6.2 5.1"></path>
+    </svg>
+  </button>
+
+  <div class="mobile-brand" aria-label="The Localhost — Automatización de procesos">
+    <BrandLogo gradientId="mobileBrandGradient" class="mobile-brand-mark" />
+    <div class="mobile-brand-copy">
+      <span class="mobile-brand-name">The Localhost</span>
+      <span class="mobile-brand-tagline">Automatización de procesos</span>
+    </div>
+  </div>
+</div>
+
+<AboutModal classPrefix="about" modalId="aboutModal" closeId="aboutClose" titleId="aboutTitle" />
+
+<style>
+  .mobile-header-anchor {
+    position: relative;
+    min-height: calc(6.6rem + env(safe-area-inset-top));
+  }
+
+  @media (min-width: 1100px) {
+    .mobile-header-anchor {
+      display: none;
+    }
+  }
+
+  .language-wrap {
+    position: absolute;
+    top: calc(2.35rem + env(safe-area-inset-top));
+    left: 1rem;
+    z-index: 7;
+  }
+
+  .about-trigger {
+    position: absolute;
+    top: calc(2.35rem + env(safe-area-inset-top));
+    right: 1rem;
+    z-index: 6;
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #fff;
+    background: rgba(255, 255, 255, 0.035);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  }
+
+  .about-trigger:active {
+    transform: scale(0.96);
+  }
+
+  .about-trigger svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .mobile-brand {
+    position: absolute;
+    top: calc(2.1rem + env(safe-area-inset-top));
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 0.46rem;
+    width: max-content;
+    max-width: calc(100% - 2rem);
+    z-index: 5;
+  }
+
+  :global(.mobile-brand-mark) {
+    flex: 0 0 auto;
+    width: 47px;
+    height: 47px;
+    display: block;
+  }
+
+  .mobile-brand-copy {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: start;
+    align-items: start;
+    min-width: 0;
+    font-family: "Inter", var(--sans);
+    color: #fff;
+    line-height: 1;
+    text-align: left;
+  }
+
+  .mobile-brand-name,
+  .mobile-brand-tagline {
+    display: block;
+    width: 100%;
+    margin-left: 0;
+    padding-left: 0;
+    text-align: left;
+  }
+
+  .mobile-brand-name {
+    font-size: 1.24rem;
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    white-space: nowrap;
+  }
+
+  .mobile-brand-tagline {
+    margin-top: 0.22rem;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    white-space: nowrap;
+    color: rgba(255, 255, 255, 0.92);
+  }
+</style>

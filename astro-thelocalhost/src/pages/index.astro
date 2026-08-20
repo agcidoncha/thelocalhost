@@ -1,9 +1,16 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import HeaderDesktop from "../components/header/HeaderDesktop.astro";
+import HeaderMobile from "../components/header/HeaderMobile.astro";
+import HeaderCompactMobile from "../components/header/HeaderCompactMobile.astro";
 ---
 
 <BaseLayout>
-  <main class="container" style="padding: 4rem 0;">
+  <HeaderDesktop />
+  <HeaderMobile />
+  <HeaderCompactMobile />
+
+  <main id="top" class="container" style="padding: 4rem 0;">
     <p style="font-family: var(--mono); color: var(--accent-3); letter-spacing: 0.08em; text-transform: uppercase;">
       Migración a Astro — en curso
     </p>
@@ -11,9 +18,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       The Localhost
     </h1>
     <p style="color: var(--ink-soft); max-width: 60ch; margin-top: 1rem;">
-      Base de Astro creada: layout, tokens de diseño y estilos globales listos.
-      Los componentes reales (header, hero, objetivos, método, diagnóstico) se
-      migran por fases siguiendo <code>migracion-astro.md</code>.
+      Fase 3: header, logo, selector de idioma y modal "Detrás de The Localhost"
+      migrados como componentes reales. El resto (hero, objetivos, método,
+      diagnóstico) se migra por fases siguiendo <code>migracion-astro.md</code>.
     </p>
+    <p style="color: var(--ink-muted); max-width: 60ch; margin-top: 3rem; font-size: 0.85rem;">
+      Prueba de scroll: hazlo largo para ver aparecer la cabecera compacta en mobile.
+    </p>
+    <div style="height: 160vh;"></div>
   </main>
 </BaseLayout>

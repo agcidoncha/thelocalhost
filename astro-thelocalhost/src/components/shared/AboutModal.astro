@@ -1,0 +1,349 @@
+---
+interface Props {
+  classPrefix: "desktop-about" | "about";
+  modalId: string;
+  closeId: string;
+  titleId: string;
+}
+
+const { classPrefix, modalId, closeId, titleId } = Astro.props;
+
+const brands = [
+  "El Corte Inglés",
+  "Sanitas",
+  "Endesa",
+  "Mercedes-Benz",
+  "BMW",
+  "Repsol",
+  "Packlink",
+  "Kinepolis",
+  "Autopia",
+];
+---
+
+<div class={`${classPrefix}-modal`} id={modalId} data-about-modal role="dialog" aria-modal="true" aria-labelledby={titleId}>
+  <div class={`${classPrefix}-card`}>
+    <button class={`${classPrefix}-close`} id={closeId} type="button" aria-label="Cerrar" data-about-close>×</button>
+
+    <p class={`${classPrefix}-kicker`}>Detrás de The Localhost</p>
+    <h2 id={titleId}>Ángel G. Cidoncha</h2>
+
+    <p>
+      Llevo más de 20 años trabajando entre frontend, diseño digital y tecnología. Esa experiencia es la base desde
+      la que hoy abordo la automatización: entender primero el problema y después elegir la herramienta adecuada.
+    </p>
+
+    <div class={`${classPrefix}-points`}>
+      <div class={`${classPrefix}-point`}>
+        <strong>Frontend Design &amp; Layout · UX/UI · SEO · Project Management · CMS</strong>
+      </div>
+      <div class={`${classPrefix}-point`}><strong>Formador de la Comunidad de Madrid</strong> durante más de 10 años.</div>
+    </div>
+
+    <div class={`${classPrefix}-brands`} aria-label="Marcas para las que ha trabajado">
+      <span class={`${classPrefix}-brands-label`}>He participado en proyectos para marcas como</span>
+      <div class={`${classPrefix}-brand-list`}>
+        {brands.map((brand) => <span>{brand}</span>)}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-about-modal]").forEach((modal) => {
+    const id = modal.id;
+    const closeBtn = modal.querySelector<HTMLButtonElement>("[data-about-close]");
+    const triggers = document.querySelectorAll<HTMLButtonElement>(`[data-about-trigger="${id}"]`);
+    let lastTrigger: HTMLElement | null = null;
+
+    const open = (event: Event) => {
+      lastTrigger = event.currentTarget as HTMLElement;
+      modal.classList.add("is-active");
+    };
+
+    const close = () => {
+      modal.classList.remove("is-active");
+      lastTrigger?.focus();
+    };
+
+    triggers.forEach((trigger) => trigger.addEventListener("click", open));
+    closeBtn?.addEventListener("click", close);
+
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) close();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && modal.classList.contains("is-active")) close();
+    });
+  });
+</script>
+
+<style>
+  /* Variante desktop */
+  .desktop-about-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+    background: rgba(2, 5, 14, 0.8);
+    backdrop-filter: blur(16px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.28s ease, visibility 0.28s ease;
+  }
+
+  .desktop-about-modal.is-active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .desktop-about-card {
+    width: min(100%, 520px);
+    max-height: min(88vh, 720px);
+    overflow-y: auto;
+    position: relative;
+    padding: 1.6rem 1.45rem 1.35rem;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.11);
+    background: radial-gradient(circle at 100% 0%, rgba(255, 68, 124, 0.1), transparent 16rem),
+      linear-gradient(180deg, #121a35, #080d1c);
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.52);
+    transform: translateY(12px) scale(0.985);
+    transition: transform 0.32s var(--ease);
+  }
+
+  .desktop-about-modal.is-active .desktop-about-card {
+    transform: none;
+  }
+
+  .desktop-about-close {
+    position: absolute;
+    top: 0.9rem;
+    right: 0.9rem;
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: #8290af;
+    background: rgba(255, 255, 255, 0.045);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    font-size: 1.15rem;
+  }
+
+  .desktop-about-kicker {
+    color: #ff447c;
+    font-size: 0.7rem;
+    font-weight: 850;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 0.78rem;
+  }
+
+  .desktop-about-card h2 {
+    max-width: 90%;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: clamp(3rem, 5vw, 4.8rem);
+    line-height: 0.88;
+    margin-bottom: 0.9rem;
+    font-weight: 400;
+    white-space: nowrap;
+  }
+
+  .desktop-about-card > p:not(.desktop-about-kicker) {
+    color: #c0cae0;
+    font-size: 0.9rem;
+    line-height: 1.58;
+  }
+
+  .desktop-about-points {
+    display: grid;
+    gap: 0.6rem;
+    margin-top: 1rem;
+  }
+
+  .desktop-about-point {
+    padding: 0.78rem 0.82rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    background: rgba(255, 255, 255, 0.025);
+    color: #c0cae0;
+    font-size: 0.83rem;
+    line-height: 1.45;
+  }
+
+  .desktop-about-point strong {
+    color: #fff;
+  }
+
+  .desktop-about-brands {
+    margin-top: 1rem;
+    padding-top: 0.95rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .desktop-about-brands-label {
+    display: block;
+    margin-bottom: 0.65rem;
+    color: rgba(255, 255, 255, 0.56);
+    font-size: 0.7rem;
+    font-weight: 750;
+    line-height: 1.35;
+  }
+
+  .desktop-about-brand-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.44rem;
+  }
+
+  .desktop-about-brand-list span {
+    padding: 0.44rem 0.62rem;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.035);
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.68rem;
+    font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  /* Variante mobile */
+  .about-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: calc(1rem + env(safe-area-inset-top)) 1rem calc(1rem + env(safe-area-inset-bottom));
+    background: rgba(2, 5, 14, 0.8);
+    backdrop-filter: blur(16px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.28s ease, visibility 0.28s ease;
+  }
+
+  .about-modal.is-active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .about-card {
+    width: min(100%, 430px);
+    max-height: min(85vh, 640px);
+    overflow-y: auto;
+    position: relative;
+    padding: 1.35rem 1.15rem 1.15rem;
+    border-radius: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.11);
+    background: radial-gradient(circle at 100% 0%, rgba(255, 68, 124, 0.1), transparent 14rem),
+      linear-gradient(180deg, #121a35, #080d1c);
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.52);
+    transform: translateY(12px) scale(0.985);
+    transition: transform 0.32s var(--ease);
+  }
+
+  .about-modal.is-active .about-card {
+    transform: none;
+  }
+
+  .about-close {
+    position: absolute;
+    top: 0.8rem;
+    right: 0.8rem;
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--ink-muted);
+    background: rgba(255, 255, 255, 0.045);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    font-size: 1.15rem;
+  }
+
+  .about-kicker {
+    color: #ff447c;
+    font-size: 0.68rem;
+    font-weight: 850;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 0.72rem;
+  }
+
+  .about-card h2 {
+    max-width: 90%;
+    font-size: clamp(2.55rem, 12vw, 4rem);
+    line-height: 0.88;
+    margin-bottom: 0.8rem;
+  }
+
+  .about-card p {
+    color: var(--ink-soft);
+    font-size: 0.86rem;
+    line-height: 1.55;
+  }
+
+  .about-points {
+    display: grid;
+    gap: 0.55rem;
+    margin-top: 1rem;
+  }
+
+  .about-point {
+    padding: 0.7rem 0.75rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    background: rgba(255, 255, 255, 0.025);
+    color: var(--ink-soft);
+    font-size: 0.8rem;
+    line-height: 1.42;
+  }
+
+  .about-point strong {
+    color: #fff;
+  }
+
+  .about-brands {
+    margin-top: 1rem;
+    padding-top: 0.95rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .about-brands-label {
+    display: block;
+    margin-bottom: 0.65rem;
+    color: rgba(255, 255, 255, 0.56);
+    font-size: 0.69rem;
+    font-weight: 750;
+    line-height: 1.35;
+  }
+
+  .about-brand-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.42rem;
+  }
+
+  .about-brand-list span {
+    padding: 0.42rem 0.58rem;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.035);
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.67rem;
+    font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
+  }
+</style>
