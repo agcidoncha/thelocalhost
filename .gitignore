@@ -12,3 +12,6 @@ dist/
 # Editor
 .vscode/
 .idea/
+
+# Carpeta de trabajo local, no se versiona
+guia de claude /
